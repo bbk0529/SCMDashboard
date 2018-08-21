@@ -1,6 +1,13 @@
 ( function ( $ ) {
     "use strict";
-
+    $.ajax({
+        url : "test",
+        type : "get",
+        success : function(data) {
+          
+          console.log(data);
+        }
+    })
 
 // const brandPrimary = '#20a8d8'
 const brandSuccess = '#4dbd74'
@@ -22,11 +29,14 @@ function random (min, max) {
 }
 
     var elements = 27
+    
     var data1 = []
     var data2 = []
     var data3 = []
 
     for (var i = 0; i <= elements; i++) {
+      
+      
       data1.push(random(50, 200))
       data2.push(random(80, 100))
       data3.push(65)
@@ -42,7 +52,7 @@ function random (min, max) {
             labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S', 'M', 'T', 'W', 'T', 'F', 'S', 'S', 'M', 'T', 'W', 'T', 'F', 'S', 'S', 'M', 'T', 'W', 'T', 'F', 'S', 'S'],
             datasets: [
             {
-              label: 'My First dataset',
+              label: 'Planned',
               backgroundColor: convertHex(brandInfo, 10),
               borderColor: brandInfo,
               pointHoverBackgroundColor: '#fff',
@@ -50,7 +60,7 @@ function random (min, max) {
               data: data1
           },
           {
-              label: 'My Second dataset',
+              label: 'Actual',
               backgroundColor: 'transparent',
               borderColor: brandSuccess,
               pointHoverBackgroundColor: '#fff',
@@ -58,7 +68,7 @@ function random (min, max) {
               data: data2
           },
           {
-              label: 'My Third dataset',
+              label: 'yearly average',
               backgroundColor: 'transparent',
               borderColor: brandDanger,
               pointHoverBackgroundColor: '#fff',

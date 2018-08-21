@@ -1,1 +1,10 @@
- 
+
+{% for post in posts %}
+<div>
+    {{post.published_date}}
+    {{post.title}}
+    {{post.text|linebreaksbr}}
+    
+    
+</div>
+{% endfor %}
