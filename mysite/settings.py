@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog',
+    'import_export',
 ]
 
 MIDDLEWARE = [
@@ -120,3 +121,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+
+# added 21st Aug 18 to import data from YMON
+#https://simpleisbetterthancomplex.com/packages/2016/08/11/django-import-export.html
+IMPORT_EXPORT_USE_TRANSACTIONS = True
