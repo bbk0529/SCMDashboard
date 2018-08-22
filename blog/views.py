@@ -9,6 +9,9 @@ from .resources import YmonResource
 from .resources import PersonResource
 from django.db.models import Avg, Count, Min, Sum, Max
 from .models import Ymon
+from django_pandas.io import read_frame
+import pandas as pd
+import datetime
 
 def index(request):
     
@@ -34,7 +37,7 @@ def ui_buttons(request):
     return render(request, 'blog/ui-buttons.html',{'test' : 10293845})
     
 @csrf_protect
-def test(request):
+def test(request): #called by dashboard.js (traffic)
     print("test, json called")
     #posts=Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
     posts = list(Post.objects.all())
@@ -47,8 +50,10 @@ def test(request):
         # 'count': 28
     # }
     #return JsonResponse(data)
-    data = list(Post.objects.values())
-    for i in  Post.objects.values(): print(i['title'])
+    qs=Ymon.objects.all()
+    DF=read_frame(qs) #df dataframe from query set    
+    data1=DF[['Material','Open_quantity']].groupby('Material').sum()[:28].to_json()
+    data2=DF[['Material','Open_quantity']].groupby('Material').sum()[:28].to_json()
     return JsonResponse(data, safe=False)  # or JsonResponse({'data': data})
     
     

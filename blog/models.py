@@ -16,7 +16,10 @@ class Post(models.Model):
         return self.title
 
 
-
+class leadtime(models.Model):
+    category=models.CharField(max_length=40)
+    leadtime=models.IntegerField()
+        
 class Person(models.Model):
     name = models.CharField(max_length=30)
     email = models.EmailField(null=True)

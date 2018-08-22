@@ -1,13 +1,6 @@
 ( function ( $ ) {
     "use strict";
-    $.ajax({
-        url : "test",
-        type : "get",
-        success : function(data) {
-          
-          console.log(data);
-        }
-    })
+    
 
 // const brandPrimary = '#20a8d8'
 const brandSuccess = '#4dbd74'
@@ -33,20 +26,47 @@ function random (min, max) {
     var data1 = []
     var data2 = []
     var data3 = []
-
+    
+    
     for (var i = 0; i <= elements; i++) {
       
       
       data1.push(random(50, 200))
       data2.push(random(80, 100))
-      data3.push(65)
+      data3.push(65)      
     }
-
+    
+    var json;
+    var data4 = new Array();
+    $.ajax({
+        url : "test",
+        type : "get",
+        async: false,
+        success : function(data) {
+            
+            
+            json = JSON.parse(data);            
+            
+    
+            var val;
+            for(var item in json.Open_quantity) {
+                val=json.Open_quantity[item];
+                console.log(val)
+                data4.push(val)
+                
+            }                                
+        }
+    })
+    
+    
+    
+    //console.log(JSON.stringify(data4))
+    console.log(data4)
 
     //Traffic Chart
     var ctx = document.getElementById( "trafficChart" );
-    //ctx.height = 200;
-    var myChart = new Chart( ctx, {
+    //ctx.height = 200;    
+    var myChart = new Chart( ctx, {        
         type: 'line',
         data: {
             labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S', 'M', 'T', 'W', 'T', 'F', 'S', 'S', 'M', 'T', 'W', 'T', 'F', 'S', 'S', 'M', 'T', 'W', 'T', 'F', 'S', 'S'],
@@ -57,7 +77,7 @@ function random (min, max) {
               borderColor: brandInfo,
               pointHoverBackgroundColor: '#fff',
               borderWidth: 2,
-              data: data1
+              data: data4
           },
           {
               label: 'Actual',
@@ -65,7 +85,7 @@ function random (min, max) {
               borderColor: brandSuccess,
               pointHoverBackgroundColor: '#fff',
               borderWidth: 2,
-              data: data2
+              data: data1
           },
           {
               label: 'yearly average',
