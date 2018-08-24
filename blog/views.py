@@ -6,12 +6,14 @@ from django.views.decorators.csrf import csrf_protect
 from tablib import Dataset
 from django.http import HttpResponse
 from .resources import YmonResource
-from .resources import PersonResource
 from django.db.models import Avg, Count, Min, Sum, Max
 from .models import Ymon
 from django_pandas.io import read_frame
 import pandas as pd
 import datetime
+
+qs=Ymon.objects.all()
+DF=read_frame(qs) #df dataframe from query set
 
 def index(request):
     
@@ -23,13 +25,15 @@ def index(request):
     YmonCount=Ymon.objects.all().aggregate(Count('Open_quantity'))['Open_quantity__count']
     
     print("YMON SUM",  YmonSum, YmonAvg, YmonMax, YmonCount)
-    
+    TableData=Ymon.objects.values('Category','Material', 'Description','LT').filter(LT__lte=300).order_by('-LT')
+    #TableData=DF[['Category','Material','Description','LT']]
     return render(
         request, 'blog/index.html',{
             'YmonSum':YmonSum, 
             'YmonAvg' : YmonAvg,
             'YmonMax' : YmonMax,
-            'YmonCount' : YmonCount
+            'YmonCount' : YmonCount,
+            'TableData' : TableData
     })
     
  
@@ -54,9 +58,27 @@ def test(request): #called by dashboard.js (traffic)
     DF=read_frame(qs) #df dataframe from query set    
     data1=DF[['Material','Open_quantity']].groupby('Material').sum()[:28].to_json()
     data2=DF[['Material','Open_quantity']].groupby('Material').sum()[:28].to_json()
-    return JsonResponse(data, safe=False)  # or JsonResponse({'data': data})
+    return JsonResponse(data1, safe=False)  # or JsonResponse({'data': data})
     
+def boxplot(request):            
     
+    BoxPlotLT=DF[DF.LT<365][['Category','LT']].groupby('Category').describe()
+    BoxPlotLT=BoxPlotLT['LT'][['min','25%','50%','75%','max']].sort_values('50%', ascending=False)
+    items={}
+    z=0
+    for i,v in BoxPlotLT.iterrows():
+        items[i] = list(v.values)    
+        z=z+1
+        if(z>10) : break
+    
+    return JsonResponse(items)
+    
+def barchart(request):
+    BarPlot=DF[DF.LT<365][['Category','LT']].groupby('Category').mean()
+    BarPlot=BarPlot.sort_values(by='LT',ascending=False)
+    items=BarPlot.to_dict()['LT']
+    print("barchart @ server side, called")
+    return JsonResponse(items)
 
 def export(request):
     person_resource = PersonResource()

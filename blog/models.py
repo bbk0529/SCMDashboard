@@ -16,17 +16,20 @@ class Post(models.Model):
         return self.title
 
 
-class leadtime(models.Model):
-    category=models.CharField(max_length=40)
-    leadtime=models.IntegerField()
+
+    
+
+class Material(models.Model):
+    Pn=models.IntegerField()
+    Type=models.CharField(max_length=10)
+    Category=models.CharField(max_length=20)
+    Description=models.CharField(max_length=40)
+    
         
-class Person(models.Model):
-    name = models.CharField(max_length=30)
-    email = models.EmailField(null=True)
-    birth_date = models.DateField()
-    location = models.CharField(max_length=100, null=True)
+
     
 class Ymon(models.Model):
+    Category=models.CharField(max_length=20, blank=True, null=True)
     U=models.CharField(max_length=1, blank=True,null=True)
     Sold_To_Party=models.IntegerField(blank=True,null=True)
     Name_1=models.CharField(max_length=30, blank=True,null=True)
@@ -43,6 +46,8 @@ class Ymon(models.Model):
     Pos_created_on=models.DateField(blank=True,null=True)
     Actconf_date=models.DateField(blank=True,null=True)
     Requested_deliv_date=models.DateField(blank=True,null=True)
+    Delta=models.IntegerField(blank=True, null=True)
+    LT=models.IntegerField(blank=True, null=True)
     
     def publish(self) :
         self.published_date = timezone.now()
