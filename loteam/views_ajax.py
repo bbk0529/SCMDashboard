@@ -9,7 +9,7 @@ from django.utils import timezone
 from django.db.models import Avg, Count, Min, Sum, Max
 from django.shortcuts import render
 from django.http import HttpResponse
-
+from django.shortcuts import redirect
 
 from .models import Post
 from .models import Ymon
@@ -25,25 +25,30 @@ def ui_buttons(request):
     
 def index(request):
     
-    posts=Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+    if request.user.is_authenticated:        
+        
+        posts=Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+        
+        YmonSum=Ymon.objects.all().aggregate(Sum('Open_quantity'))['Open_quantity__sum']
+        YmonAvg=Ymon.objects.all().aggregate(Avg('Open_quantity'))['Open_quantity__avg']
+        YmonMax=Ymon.objects.all().aggregate(Max('Open_quantity'))['Open_quantity__max']
+        YmonCount=Ymon.objects.all().aggregate(Count('Open_quantity'))['Open_quantity__count']
+        
+        print("YMON SUM",  YmonSum, YmonAvg, YmonMax, YmonCount)
+        TableData=Ymon.objects.values('Category','Material', 'Description','LT').filter(LT__lte=300).order_by('-LT')
+        # TableData=DF[['Category','Material','Description','LT']]
+        print(TableData)
+        return render(
+            request, 'blog/index.html',{
+                'YmonSum':YmonSum, 
+                'YmonAvg' : YmonAvg,
+                'YmonMax' : YmonMax,
+                'YmonCount' : YmonCount,
+                'TableData' : TableData
+        })
     
-    YmonSum=Ymon.objects.all().aggregate(Sum('Open_quantity'))['Open_quantity__sum']
-    YmonAvg=Ymon.objects.all().aggregate(Avg('Open_quantity'))['Open_quantity__avg']
-    YmonMax=Ymon.objects.all().aggregate(Max('Open_quantity'))['Open_quantity__max']
-    YmonCount=Ymon.objects.all().aggregate(Count('Open_quantity'))['Open_quantity__count']
-    
-    print("YMON SUM",  YmonSum, YmonAvg, YmonMax, YmonCount)
-    TableData=Ymon.objects.values('Category','Material', 'Description','LT').filter(LT__lte=300).order_by('-LT')
-    # TableData=DF[['Category','Material','Description','LT']]
-    return render(
-        request, 'blog/index.html',{
-            'YmonSum':YmonSum, 
-            'YmonAvg' : YmonAvg,
-            'YmonMax' : YmonMax,
-            'YmonCount' : YmonCount,
-            'TableData' : TableData
-    })
-
+    else:
+        return redirect('login')
 
 
 # qs=Ymon.objects.all()

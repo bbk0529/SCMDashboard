@@ -55,7 +55,7 @@ ROOT_URLCONF = 'mysite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -125,3 +125,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # added 21st Aug 18 to import data from YMON
 #https://simpleisbetterthancomplex.com/packages/2016/08/11/django-import-export.html
 IMPORT_EXPORT_USE_TRANSACTIONS = True
+
+LOGIN_REDIRECT_URL = 'index'
+LOGOUT_REDIRECT_URL = 'index'
