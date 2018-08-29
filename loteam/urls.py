@@ -1,11 +1,15 @@
 from django.urls import path
+from django.conf.urls import url
+from django.contrib import admin
 from . import views
 
 urlpatterns=[
     path('',views.index, name='index'),
     path('ui_buttons',views.ui_buttons, name='ui_buttons'),
     path('test',views.test, name='test'),
+    path('test2',views.test2, name='test'),
     path('boxplot',views.boxplot, name='boxplot'),
     path('barchart',views.barchart, name='barchart'),
-    path('simple_upload',views.simple_upload, name='simple_upload'),
+    path('barchart2',views.barchart2, name='barchart2'),
+    path('get_name',views.get_name, name='get_name'),    
 ]

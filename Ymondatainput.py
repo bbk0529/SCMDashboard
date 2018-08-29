@@ -3,7 +3,7 @@
 ###################################################
 import pandas as pd
 import datetime
-from blog.models import Ymon
+from loteam.models import Ymon
 
 columns=['U','Sold-To Party','Name 1','Sales Document','Item (SD)','Purchase order no.','Material','MRP Type','Description','Ident-code 1','Ident-code 2','Order Quantity','Open quantity','Pos. created on','Act.conf.date','Requested deliv.date']
 DF=pd.read_excel('F-KR-YMON_180813.XLSX', converters={'Material':int})
@@ -65,6 +65,32 @@ for i,v in DF.iterrows():
         continue
 
 
+########################
+#Consumption        
+########################
+
+
+import pandas as pd 
+df=pd.read_excel('Dashboard Modeling.xlsx', sheet_name='data')
+
+df['Date']=df['Date'].apply(lambda x: x.to_pydatetime().date()) #timestamp type to datetime.date
+df['year']=df['Date'].apply(lambda x: x.year)
+df['month']=df['Date'].apply(lambda x: x.month)
+df['week']=df['Date'].apply(lambda x: x.isocalendar()[1])
+df.groupby(['PN','year','month']).sum()['Qty'].loc[3013354,:,:].to_dict()
+df.groupby(['PN','year','week']).sum()['Qty'].loc[3013354,:,:].to_dict()        
+        
+
+for i,v in df.iterrows(): 
+    try : 
+        Consumption.objects.create(
+            Pn=v['PN'],
+            Date=v['Date'],
+            Qty=v['Qty']
+        )
+    except Exception as ex : 
+        print(ex, v)
+        continue
 
 
 

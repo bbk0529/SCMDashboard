@@ -2,8 +2,10 @@
 *~
 __pycache__
 myvenv
+backup
 db.sqlite3
 /static
 .DS_Store
 *.xlsx
 *.xls
+*.data

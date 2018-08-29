@@ -1,0 +1,77 @@
+{%load static%}
+<div id="barChartContainer2" style="height: 300px; width: 100%;"></div>
+<div class="content mt-3">
+    <div class="animated fadeIn">
+        <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <strong class="card-title">YMON list</strong>
+                </div>
+                <div class="card-body">
+                    <table id="bootstrap-data-table" class="table table-striped table-bordered">
+                        <thead>
+                          <tr>
+                            <!-- <th>Category</th> -->
+                            <th>Material</th>
+                            <th>Description</th>
+                            <th>LeadTime</th>
+                          </tr>
+                        </thead>
+                        <tbody>                
+                         {% for item in TableData %}
+                         <tr> 
+                            <!-- <td>{{ item.Category }}</td> -->
+                            
+                            <a href="#", onclick="javascript:graph({{ item.Material}})">
+                                <td id={{ item.Material}}  >                                
+                                
+                                    {{ item.Material}} 
+                                </td>
+                            </a>
+                            
+                            <td id={{ item.Material}}  >
+                                {{ item.Description }}
+                            </td>
+                            <td id={{ item.Material}}  >
+                                {{ item.LT }}
+                            </td>
+                        </tr>
+                        {% endfor %}              
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div> <!--div class=col-md-2-->
+        </div> <!--div class="row"-->
+    </div><!-- .animated -->
+</div><!-- .content -->
+
+
+<script>
+    function graph(id){
+        console.log(id, "haha");
+    }
+</script>
+
+<script type="text/javascript" src="{% static 'assets/js/barchart2.js' %}"></script>
+
+
+<script src="{% static 'assets/js/lib/data-table/datatables.min.js' %}"></script>
+<script src="{% static 'assets/js/lib/data-table/dataTables.bootstrap.min.js' %}"></script>
+<script src="{% static 'assets/js/lib/data-table/dataTables.buttons.min.js' %}"></script>
+<script src="{% static 'assets/js/lib/data-table/buttons.bootstrap.min.js' %}"></script>
+<script src="{% static 'assets/js/lib/data-table/jszip.min.js' %}"></script>
+<script src="{% static 'assets/js/lib/data-table/pdfmake.min.js' %}"></script>
+<script src="{% static 'assets/js/lib/data-table/vfs_fonts.js' %}"></script>
+<script src="{% static 'assets/js/lib/data-table/buttons.html5.min.js' %}"></script>
+<script src="{% static 'assets/js/lib/data-table/buttons.print.min.js' %}"></script>
+<script src="{% static 'assets/js/lib/data-table/buttons.colVis.min.js' %}"></script>
+<script src="{% static 'assets/js/lib/data-table/datatables-init.js' %}"></script>
+
+
+<!-- <script type="text/javascript"> -->
+        <!-- $(document).ready(function() { -->
+          <!-- $('#bootstrap-data-table-export').DataTable();          -->
+        <!-- }); -->
+<!-- </script> -->

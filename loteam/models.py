@@ -15,19 +15,6 @@ class Post(models.Model):
     def __str__(self) : 
         return self.title
 
-
-
-    
-
-class Material(models.Model):
-    Pn=models.IntegerField()
-    Type=models.CharField(max_length=10)
-    Category=models.CharField(max_length=20)
-    Description=models.CharField(max_length=40)
-    
-        
-
-    
 class Ymon(models.Model):
     Category=models.CharField(max_length=20, blank=True, null=True)
     U=models.CharField(max_length=1, blank=True,null=True)
@@ -48,10 +35,18 @@ class Ymon(models.Model):
     Requested_deliv_date=models.DateField(blank=True,null=True)
     Delta=models.IntegerField(blank=True, null=True)
     LT=models.IntegerField(blank=True, null=True)
+
     
-    def publish(self) :
-        self.published_date = timezone.now()
-        self.save()
+
+class Material(models.Model):
+    Pn=models.IntegerField()
+    Type=models.CharField(max_length=10)
+    Category=models.CharField(max_length=20)
+    Description=models.CharField(max_length=40)
     
-    # def __str__(self) : 
-        # return self.title
+        
+class Consumption(models.Model):
+    Pn=models.IntegerField()
+    Date=models.DateField()
+    Qty=models.IntegerField()    
+    

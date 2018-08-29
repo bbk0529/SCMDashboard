@@ -2,7 +2,7 @@
 {% block content %}
     <div id="right-panel" class="right-panel">
 
-    {% include "./subtemplate/header.html" %}
+    <!-- {#% include "./subtemplate/header.html" %#} -->
 
         <div class="content mt-3">
 
@@ -14,11 +14,14 @@
             {#% include './subtemplate/right_subpanel5.html' %#} <!--Card  -->
             {#% include './subtemplate/right_subpanel6.html' %#} <!--Worldmap -->
             
+            
+            
+            {% include 'blog/table.html' %}  
+            
             <!-- <div id="boxPlotChartContainer" style="height: 300px; width: 100%;"></div> -->
-            <div id="barChartContainer" style="height: 300px; width: 100%;"></div>
-            {% include 'blog/table.html' %} <!--Worldmap -->
+            <!-- <div id="barChartContainer" style="height: 300px; width: 100%;"></div> -->
+            
             
         </div> <!-- .content -->
     </div><!-- /#right-panel -->
-    
 {% endblock %}

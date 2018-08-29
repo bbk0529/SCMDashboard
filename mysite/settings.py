@@ -36,9 +36,8 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'blog',
-    'import_export',
+    'django.contrib.staticfiles',    
+    'loteam',       
 ]
 
 MIDDLEWARE = [
