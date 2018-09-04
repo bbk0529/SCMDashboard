@@ -47,6 +47,10 @@ DF=DF.merge(partnr[['Material','Category']], on='Material')
 clearing=read_frame(Clearing.objects.all())
 DF.loc[DF['Material'].isin(clearing.Material),'Remark']='Clearing'
 DF.loc[:,'Remark']=DF.Remark.fillna("")
+writer=pd.ExcelWriter('masterforycp4.xlsx')
+pd.DataFrame(DF.Material.unique()).to_excel(writer, "Master")
+writer.save()
+
 
 for i,v in DF.iterrows():
     try :

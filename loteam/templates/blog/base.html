@@ -10,14 +10,14 @@
     <body>
     {% include "./subtemplate/script.html" %}
     {#% include "./subtemplate/left_panel.html" %#}
-    <!-- <div class="content mt-3">
+    <div class="content mt-3">
     {% if user.is_authenticated %}
     Hi {{ user.username }}!
     <p><a href="{% url 'logout' %}">logout</a></p>
     {% else %}
     You are not logged in
     <p><a href="{% url 'login' %}">login</a></p>
-    {% endif %} -->
+    {% endif %}
         <!-- Right Panel -->
         {% block content %}
 
