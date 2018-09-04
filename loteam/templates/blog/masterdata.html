@@ -1,0 +1,32 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+
+
+    <div id="right-panel" class="right-panel">
+
+    <!-- {#% include "./subtemplate/header.html" %#} -->
+
+        <div class="content mt-3">
+
+            {#% include "./subtemplate/right_message.html" %#}
+            {#% include './subtemplate/right_subpanel1.html' %#} <!--Member Online -->
+            {#% include './subtemplate/right_subpanel2.html' %#} <!--SNS -->
+            {#% include './subtemplate/right_subpanel3.html' %#} <!--Traffic Graph -->
+            {#% include './subtemplate/right_subpanel4.html' %#} <!--Project Manager  -->
+            {#% include './subtemplate/right_subpanel5.html' %#} <!--Card  -->
+            {#% include './subtemplate/right_subpanel6.html' %#} <!--Worldmap -->
+
+
+            {% include 'blog/chart/doughtchart.html' %}
+            {% include 'blog/table.html' %}
+
+            <!-- {#% include 'blog/chart/barchart2.html' %#}   -->
+
+
+            <!-- <div id="boxPlotChartContainer" style="height: 300px; width: 100%;"></div> -->
+            <!-- <div id="barChartContainer" style="height: 300px; width: 100%;"></div> -->
+
+
+        </div> <!-- .content -->
+    </div><!-- /#right-panel -->
+{% endblock %}

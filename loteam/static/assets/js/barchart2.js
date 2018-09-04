@@ -1,24 +1,27 @@
 (function ($) {
-    graph(2003);    
-    
-    
+    graph(2003);
+
+    var ctx = document.getElementById( "barChartContainer2" );
+
+
+
     $('td').click(function() { //the event happening, table <td> clicked
         let id=$(this).attr('id');
         graph(id)
         console.log(id);
     }) // end of 'td' click
-    
-    
-    function graph(id){    
-        console.log("barchart 2 ajax called");      
-        data =consumptionRead(id);    
+
+
+    function graph(id){
+        console.log("barchart 2 ajax called");
+        data =consumptionRead(id);
         console.log(data);
-        chartDraw(id, data[0],data[1]);      
+        chartDraw(id, data[0],data[1]);
     }
-    
-    function consumptionRead(id) {            
-        var data1 = new Array();    
-        var data2 = new Array();  
+
+    function consumptionRead(id) {
+        var data1 = new Array();
+        var data2 = new Array();
         $.ajax({
             url : "barchart2",
             type : "get",
@@ -28,19 +31,19 @@
             async: false,
             success : function(data) {
                 BarPlot2=JSON.parse(data['BarPlot2'])
-                BarPlot2Mean=JSON.parse(data['BarPlot2Mean'])                
-                for(var item in BarPlot2) {               
+                BarPlot2Mean=JSON.parse(data['BarPlot2Mean'])
+                for(var item in BarPlot2) {
                     data1.push({label:item , y: BarPlot2[item]});
                 }
                 for(var item2 in BarPlot2Mean) {
-                    data2.push({label:item2 , y: BarPlot2Mean[item2]});               
-                }                                                
-        
+                    data2.push({label:item2 , y: BarPlot2Mean[item2]});
+                }
+
             }
         }) //end of $.ajax
         return [data1,data2];
     }
-    
+
     function chartDraw(id, data1, data2) {
         console.log(id,data1,data2);
         title=id.toString().concat(" Consumption");
@@ -49,7 +52,7 @@
             animationEnabled: true,
             title:{
                 text: title
-            },	
+            },
             axisY: {
                 title: "Consumption",
                 titleFontColor: "#4F81BC",
@@ -63,7 +66,7 @@
                 lineColor: "#C0504E",
                 labelFontColor: "#C0504E",
                 tickColor: "#C0504E"
-            },	
+            },
             toolTip: {
                 shared: true
             },
@@ -75,13 +78,13 @@
                 type: "column",
                 name: "Consumption",
                 legendText: "Consumption",
-                showInLegend: true, 
+                showInLegend: true,
                 dataPoints:
                     data1
-                
+
             },
             {
-                type: "line",	
+                type: "line",
                 name: "120D avg",
                 legendText: "120D Avg",
                 axisYType: "secondary",
@@ -91,8 +94,8 @@
         });
         chart.render();
     } // end of function
-        
-    
+
+
 
     function toggleDataSeries(e) {
         if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {

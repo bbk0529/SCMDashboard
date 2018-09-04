@@ -36,8 +36,8 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',    
-    'loteam',       
+    'django.contrib.staticfiles',
+    'loteam',
 ]
 
 MIDDLEWARE = [
@@ -110,7 +110,7 @@ TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
-USE_L10N = True
+USE_L10N = False
 
 USE_TZ = True
 
@@ -126,5 +126,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 #https://simpleisbetterthancomplex.com/packages/2016/08/11/django-import-export.html
 IMPORT_EXPORT_USE_TRANSACTIONS = True
 
-LOGIN_REDIRECT_URL = 'index'
-LOGOUT_REDIRECT_URL = 'index'
+LOGIN_REDIRECT_URL = 'tab1'
+LOGOUT_REDIRECT_URL = 'tab1'
+
+DATE_FORMAT='y-n-j'

@@ -1,11 +1,16 @@
+
 {% extends 'blog/base.html' %}
+{%load static %}
 {% block content %}
 
-
-
-  
-
-
+    <p id="list"></p>
+    <select id="ProductFamily">
+    {% for Product in ProductFamily %}
+       <option value="{{Product.Product}}">
+           {{Product.Product}}
+       </option>
+    {% endfor %}
+    </select>
 
     <div id="right-panel" class="right-panel">
 
@@ -13,22 +18,64 @@
 
         <div class="content mt-3">
 
-            {#% include "./subtemplate/right_message.html" %#}    
+            {#% include "./subtemplate/right_message.html" %#}
             {#% include './subtemplate/right_subpanel1.html' %#} <!--Member Online -->
             {#% include './subtemplate/right_subpanel2.html' %#} <!--SNS -->
             {#% include './subtemplate/right_subpanel3.html' %#} <!--Traffic Graph -->
             {#% include './subtemplate/right_subpanel4.html' %#} <!--Project Manager  -->
             {#% include './subtemplate/right_subpanel5.html' %#} <!--Card  -->
             {#% include './subtemplate/right_subpanel6.html' %#} <!--Worldmap -->
-            
-            
-            
-            {% include 'blog/table.html' %}  
-            
+
+
+            {#% include 'blog/chart/doughtchart.html' %#}
+            {#% include 'blog/table.html' %#}
+
+            {#% include 'blog/chart/barchart2.html' %#}
+            {#% include 'blog/table_ycp4.html' %#}
+
             <!-- <div id="boxPlotChartContainer" style="height: 300px; width: 100%;"></div> -->
             <!-- <div id="barChartContainer" style="height: 300px; width: 100%;"></div> -->
-            
-            
+
+
         </div> <!-- .content -->
     </div><!-- /#right-panel -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="{% static 'assets/js/vendor/jquery-2.1.4.min.js' %}"></script>
+<script>
+$(document).ready(function(){
+    console.log("java script called");
+    $('#ProductFamily').change(function(){
+      var product=$("#ProductFamily option:selected").text().replace(/ /g,'')
+      console.log(product);
+      $.ajax({
+          url : "productFamily",
+          type : "get",
+          data: {
+              'product' : product
+          },
+          async: false,
+          success : function(data) {
+              console.log("successfully communicated with Server");
+              // console.log(data);
+              $("#list").html(
+                data
+              );
+          }
+      }) //end of $.ajax
+    });
+});
+</script>
+
 {% endblock %}

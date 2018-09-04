@@ -5,24 +5,29 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
 <head>
-{% include "./subtemplate/head.html" %}    
-
+{% include "./subtemplate/head.html" %}
 </head>
-
     <body>
-    {% include "./subtemplate/left_panel.html" %}
+    {% include "./subtemplate/script.html" %}
+    {#% include "./subtemplate/left_panel.html" %#}
+    <!-- <div class="content mt-3">
+    {% if user.is_authenticated %}
+    Hi {{ user.username }}!
+    <p><a href="{% url 'logout' %}">logout</a></p>
+    {% else %}
+    You are not logged in
+    <p><a href="{% url 'login' %}">login</a></p>
+    {% endif %} -->
         <!-- Right Panel -->
         {% block content %}
-        
+
         <!--login.html to be here -->
         <!--index.html to be here -->
-        
-        
-        
-        {% endblock %}
-        
-        <!-- Right Panel -->
-        {% include "./subtemplate/script.html" %}
 
+
+
+        {% endblock %}
+
+        <!-- Right Panel -->
     </body>
 </html>

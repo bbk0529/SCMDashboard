@@ -1,17 +1,8 @@
 {%load static%}
-{% if user.is_authenticated %}
-        Hi {{ user.username }}!
-        <p><a href="{% url 'logout' %}">logout</a></p>
-{% else %}
-        You are not logged in
-        <p><a href="{% url 'login' %}">login</a></p>
-{% endif %}
-
-<div id="barChartContainer2" style="height: 300px; width: 100%;"></div>
 <div class="content mt-3">
     <div class="animated fadeIn">
         <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
                     <strong class="card-title">YMON list</strong>
@@ -23,44 +14,68 @@
                             <!-- <th>Category</th> -->
                             <th>Material</th>
                             <th>Description</th>
-                            <th>LeadTime</th>
+                            <th>TypeDescription</th>
+                            <th>Hierarchy</th>
+                            <th>Con0015</th>
+                            <th>Con0360</th>
+                            <th>Con3M</th>
+                            <th>Con12M</th>
+                            <th>Stock</th>
+                            <th>Order</th>
+                            <th>Incoming</th>
                           </tr>
                         </thead>
-                        <tbody>                
+                        <tbody>
                          {% for item in TableData %}
-                         <tr> 
+                         <tr>
                             <!-- <td>{{ item.Category }}</td> -->
-                            
-                            <a href="#", onclick="javascript:graph({{ item.Material}})">
-                                <td id={{ item.Material}}  >                                
-                                
-                                    {{ item.Material}} 
+
+                            <!-- <a href="#", onclick="javascript:graph({{ item.Material}})"> -->
+                                <td id={{ item.Material}}  >
+
+                                    {{ item.Material}}
                                 </td>
-                            </a>
-                            
+                            <!-- </a> -->
+
                             <td id={{ item.Material}}  >
                                 {{ item.Description }}
                             </td>
                             <td id={{ item.Material}}  >
-                                {{ item.LT }}
+                                {{ item.TypeDescription }}
+                            </td>
+                            <td id={{ item.Material}}  >
+                                {{ item.Hierarchy }}
+                            </td>
+                            <td id={{ item.Material}}  >
+                                {{ item.Con0015 }}
+                            </td>
+                            <td id={{ item.Material}}  >
+                                {{ item.Con0360 }}
                             </td>
                         </tr>
-                        {% endfor %}              
+                        {% endfor %}
                         </tbody>
                     </table>
                 </div>
             </div>
-        </div> <!--div class=col-md-2-->
+        </div> <!--div class=col-md-8-->
+        <div class="col-md-4">
+          <div class="card">
+                    <div class="card-header">
+                        <strong class="card-title">Consumption</strong>
+                    </div>
+                    <div class="card-body">
+                      <div id="barChartContainer2" style="height: 300px; width: 100%;"></div>
+                    </div>
+          </div>
+        </div>
         </div> <!--div class="row"-->
+
+
     </div><!-- .animated -->
 </div><!-- .content -->
 
 
-<script>
-    function graph(id){
-        console.log(id, "haha");
-    }
-</script>
 
 <script type="text/javascript" src="{% static 'assets/js/barchart2.js' %}"></script>
 

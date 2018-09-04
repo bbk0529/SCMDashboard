@@ -14,39 +14,44 @@ from django.shortcuts import redirect
 from .models import Post
 from .models import Ymon
 from .models import Consumption
+from .models import Masterdata
+from .models import ProductFamily
+from .models import YCP4
 
 
 
- 
+
+
 def ui_buttons(request):
     return render(request, 'blog/ui-buttons.html',{'test' : 10293845})
-    
-    
-    
+
+
 def index(request):
-    
-    if request.user.is_authenticated:        
-        
-        posts=Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
-        
-        YmonSum=Ymon.objects.all().aggregate(Sum('Open_quantity'))['Open_quantity__sum']
-        YmonAvg=Ymon.objects.all().aggregate(Avg('Open_quantity'))['Open_quantity__avg']
-        YmonMax=Ymon.objects.all().aggregate(Max('Open_quantity'))['Open_quantity__max']
-        YmonCount=Ymon.objects.all().aggregate(Count('Open_quantity'))['Open_quantity__count']
-        
-        print("YMON SUM",  YmonSum, YmonAvg, YmonMax, YmonCount)
-        TableData=Ymon.objects.values('Category','Material', 'Description','LT').filter(LT__lte=300).order_by('-LT')
+    if request.user.is_authenticated:
+
+        # posts=Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+        #
+        # YmonSum=Ymon.objects.all().aggregate(Sum('Open_quantity'))['Open_quantity__sum']
+        # YmonAvg=Ymon.objects.all().aggregate(Avg('Open_quantity'))['Open_quantity__avg']
+        # YmonMax=Ymon.objects.all().aggregate(Max('Open_quantity'))['Open_quantity__max']
+        # YmonCount=Ymon.objects.all().aggregate(Count('Open_quantity'))['Open_quantity__count']
+
+        # print("YMON SUM",  YmonSum, YmonAvg, YmonMax, YmonCount)
+        Products=ProductFamily.objects.values()
+        TableData=Masterdata.objects.values(
+            'Material', 'Description', 'TypeDescription', 'Hierarchy', 'Type', 'SupplyPlant', 'SS0015', 'Outlier0015', 'SS0360', 'Outier0360', 'Con0015', 'Con0360', 'Vendor'
+        )[:1000]
+
+
+        #TableData=Ymon.objects.values('Category','Material', 'Description','LT').filter(LT__lte=300).order_by('-LT')
         # TableData=DF[['Category','Material','Description','LT']]
-        print(TableData)
+        print(Products)
         return render(
             request, 'blog/index.html',{
-                'YmonSum':YmonSum, 
-                'YmonAvg' : YmonAvg,
-                'YmonMax' : YmonMax,
-                'YmonCount' : YmonCount,
-                'TableData' : TableData
+                'TableData' : TableData,
+                'ProductFamily' : Products
         })
-    
+
     else:
         return redirect('login')
 
@@ -67,51 +72,55 @@ def barchart2(request):
     try : #set up ID for search
         if request.method == 'GET':
             id = int(request.GET['id'])
-    
+
+
     except : #default ID for showing at the initial view
         id = 1000500
 
 
-    
-    df=read_frame(Consumption.objects.filter(Pn=id))#SELECT * from Consumption WHERE pn=id   
+
+    df=read_frame(Consumption.objects.filter(Pn=id))#SELECT * from Consumption WHERE pn=id
     df['Date']=df['Date'].apply(lambda x : str(x))
     # df['year']=df['Date'].apply(lambda x: x.year)
     # df['month']=df['Date'].apply(lambda x: x.month)
-    # df['week']=df['Date'].apply(lambda x: x.isocalendar()[1])       
+    # df['week']=df['Date'].apply(lambda x: x.isocalendar()[1])
     # df['rolling']=df[Qty].rolling(window=120, min_periods=1).mean()
-    
+
     # BarPlot2=df.groupby(['Pn','year','week']).sum()['Qty'].loc[id,:,:].to_json()
-    
+
     BarPlot2=df.groupby('Date').sum()['Qty'].sort_index()
     BarPlot2Mean=BarPlot2.rolling(window=30, min_periods=1).mean()
-    BarPlot2=BarPlot2.to_json()    
-    BarPlot2Mean=BarPlot2Mean.to_json()   
+    BarPlot2=BarPlot2.to_json()
+    BarPlot2Mean=BarPlot2Mean.to_json()
+
     data={'BarPlot2' : BarPlot2, 'BarPlot2Mean' : BarPlot2Mean}
-    
+
     # return HttpResponse(data, content_type="application/json")
+    print("id",id)
+    
     return HttpResponse(json.dumps(data), content_type="application/json")
-    
-    
+
+
 
 def test(request): #called by dashboard.js (traffic)
-    print("test, json called")    
+    print("test, json called")
     posts = list(Post.objects.all())
-    
+
     qs=Ymon.objects.all()
-    DF=read_frame(qs) #df dataframe from query set    
+    DF=read_frame(qs) #df dataframe from query set
     data1=DF[['Material','Open_quantity']].groupby('Material').sum()[:28].to_json()
     data2=DF[['Material','Open_quantity']].groupby('Material').sum()[:28].to_json()
     return JsonResponse(data1, safe=False)  # or JsonResponse({'data': data})
-    
-def boxplot(request):            
-    
+
+def boxplot(request):
+
     BoxPlotLT=DF[DF.LT<365][['Category','LT']].groupby('Category').describe()
     BoxPlotLT=BoxPlotLT['LT'][['min','25%','50%','75%','max']].sort_values('50%', ascending=False)
     items={}
     z=0
     for i,v in BoxPlotLT.iterrows():
-        items[i] = list(v.values)    
+        items[i] = list(v.values)
         z=z+1
         if(z>10) : break
-    
+
     return JsonResponse(items)

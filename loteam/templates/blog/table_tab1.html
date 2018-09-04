@@ -1,0 +1,115 @@
+{%load static%}
+
+<div class="content mt-3">
+    <div class="animated fadeIn">
+        <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <strong class="card-title">YMON list</strong>
+                </div>
+                <div class="card-body">
+                    <table id="bootstrap-data-table" class="table table-striped table-bordered">
+                        <thead>
+                          <tr>
+                            <!-- <th>Category</th> -->
+                            <th>PN</th>
+                            <th>Description</th>
+                            <th>SO</th>
+                            <th>Item</th>
+                            <th>PO</th>
+                            <th>Qty</th>
+                            <th>Po_created</th>
+                            <th>ConfDate</th>
+                            <th>ReqDate</th>
+                            <th>Con3M</th>
+                            <th>Con12M</th>
+                            <th>Status</th>
+                            <th>Stock</th>
+                            <th>Incoming</th>
+                            <th>Order</th>
+                            <th>Topticket</th>
+                            <th>Remark</th>
+                            <th>Shippingcondition</th>
+
+                          </tr>
+                        </thead>
+                        <tbody>
+                         {% for item in ymon %}
+                         <tr>
+                            <td id={{ item.Material}}  >
+                                {{ item.ycp4.Material}}
+                            </td>
+                            <td id={{ item.Material}}  >
+                                {{ item.ycp4.Description }}
+                            </td>
+                            <td id={{ item.Material}}  >
+                                {{ item.Sales_Document }}
+                            </td>
+                            <td id={{ item.Material}}  >
+                                {{ item.Item }}
+                            </td>
+                            <td id={{ item.Material}}  >
+                                {{ item.Purchase_order_no }}
+                            </td>
+                            <td id={{ item.Material}}  >
+                                {{ item.Open_quantity}}
+                            </td>
+                            <td id={{ item.Material}}  >
+                                {{ item.Pos_created_on}}
+                            </td>
+                            <td id={{ item.Material}}  >
+                                {{ item.Actconf_date}}
+                            </td>
+                            <td id={{ item.Material}}  >
+                                {{ item.Requested_deliv_date}}
+                            </td>
+                            <td id={{ item.Material}}  >
+                                {{ item.ycp4.Con3M }}
+                            </td>
+                            <td id={{ item.Material}}  >
+                                {{ item.ycp4.Con12M }}
+                            </td>
+                            <td id={{ item.Material}}  >
+                                {{ item.ycp4.Stock|add:item.ycp4.Incoming|add:item.ycp4.Order }}
+                            </td>
+                            <td id={{ item.Material}}  >
+                                {{ item.ycp4.Stock }}
+                            </td>
+                            <td id={{ item.Material}}  >
+                                {{ item.ycp4.Incoming }}
+                            </td>
+                            <td id={{ item.Material}}  >
+                                {{ item.ycp4.Order }}
+                            </td>
+                            <td id={{ item.Material}}  >
+                                {{ item.Topticket }}
+                            </td>
+                            <td id={{ item.Material}}  >
+                                {{ item.Remark }}
+                            </td>
+                            <td id={{ item.Material}}  >
+                                {{ item.Shippingcondition }}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div> <!--div class=col-md-8-->
+    </div><!-- .animated -->
+</div><!-- .content -->
+
+
+<script src="{% static 'assets/js/lib/data-table/datatables.min.js' %}"></script>
+<script src="{% static 'assets/js/lib/data-table/dataTables.bootstrap.min.js' %}"></script>
+<script src="{% static 'assets/js/lib/data-table/dataTables.buttons.min.js' %}"></script>
+<script src="{% static 'assets/js/lib/data-table/buttons.bootstrap.min.js' %}"></script>
+<script src="{% static 'assets/js/lib/data-table/jszip.min.js' %}"></script>
+<script src="{% static 'assets/js/lib/data-table/pdfmake.min.js' %}"></script>
+<script src="{% static 'assets/js/lib/data-table/vfs_fonts.js' %}"></script>
+<script src="{% static 'assets/js/lib/data-table/buttons.html5.min.js' %}"></script>
+<script src="{% static 'assets/js/lib/data-table/buttons.print.min.js' %}"></script>
+<script src="{% static 'assets/js/lib/data-table/buttons.colVis.min.js' %}"></script>
+<script src="{% static 'assets/js/lib/data-table/datatables-init.js' %}"></script>
