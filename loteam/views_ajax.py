@@ -42,7 +42,7 @@ def index(request):
             'Material', 'Description', 'TypeDescription', 'Hierarchy', 'Type', 'SupplyPlant', 'SS0015', 'Outlier0015', 'SS0360', 'Outier0360', 'Con0015', 'Con0360', 'Vendor'
         )[:1000]
 
-
+        print(TableData)
         #TableData=Ymon.objects.values('Category','Material', 'Description','LT').filter(LT__lte=300).order_by('-LT')
         # TableData=DF[['Category','Material','Description','LT']]
         print(Products)
@@ -97,7 +97,7 @@ def barchart2(request):
 
     # return HttpResponse(data, content_type="application/json")
     print("id",id)
-    
+
     return HttpResponse(json.dumps(data), content_type="application/json")
 
 

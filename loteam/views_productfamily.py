@@ -20,7 +20,7 @@ def productFamily(request) :
             partlist.append(i['Material'])
 
         TableData=Masterdata.objects.filter(Material__in=partlist)
-        ycp4data=YCP4.objects.filter(Pn__in=partlist)
+        ycp4data=YCP4.objects.filter(Material__in=partlist)
         print(TableData)
         print(ycp4data)
 
