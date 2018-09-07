@@ -57,7 +57,8 @@
 $(document).ready(function(){
     console.log("java script called");
     $('#ProductFamily').change(function(){
-      var product=$("#ProductFamily option:selected").text().replace(/ /g,'')
+      var product=$("#ProductFamily option:selected").text()
+      // var product=$("#ProductFamily option:selected").text().replace(/ /g,'')
       console.log(product);
       $.ajax({
           url : "productFamily",

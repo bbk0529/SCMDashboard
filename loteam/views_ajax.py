@@ -89,7 +89,7 @@ def barchart2(request):
     # BarPlot2=df.groupby(['Pn','year','week']).sum()['Qty'].loc[id,:,:].to_json()
 
     BarPlot2=df.groupby('Date').sum()['Qty'].sort_index()
-    BarPlot2Mean=BarPlot2.rolling(window=30, min_periods=1).mean()
+    BarPlot2Mean=BarPlot2.rolling(window=120, min_periods=1).mean()
     BarPlot2=BarPlot2.to_json()
     BarPlot2Mean=BarPlot2Mean.to_json()
 

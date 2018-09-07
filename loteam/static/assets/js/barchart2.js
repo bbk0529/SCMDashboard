@@ -1,5 +1,8 @@
 (function ($) {
-    graph(2003);
+    let id=$("td:first-child").attr('id');
+
+    console.log(id);
+    graph(id);
 
     var ctx = document.getElementById( "barChartContainer2" );
 

@@ -12,7 +12,7 @@ def productFamily(request) :
         product=request.GET['product'].strip()
         print(product)
         #SGFCode = ProductFamily.objects.filter(Product__contains=product).values()
-        SGFCode = str(ProductFamily.objects.filter(Product__contains=product).values()[0]['SGFCode']).replace(".0","")
+        SGFCode = ProductFamily.objects.filter(Product__contains=product).values()[0]['SGFCode']
         partnumbers=Masterdata.objects.filter(Hierarchy__contains=SGFCode).values('Material')
         partlist=[]
         for i in partnumbers :
