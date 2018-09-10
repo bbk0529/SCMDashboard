@@ -10,10 +10,12 @@ columns=['U','Sold-To Party','Name 1','Sales Document','Item (SD)','Purchase ord
 filename="Q:\\KRGrp007\\★NSC Meeting\\현황판\\YMON.XLSX"
 
 DF=pd.read_excel(filename)
-partnr=pd.read_excel('F-KR-YMON_180813.XLSX', sheet_name='partnr', converters={'Material':int})
-partnr.columns=['Material','Type','Category','Description']
+#partnr=pd.read_excel('F-KR-YMON_180813.XLSX', sheet_name='partnr', converters={'Material':int})
+#partnr.columns=['Material','Type','Category','Description']
 
+####################################################
 #PRETREATMENT
+####################################################
 DF=DF[columns]
 
 DF['Act.conf.date']=DF['Act.conf.date'].apply(lambda x: x.to_pydatetime().date())
@@ -31,17 +33,19 @@ DF=DF.drop(DF[DF['Material']>51200000].index)
 DF=DF.drop(DF[DF['Material'].between(11900000,12000000)].index)
 
 
+
+
+####################################################
+#PRETREATMENT
+####################################################
+
 #Adding additional columns , induced by others
 DF['Delta']=DF['Act.conf.date']-DF['Requested deliv.date']
 DF['Delta']= DF.Delta.apply(lambda x : x.days)
 
 DF['LT']=DF['Act.conf.date']-DF['Pos. created on']
 DF['LT']= DF.LT.apply(lambda x : x.days)
-
-DF=DF.merge(partnr[['Material','Category']], on='Material')
-
-
-
+#DF=DF.merge(partnr[['Material','Category']], on='Material')
 
 
 clearing=read_frame(Clearing.objects.all())
@@ -50,6 +54,48 @@ DF.loc[:,'Remark']=DF.Remark.fillna("")
 writer=pd.ExcelWriter('masterforycp4.xlsx')
 pd.DataFrame(DF.Material.unique()).to_excel(writer, "Master")
 writer.save()
+Ymonerrorfile=open('errorfile.txt','a')
+
+for i,v in DF.iterrows():
+    #print(i)
+    #print(v)
+    #ycp4=YCP4.objects.filter(Material=v['Material']),
+    #print(ycp4[0].values())
+    try:
+        Ymon.objects.update_or_create(
+            Sales_Document=str(v['Sales Document']),
+            Item=v['Item (SD)'],
+            defaults={
+                'ycp4': YCP4.objects.get(Material=v['Material']),
+                'U':v['U'],
+                'Sold_To_Party':v['Sold-To Party'],
+                'Name_1':v['Name 1'],
+                'Sales_Document':str(v['Sales Document']),
+                'Item':v['Item (SD)'],
+                'Purchase_order_no':str(v['Purchase order no.']),
+                'MRP_Type':v['MRP Type'],
+                'Description':v['Description'],
+                'Ident_code_1':v['Ident-code 1'],
+                'Ident_code_2':v['Ident-code 2'],
+                'Order_Quantity':v['Order Quantity'],
+                'Open_quantity':v['Open quantity'],
+                'Pos_created_on':v['Pos. created on'],
+                'Actconf_date':v['Act.conf.date'],
+                'Requested_deliv_date':v['Requested deliv.date'],
+                'Delta':v['Delta'],
+                'LT':v['LT'],
+                'Remark':v['Remark'],
+                'Topticket':v['No.Tickets'],
+                'Shippingcondition':v['Shipping Conditions']
+                }
+            )
+
+    except Exception as ex :
+        print(ex, v[['Sales Document','Item (SD)']])
+        Ymonerrorfile.write(ex,v)
+        continue
+Ymonerrorfile.close()
+
 
 
 for i,v in DF.iterrows():

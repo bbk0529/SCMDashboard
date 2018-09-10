@@ -1,11 +1,6 @@
 from django.db import models
 from django.utils import timezone
 
-class ProductFamily(models.Model):
-    Product=models.CharField(max_length=20)
-    SGFCode=models.CharField(max_length=20)
-    Focus=models.CharField(max_length=20)
-    Pn=models.CharField(max_length=20)
 
 class Post(models.Model):
     author=models.ForeignKey('auth.User', on_delete=models.CASCADE)
@@ -48,17 +43,17 @@ class Clearing(models.Model):
 
 
 class YCP4(models.Model):
-    Material = models.IntegerField()
+    Material = models.IntegerField(primary_key=True)
     Description=models.CharField(max_length=30, blank=True,null=True)
-    Con3M=models.IntegerField()
-    Con12M=models.IntegerField()
-    Stock=models.IntegerField()
-    Incoming=models.IntegerField()
-    Order=models.IntegerField()
+    Con3M=models.IntegerField(blank=True,null=True)
+    Con12M=models.IntegerField(blank=True,null=True)
+    Stock=models.IntegerField(blank=True,null=True)
+    Incoming=models.IntegerField(blank=True,null=True)
+    Order=models.IntegerField(blank=True,null=True)
 
 class Ymon(models.Model):
-    ycp4=models.ForeignKey('YCP4',on_delete=models.CASCADE, default='0000')
-    Category=models.CharField(max_length=20, blank=True, null=True)
+    ycp4=models.ForeignKey(YCP4,on_delete=models.CASCADE)
+    #Category=models.CharField(max_length=20, blank=True, null=True)
     U=models.CharField(max_length=1, blank=True,null=True)
     Sold_To_Party=models.IntegerField(blank=True,null=True)
     Name_1=models.CharField(max_length=30, blank=True,null=True)
@@ -95,6 +90,11 @@ class Consumption(models.Model):
     Qty=models.IntegerField()
 
 
+class ProductFamily(models.Model):
+    Product=models.CharField(max_length=20)
+    SGFCode=models.CharField(max_length=20)
+    Focus=models.CharField(max_length=20)
+    Pn=models.CharField(max_length=20)
 
 
 class Masterdata(models.Model):
