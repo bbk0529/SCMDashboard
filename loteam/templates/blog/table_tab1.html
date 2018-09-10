@@ -70,8 +70,11 @@
                             <td id={{ item.Material}}  >
                                 {{ item.ycp4.Con12M }}
                             </td>
-                            <td id={{ item.Material}}  >
+                            <td>
+                              <font color="
+                                {% if item.ycp4.Stock|add:item.ycp4.Incoming|add:item.ycp4.Order < 0 %}Red{% endif %}">
                                 {{ item.ycp4.Stock|add:item.ycp4.Incoming|add:item.ycp4.Order }}
+                              </font>
                             </td>
                             <td id={{ item.Material}}  >
                                 {{ item.ycp4.Stock }}

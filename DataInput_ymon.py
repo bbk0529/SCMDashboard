@@ -54,7 +54,7 @@ DF.loc[:,'Remark']=DF.Remark.fillna("")
 writer=pd.ExcelWriter('masterforycp4.xlsx')
 pd.DataFrame(DF.Material.unique()).to_excel(writer, "Master")
 writer.save()
-Ymonerrorfile=open('errorfile.txt','a')
+Ymonerrorfile=open('ymonerrorfile.txt','a')
 
 for i,v in DF.iterrows():
     #print(i)
@@ -94,6 +94,10 @@ for i,v in DF.iterrows():
         print(ex, v[['Sales Document','Item (SD)']])
         Ymonerrorfile.write(ex,v)
         continue
+
+
+
+
 Ymonerrorfile.close()
 
 

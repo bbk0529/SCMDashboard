@@ -1,7 +1,7 @@
 import pandas as pd
 
 #filename='F-KR-YMON_180813.XLSX'
-
+errorfile=open('errorfile.txt','a')
 filename="Q:\\KRGrp007\\★NSC Meeting\\현황판\\YCP4.XLSX"
 sheet_name='ycp4'
 df=pd.read_excel(filename, header=0)
@@ -12,19 +12,23 @@ df.columns=['Material', 'Description', 'Con3M','Con12M','Stock','DelayedPO','Inc
 
 from loteam.models import YCP4
 
-
 for i,v in df.iterrows():
     try :
-        YCP4.objects.create(
+        YCP4.objects.update_or_create(
             Material = v['Material'],
-            Description=v['Description'],
-            Con3M=v['Con3M'],
-            Con12M=v['Con12M'],
-            Stock=v['Stock'],
-            Incoming=v['Incoming'] + v['DelayedPO'],
-            Order=v['Order'],
+            defaults={
+                'Description':v['Description'],
+                'Con3M':v['Con3M'],
+                'Con12M':v['Con12M'],
+                'Stock':v['Stock'],
+                'Incoming':v['Incoming'] + v['DelayedPO'],
+                'Order':v['Order'],
+            }
         )
     except Exception as ex :
-        print(ex)
+
         print(ex, v)
+        errorfile.write(ex,v)
         continue
+
+errorfile.close()
