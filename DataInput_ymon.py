@@ -47,13 +47,15 @@ DF['LT']=DF['Act.conf.date']-DF['Pos. created on']
 DF['LT']= DF.LT.apply(lambda x : x.days)
 #DF=DF.merge(partnr[['Material','Category']], on='Material')
 
-
 clearing=read_frame(Clearing.objects.all())
 DF.loc[DF['Material'].isin(clearing.Material),'Remark']='Clearing'
 DF.loc[:,'Remark']=DF.Remark.fillna("")
 writer=pd.ExcelWriter('masterforycp4.xlsx')
 pd.DataFrame(DF.Material.unique()).to_excel(writer, "Master")
 writer.save()
+
+
+
 Ymonerrorfile=open('ymonerrorfile.txt','a')
 
 for i,v in DF.iterrows():

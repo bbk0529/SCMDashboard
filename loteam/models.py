@@ -50,6 +50,7 @@ class YCP4(models.Model):
     Stock=models.IntegerField(blank=True,null=True)
     Incoming=models.IntegerField(blank=True,null=True)
     Order=models.IntegerField(blank=True,null=True)
+    Status=models.IntegerField(blank=True,null=True)
 
 class Ymon(models.Model):
     ycp4=models.ForeignKey(YCP4,on_delete=models.CASCADE)
@@ -74,6 +75,7 @@ class Ymon(models.Model):
     Remark=models.CharField(max_length=10, blank=True, null=True)
     Topticket=models.IntegerField(blank=True,null=True)
     Shippingcondition=models.CharField(max_length=2, blank=True,null=True)
+
 
 
 

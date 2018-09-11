@@ -1,15 +1,22 @@
 {%load static%}
+<style>
 
+.text_filter{
+    width:45%;
+    min-width:200px;
+}
+
+</style>
 <div class="content mt-3">
     <div class="animated fadeIn">
         <div class="row">
         <div class="col-lg-12">
-            <!-- <div class="card">
+            <div class="card">
                 <div class="card-header">
                     <strong class="card-title">YMON list</strong>
                 </div>
-                <div class="card-body"> -->
-                    <table id="bootstrap-data-table" class="table table-striped table-bordered">
+                <div class="card-body">
+                    <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
                         <thead>
                           <tr>
                             <!-- <th>Category</th> -->
@@ -22,16 +29,15 @@
                             <th>Po_created</th>
                             <th>ConfDate</th>
                             <th>ReqDate</th>
-                            <th>Con3M</th>
-                            <th>Con12M</th>
+                            <!-- <th>Con3M</th>
+                            <th>Con12M</th> -->
                             <th>Status</th>
                             <th>Stock</th>
                             <th>Incoming</th>
                             <th>Order</th>
-                            <th>Topticket</th>
-                            <th>Remark</th>
-                            <th>Shippingcondition</th>
-
+                            <!-- <th>Topticket</th>
+                            <th>Remark</th> -->
+                            <th>Ship</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -41,7 +47,9 @@
                                 {{ item.ycp4.Material}}
                             </td>
                             <td id={{ item.Material}}  >
+                              <font color="{% if item.ycp4.Status < 0 %} Red {% endif %}">
                                 {{ item.ycp4.Description }}
+                              </font>
                             </td>
                             <td id={{ item.Material}}  >
                                 {{ item.Sales_Document }}
@@ -64,17 +72,21 @@
                             <td id={{ item.Material}}  >
                                 {{ item.Requested_deliv_date}}
                             </td>
-                            <td id={{ item.Material}}  >
+                            <!-- <td id={{ item.Material}}  >
                                 {{ item.ycp4.Con3M }}
                             </td>
                             <td id={{ item.Material}}  >
                                 {{ item.ycp4.Con12M }}
-                            </td>
+                            </td> -->
+                            <!-- <td>
+                              {{ item.ycp4.Status }} -->
+                              <!-- <font color="
+                                {% if item.ycp4.Status < 0 %}Red{% endif %}">
+
+                              </font> -->
+                            <!-- </td> -->
                             <td>
-                              <font color="
-                                {% if item.ycp4.Stock|add:item.ycp4.Incoming|add:item.ycp4.Order < 0 %}Red{% endif %}">
-                                {{ item.ycp4.Stock|add:item.ycp4.Incoming|add:item.ycp4.Order }}
-                              </font>
+                              {{ item.ycp4.Status }}
                             </td>
                             <td id={{ item.Material}}  >
                                 {{ item.ycp4.Stock }}
@@ -85,24 +97,43 @@
                             <td id={{ item.Material}}  >
                                 {{ item.ycp4.Order }}
                             </td>
-                            <td id={{ item.Material}}  >
+                            <!-- <td id={{ item.Material}}  >
                                 {{ item.Topticket }}
                             </td>
                             <td id={{ item.Material}}  >
                                 {{ item.Remark }}
-                            </td>
+                            </td> -->
                             <td id={{ item.Material}}  >
                                 {{ item.Shippingcondition }}
                             </td>
                         </tr>
                         {% endfor %}
                         </tbody>
+                        <tfoot>
+                        <tr>
+                          <th>PN</th>
+                          <th>Description</th>
+                          <th>SO</th>
+                          <th>Item</th>
+                          <th>PO</th>
+                          <th>Qty</th>
+                          <th>Po_created</th>
+                          <th>ConfDate</th>
+                          <th>ReqDate</th>
+                          <th>Status</th>
+                          <th>Stock</th>
+                          <th>Incoming</th>
+                          <th>Order</th>
+                          <th>Ship</th>
+                        </tr>
+                    </tfoot>
                     </table>
                 </div><!--card-->
             </div> <!--card body-->
         </div> <!--div class=col-md-12-->
     </div><!-- .animated -->
 </div><!-- .content -->
+
 
 
 <script src="{% static 'assets/js/lib/data-table/datatables.min.js' %}"></script>
