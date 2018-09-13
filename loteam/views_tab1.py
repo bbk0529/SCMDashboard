@@ -1,7 +1,10 @@
 #view_ajax.py
 from .models import Ymon, YCP4
 from django.shortcuts import render
-from django.shortcuts import redirect
+from django.shortcuts import redirect, HttpResponse
+from django.core.serializers import serialize
+from django_pandas.io import read_frame
+import json
 
 import time
 starttime = time.time()
@@ -20,3 +23,12 @@ def tab1(request) :
         })
     else:
         return redirect('login')
+
+def tab2(request) :
+    ymon=read_frame(Ymon.objects.filter(Description__contains='dgsl')).to_json()
+    print(ymon)
+    return HttpResponse(json.dumps(ymon), content_type="application/json")
+    # return render(
+    #     request, 'blog/table_tab2.html',{
+    #         'ymon' : ymon
+    # })

@@ -5,6 +5,7 @@ from . import views
 
 urlpatterns=[
     path('',views.tab1, name='tab1'),
+    path('tab2',views.tab2, name='tab2'),
     path('consumption',views.index, name='consumption'),
     path('ui_buttons',views.ui_buttons, name='ui_buttons'),
     path('boxplot',views.boxplot, name='boxplot'),

@@ -29,6 +29,33 @@
                 <th>Order</th>
             </tr>
         </thead>
+        <tbody>
+         {% for item in ymon %}
+         <tr>
+           <td class='details-control'>
+           </td>
+            <td id={{ item.Material}}  >
+                {{ item.ycp4.Material}}
+            </td>
+            <td id={{ item.Material}}  >
+                {{ item.ycp4.Description }}
+            </td>
+            <td>
+              {{ item.ycp4.Status }}
+            </td>
+            <td id={{ item.Material}}  >
+                {{ item.ycp4.Stock }}
+            </td>
+            <td id={{ item.Material}}  >
+                {{ item.ycp4.Incoming }}
+            </td>
+            <td id={{ item.Material}}  >
+                {{ item.ycp4.Order }}
+            </td>
+
+        </tr>
+        {% endfor %}
+        </tbody>
         <tfoot>
             <tr>
               <th></th>
@@ -58,26 +85,31 @@ function format ( d ) {
 }
 
 $(document).ready(function() {
-    var table = $('#example').DataTable( {
-        // "ajax": "../ajax/data/objects.txt",
-        "ajax": "tab2",
-        "columns": [
-            {
-                "className":      'details-control',
-                "orderable":      false,
-                "data":           null,
-                "defaultContent": ''
-            },
-            { "data": "Material" },
-            { "data": "Description" },
-            { "data": "Status" },
-            { "data": "Stock" },
-            { "data": "Incoming"},
-            { "data": "Order" },
-        ],
-        "order": [[1, 'asc']]
-    } );
+    // var table = $('#example').DataTable( {
+    //     // "ajax": "../ajax/data/objects.txt",
+    //     "ajax": "tab2",
+    //     "columns": [
+    //         {
+    //             "className":      'details-control',
+    //             "orderable":      false,
+    //             "data":           null,
+    //             "defaultContent": ''
+    //         },
+    //         { "data": "Material" },
+    //         { "data": "Description" },
+    //         { "data": "Status" },
+    //         { "data": "Stock" },
+    //         { "data": "Incoming"},
+    //         { "data": "Order" },
+    //     ],
+    //     "order": [[1, 'asc']]
+    // } );
+
     // Add event listener for opening and closing details
+    var table = $('#example').DataTable({
+        lengthMenu: [[5,10, 20, 50, -1], [5,10, 20, 50, "All"]],
+    });
+
     $('#example').on('click', 'td.details-control', function () {
         console.log("clicked");
         var tr = $(this).closest('tr');
