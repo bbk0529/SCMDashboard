@@ -9,7 +9,8 @@ filename="Q:\\KRGrp007\\★NSC Meeting\\현황판\\YCP4.XLSX"
 sheet_name='ycp4'
 df=pd.read_excel(filename, header=0)
 #df=pd.read_excel(filename, sheet_name=sheet_name, header=1)
-df=df.iloc[:,[6,7,4,5,18,23,24,26]]
+#df=df.loc[:,['Material',]]
+df=df.iloc[:,[6,7,4,5,18,23,24,26,9]]
 df.columns=['Material', 'Description', 'Con3M','Con12M','Stock','DelayedPO','Incoming','Order', 'MRP Type']
 df['Status']= df['Stock'] + df['Order'] + df['Incoming'] + df['DelayedPO']
 
@@ -29,7 +30,7 @@ for i,v in df.iterrows():
                 'Incoming':v['Incoming'] + v['DelayedPO'],
                 'Order': v['Order'],
                 'Status': v['Status'],
-                'MRP': v['MRP Type'],
+                'Mrp': v['MRP Type'],
             }
         )
 

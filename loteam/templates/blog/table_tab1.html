@@ -22,6 +22,7 @@
                             <!-- <th>Category</th> -->
                             <th>PN</th>
                             <th>Description</th>
+                            <th>MRP</th>
                             <th>SO</th>
                             <th>Item</th>
                             <th>PO</th>
@@ -50,6 +51,9 @@
                               <font color="{% if item.ycp4.Status < 0 %} Red {% endif %}">
                                 {{ item.ycp4.Description }}
                               </font>
+                            </td>
+                            <td id={{ item.Material}}  >
+                                {{ item.ycp4.Mrp }}
                             </td>
                             <td id={{ item.Material}}  >
                                 {{ item.Sales_Document }}
@@ -113,6 +117,7 @@
                         <tr>
                           <th>PN</th>
                           <th>Description</th>
+                          <th>MRP</th>
                           <th>SO</th>
                           <th>Item</th>
                           <th>PO</th>
