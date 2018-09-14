@@ -51,6 +51,7 @@ class YCP4(models.Model):
     Incoming=models.IntegerField(blank=True,null=True)
     Order=models.IntegerField(blank=True,null=True)
     Status=models.IntegerField(blank=True,null=True)
+    Mrp=models.CharField(max_length=2, blank=True, null=True)
 
 class Ymon(models.Model):
     ycp4=models.ForeignKey(YCP4,on_delete=models.CASCADE)
