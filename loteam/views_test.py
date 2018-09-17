@@ -4,6 +4,42 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from .models import ProductFamily, Masterdata, YCP4, Book, Publisher
 import json
+import pandas as pd
+
+import io
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+from matplotlib.backends.backend_agg import FigureCanvasAgg
+
+
+def simple(request):
+    import pickle
+
+    DF=pickle.load(open('yu.p','rb'))
+
+
+
+    f = plt.figure(figsize=(20,5))
+    #ax = plt.axes([0.1, 0.1, 0.8, 0.8])
+
+
+    plt.hist(DF.COUNT, bins=10)
+
+    # labels = 'Frogs', 'Hogs', 'Dogs', 'Logs'
+    # fracs = [15,30,45, 10]
+    # explode=(0, 0.05, 0, 0)
+    # plt.pie(fracs, explode=explode, labels=labels, autopct='%1.1f%%', shadow=True)
+    #plt.title('Raining Hogs and Dogs', bbox={'facecolor':'0.8', 'pad':5})
+
+    canvas = FigureCanvasAgg(f)
+
+    buf=io.BytesIO()
+    plt.savefig(buf,format='png')
+    plt.close(f)
+    response = HttpResponse(buf.getvalue(), content_type='image/png')
+
+    return response
 
 def book(request) :
     #data=Book.objects.all().values()

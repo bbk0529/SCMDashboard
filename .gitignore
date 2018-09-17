@@ -10,3 +10,4 @@ db.sqlite3
 *.xls
 *.data
 *.xlsb
+*.pickle

@@ -42,23 +42,13 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
 <script src="{% static 'assets/js/vendor/jquery-2.1.4.min.js' %}"></script>
 <script>
 $(document).ready(function(){
     console.log("java script called");
+
     $('#ProductFamily').change(function(){
       var product=$("#ProductFamily option:selected").text()
-      // var product=$("#ProductFamily option:selected").text().replace(/ /g,'')
       console.log(product);
       $.ajax({
           url : "productFamily",

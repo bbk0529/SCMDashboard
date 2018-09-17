@@ -13,6 +13,6 @@ urlpatterns=[
     path('barchart2',views.barchart2, name='barchart2'),
     path('get_name',views.get_name, name='get_name'),
     path('productFamily',views.productFamily, name='productFamily'),
-    path('book',views.book, name='book'),
+    path('simple',views.simple, name='simple'),
 
 ]
