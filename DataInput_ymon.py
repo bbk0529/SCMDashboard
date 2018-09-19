@@ -94,7 +94,9 @@ for i,v in DF.iterrows():
 
     except Exception as ex :
         print(ex, v[['Sales Document','Item (SD)']])
-        Ymonerrorfile.write(ex,v)
+        Ymonerrorfile.write(str(ex))
+        Ymonerrorfile.write(str(v[['Sales Document','Item (SD)', 'Material']]))
+
         continue
 
 

@@ -15,3 +15,11 @@ for i,v in df.iterrows():
     except Exception as ex :
         print(ex, v)
         continue
+
+
+
+
+
+DF.join(df.iloc[:,4])
+D.Grouping.describe()
+A.join(df.iloc[:,4]).iloc[:,-2:].groupby('Grouping').count()
