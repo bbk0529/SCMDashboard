@@ -48,7 +48,11 @@ def ycp4Update() :
 
         except Exception as ex :
             print(ex, v)
-            errorfile.write((str(datetime.datetime.now())+ str(ex) + v['Material'] ))
+            errorfile.write((
+                str(datetime.datetime.now()) +
+                str(ex) +
+                str(v['Material'])
+                ))
 
             continue
 
