@@ -41,7 +41,7 @@ def ycp4Update() :
                     'Order': v['Order'],
                     'Status': v['Status'],
                     'Mrp': v['MRP Type'],
-                    'MaterialType' : v['Material Type Type']
+                    'MaterialType' : v['Material Type']
                 }
             )
 
