@@ -18,8 +18,8 @@ def ycp4Update() :
         'Material','Material Description','Average consumption of 3 months',
         'Average consumption of 12 months','MRP Unrestr. stock',
         'Quantity delayed purch.orders','Quantity current purch.orders',
-        'Total Reservierungen / Sales Orders', 'MRP Type']]
-    df.columns=['Material', 'Description', 'Con3M','Con12M','Stock','DelayedPO','Incoming','Order', 'MRP Type']
+        'Total Reservierungen / Sales Orders', 'MRP Type', 'Material Type']]
+    df.columns=['Material', 'Description', 'Con3M','Con12M','Stock','DelayedPO','Incoming','Order', 'MRP Type', 'Type']
     df['Status']= df['Stock'] + df['Order'] + df['Incoming'] + df['DelayedPO']
 
     #df=df.set_index('Pn')
@@ -41,12 +41,9 @@ def ycp4Update() :
                     'Order': v['Order'],
                     'Status': v['Status'],
                     'Mrp': v['MRP Type'],
-                    'MaterialType' : v['Material Type']
+                    'MaterialType' : v['Type']
                 }
             )
-
-
-
         except Exception as ex :
             print(ex, v)
             errorfile.write((
