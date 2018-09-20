@@ -52,6 +52,7 @@ class YCP4(models.Model):
     Order=models.IntegerField(blank=True,null=True)
     Status=models.IntegerField(blank=True,null=True)
     Mrp=models.CharField(max_length=2, blank=True, null=True)
+    MaterialType=models.CharField(max_length=4, blank=True, null=True)
 
 class Ymon(models.Model):
     ycp4=models.ForeignKey(YCP4,on_delete=models.CASCADE)
