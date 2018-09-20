@@ -1,3 +1,67 @@
+def ycp4Update() :
+    print("_________ycp4Update loaded")
+    import pandas as pd
+    import time
+    import datetime
+
+
+    starttime=time.time()
+    #filename='F-KR-YMON_180813.XLSX'
+    errorfile=open('errorfile.txt','a')
+    filename="Q:\\KRGrp007\\★NSC Meeting\\현황판\\YCP4.XLSX"
+    print("________YCP4 excel file being loaded")
+    df=pd.read_excel(filename, header=0)
+    print("________YCP4 file loaded, to be put into the database")
+    #df=pd.read_excel(filename, sheet_name=sheet_name, header=1)
+    #df=df.loc[:,['Material',]]
+    df=df.loc[:,[
+        'Material','Material Description','Average consumption of 3 months',
+        'Average consumption of 12 months','MRP Unrestr. stock',
+        'Quantity delayed purch.orders','Quantity current purch.orders',
+        'Total Reservierungen / Sales Orders', 'MRP Type']]
+    df.columns=['Material', 'Description', 'Con3M','Con12M','Stock','DelayedPO','Incoming','Order', 'MRP Type']
+    df['Status']= df['Stock'] + df['Order'] + df['Incoming'] + df['DelayedPO']
+
+    #df=df.set_index('Pn')
+
+    from loteam.models import YCP4
+    i=0
+    for i,v in df.iterrows():
+        i=i+1
+        if (i%100 == 0) : print(i,"inputted")
+        try :
+            YCP4.objects.update_or_create(
+                Material = v['Material'],
+                defaults={
+                    'Description':v['Description'],
+                    'Con3M':v['Con3M'],
+                    'Con12M':v['Con12M'],
+                    'Stock':v['Stock'],
+                    'Incoming':v['Incoming'] + v['DelayedPO'],
+                    'Order': v['Order'],
+                    'Status': v['Status'],
+                    'Mrp': v['MRP Type'],
+                }
+            )
+
+
+
+        except Exception as ex :
+            print(ex, v)
+            errorfile.write((str(datetime.datetime.now())+ str(ex) + v['Material'] ))
+
+            continue
+
+
+
+    errorfile.close()
+
+
+    print("completed")
+    print(time.time()-starttime)
+    print("completed")
+
+
 def ymonUpdate() :
     ###################################################
     #   DATA INPUT                                    #
@@ -6,11 +70,12 @@ def ymonUpdate() :
     import datetime
     from django_pandas.io import read_frame
     from loteam.models import Ymon, Clearing, YCP4
-
+    print("ymonUpdate loaded")
     columns=['U','Sold-To Party','Name 1','Sales Document','Item (SD)','Purchase order no.','Material','MRP Type','Description','Ident-code 1','Ident-code 2','Order Quantity','Open quantity','Pos. created on','Act.conf.date','Requested deliv.date', 'No.Tickets', 'Shipping Conditions']
     filename="Q:\\KRGrp007\\★NSC Meeting\\현황판\\YMON.XLSX"
-
+    print("ymonUpdate loaded, and ymon file to be read")
     DF=pd.read_excel(filename)
+    print("ymonUpdate file read")
     #partnr=pd.read_excel('F-KR-YMON_180813.XLSX', sheet_name='partnr', converters={'Material':int})
     #partnr.columns=['Material','Type','Category','Description']
 
@@ -58,13 +123,17 @@ def ymonUpdate() :
 
 
     Ymonerrorfile=open('ymonerrorfile.txt','a')
-
+    i=0
     for i,v in DF.iterrows():
         #print(i)
         #print(v)
         #ycp4=YCP4.objects.filter(Material=v['Material']),
         #print(ycp4[0].values())
+
+        i=i+1
+        if (i%100 == 0) : print(i,"inputted")
         try:
+
             Ymon.objects.update_or_create(
                 Sales_Document=str(v['Sales Document']),
                 Item=v['Item (SD)'],

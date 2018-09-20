@@ -1,0 +1,37 @@
+2018-09-20 09:13:16.605030YCP4 matching query does not exist.Sales Document    2019117857
+Item (SD)                 70
+Material             8058202
+Name: 639, dtype: object2018-09-20 09:13:16.621069YCP4 matching query does not exist.Sales Document    2019117857
+Item (SD)                 80
+Material             8063764
+Name: 640, dtype: object2018-09-20 09:13:16.633099YCP4 matching query does not exist.Sales Document    2019117857
+Item (SD)                 90
+Material             8072998
+Name: 641, dtype: object2018-09-20 09:13:16.662176YCP4 matching query does not exist.Sales Document    2019117857
+Item (SD)                100
+Material             8072998
+Name: 642, dtype: object2018-09-20 09:13:16.687244YCP4 matching query does not exist.Sales Document    2019117857
+Item (SD)                110
+Material             8063769
+Name: 643, dtype: object2018-09-20 09:13:16.727350YCP4 matching query does not exist.Sales Document    2019117857
+Item (SD)                120
+Material             8063768
+Name: 644, dtype: object2018-09-20 09:14:45.169171YCP4 matching query does not exist.Sales Document    2019183854
+Item (SD)                 10
+Material              152790
+Name: 1647, dtype: object2018-09-20 09:14:45.242376YCP4 matching query does not exist.Sales Document    2019183857
+Item (SD)                 10
+Material              163165
+Name: 1650, dtype: object2018-09-20 09:14:46.625917YCP4 matching query does not exist.Sales Document    2019184549
+Item (SD)                 10
+Material              170858
+Name: 1712, dtype: object2018-09-20 09:14:48.416063YCP4 matching query does not exist.Sales Document    2019188601
+Item (SD)                 10
+Material              548749
+Name: 1792, dtype: object2018-09-20 09:14:50.517908YCP4 matching query does not exist.Sales Document    2019189701
+Item (SD)                 10
+Material              383215
+Name: 1885, dtype: object2018-09-20 09:14:52.805943YCP4 matching query does not exist.Sales Document    2019192401
+Item (SD)                 10
+Material              535883
+Name: 1985, dtype: object

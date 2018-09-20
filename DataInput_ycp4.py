@@ -1,4 +1,4 @@
-def ycp4 : 
+def ycp4Update() :
     import pandas as pd
     import time
     import datetime
@@ -9,7 +9,9 @@ def ycp4 :
     errorfile=open('errorfile.txt','a')
     filename="Q:\\KRGrp007\\★NSC Meeting\\현황판\\YCP4.XLSX"
     sheet_name='ycp4'
+    print("YMON file to be read")
     df=pd.read_excel(filename, header=0)
+    print("YCP4 file loaded")
     #df=pd.read_excel(filename, sheet_name=sheet_name, header=1)
     #df=df.loc[:,['Material',]]
     df=df.loc[:,[[
@@ -23,8 +25,10 @@ def ycp4 :
     #df=df.set_index('Pn')
 
     from loteam.models import YCP4
-
+    i=0
     for i,v in df.iterrows():
+        i=i+1
+        if (i%100 = 0) : print(i,"inputted")
         try :
             YCP4.objects.update_or_create(
                 Material = v['Material'],
