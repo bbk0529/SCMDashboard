@@ -72,6 +72,11 @@ def ymonUpdate() :
     import datetime
     from django_pandas.io import read_frame
     from loteam.models import Ymon, Clearing, YCP4
+
+    #delete
+    Ymon.objects.filter(Open_quantity=0).filter(Actconf_date__lt=datetime.date.today()-datetime.timedelta(7)).filter(Shippingcondition=28).delete()
+    Ymon.objects.filter(Open_quantity=0).filter(Actconf_date__lt=datetime.date.today()-datetime.timedelta(7*8)).filter(Shippingcondition=25).delete()
+
     print("ymonUpdate loaded")
     columns=['U','Sold-To Party','Name 1','Sales Document','Item (SD)','Purchase order no.','Material','MRP Type','Description','Ident-code 1','Ident-code 2','Order Quantity','Open quantity','Pos. created on','Act.conf.date','Requested deliv.date', 'No.Tickets', 'Shipping Conditions']
     filename="Q:\\KRGrp007\\★NSC Meeting\\현황판\\YMON.XLSX"
