@@ -8,55 +8,48 @@
     {% include "../subtemplate/head.html" %}
 </head>
 <body>
-    {#% include "../subtemplate/left_panel.html" %#}
-
-    <!-- Right Panel -->
-
-    <div id="right-panel" class="right-panel">
-
-        <!-- Header-->
 
 
 
-<div class="content mt-3">
-    <div class="animated fadeIn">
+
+    <div class="content mt-3">
+    <!-- <div class="animated fadeIn"> -->
+            <div><img src="{% static 'images/festologo.jpg' %}"></div>
             <div class="row" >
-              <div class="col-lg-6"  id="result">
-                {#% include "procurement/view_tab1.html" %#}
-                {%load static %}
 
 
 
-
+              <div class="col-lg-8"  id="result">
                       <div class="card">
                         <div class="card-header">
                           <strong>Inquiry</strong> View
                         </div>
 
 
-                                <div class="card-body card-block">
+                        <div class="card-body card-block">
                                   <!-- <form action="" method="post" enctype="multipart/form-data" class="form-horizontal"> -->
 
 
                                         <div class="row form-group">
                                           <div class="col-3"><label for="text-input" class=" form-control-label"  >SA No.</label></div>
                                           <div class="col-4">
-                                            <input type="text" id="text-input" name="text-input" value="{{ Assay.SA_No}}" disabled="True" placeholder="Text" class="form-control">
+                                            <input type="text" id="text-input" name="text-input" value="{{ Assay.SA_No}}" disabled="True" placeholder="Assay_No" class="form-control">
                                           </div>
                                           <!-- <div class="col-6 col-md-3"><input type="text" id="text-input" name="text-input" value="{{ Assay.SA_No}}" placeholder="Text" class="form-control"></div> -->
                                             <!-- <div class="col-3 col-md-3"> -->
                                               <div class="col-5">
-                                              <form action="/scm" method="get">
+                                              <!-- <form action="/scm" method="get"> -->
                                                   <input list="SA_No" name="SA_No" id="assayNo">
                                                   <datalist id="SA_No">
                                                     {% for assay in assayList %}
                                                         <option value=" {{ assay.SA_No }}">
                                                     {% endfor %}
                                                   </datalist>
-                                                  <input type="submit" value="Query">
+                                                  <button id="check" > Query </button>
+                                                  <!-- <input type="submit" value="Query"> -->
 
-                                              </form>
-                                                <button id="check" > Check </button>
+                                              <!-- </form> -->
+
                                             </div>
                                               <!-- <input type="text" id="text-input" name="text-input" value="{{ Assay.SA_No}}" placeholder="Text" class="form-control"> -->
                                             <!-- </div> -->
@@ -65,149 +58,23 @@
 
 
                                         </div>
-
-
-                                        <div class="row form-group">
-                                          <div class="col col-md-3"><label for="text-input" class=" form-control-label">Type</label></div>
-                                          <div class="col-12 col-md-9"><input type="text" id="text-input" name="text-input" value="{{ Assay.Type}}" disabled placeholder="Text" class="form-control"></div>
-                                        </div>
-
-
-
-
-                                        <div class="row form-group">
-                                          <div class="col col-md-3"><label for="text-input" class=" form-control-label">Delivery Time<br>(5Working Days)</label></div>
-                                          <div class="col-12 col-md-9"><input type="text" id="text-input" name="text-input"  disabled="True" value="{{ Assay.Date}}" placeholder="Text" class="form-control"></div>
-                                        </div>
-                                        <div class="row form-group">
-                                          <div class="col col-md-3"><label for="text-input" class=" form-control-label">Number of Suppliers</label></div>
-                                          <div class="col-12 col-md-9"><input type="text" id="text-input" name="text-input" disabled="True" value="{{Assay.Number_of_suppliers}}" placeholder="Text" class="form-control"></div>
-                                        </div>
-
-                                        <div class="row form-group">
-                                          <div class="col col-md-3"><label for="text-input" class=" form-control-label">Details1</label></div>
-                                          <div class="col-12 col-md-9"><input type="text" id="text-input" name="text-input" disabled="True" value="{{Assay.Details_1}}" placeholder="Text" class="form-control"></div>
-                                        </div>
-                                      <div class="row form-group">
-                                        <div class="col col-md-3"><label for="text-input" class=" form-control-label">Details2</label></div>
-                                        <div class="col-12 col-md-9"><input type="text" id="text-input" name="text-input" disabled="True" value="{{Assay.Details_2}}" placeholder="Text" class="form-control"></div>
-                                      </div>
-
-
-
-
-                                      <table class="table">
-                                        <thead>
-                                          <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">Supplier Name</th>
-                                            <th scope="col">Qty</th>
-                                            <th scope="col">Unit Price</th>
-                                            <th scope="col">List-1</th>
-                                            <th scope="col">List-2</th>
-                                        </tr>
-                                      </thead>
-                                      <tbody>
-                                      <tr>
-                                        <th scope="row">1</th>
-                                        <td>{{Assay.Supplier1}}</td>
-                                        <td>{{Assay.Supplier1_Qty}}</td>
-                                        <td>{{Assay.Supplier1_Final_Unit_Price}}</td>
-                                        <td>{{Assay.Supplier1_Fabricating_Goods}}</td>
-                                        <td>{{Assay.Supplier1_Modification_of_free_offerd_item}}</td>
-
-                                      </tr>
-                                      <tr>
-                                        <th scope="row">2</th>
-                                        <td>{{Assay.Supplier2}}</td>
-                                        <td>{{Assay.Supplier2_Qty}}</td>
-                                        <td>{{Assay.Supplier2_Final_Unit_Price}}</td>
-                                        <td>{{Assay.Supplier2_Fabricating_Goods}}</td>
-                                        <td>{{Assay.Supplier2_Modification_of_free_offerd_item}}</td>
-                                      </tr>
-                                      <tr>
-                                        <th scope="row">3</th>
-                                        <td>{{Assay.Supplier3}}</td>
-                                        <td>{{Assay.Supplier3_Qty}}</td>
-                                        <td>{{Assay.Supplier3_Final_Unit_Price}}</td>
-                                        <td>{{Assay.Supplier3_Fabricating_Goods}}</td>
-                                        <td>{{Assay.Supplier3_Modification_of_free_offerd_item}}</td>
-                                      </tr>
-
-                                      <tr>
-                                        <th scope="row">4</th>
-                                        <td>{{Assay.Supplier4}}</td>
-                                        <td>{{Assay.Supplier4_Qty}}</td>
-                                        <td>{{Assay.Supplier4_Final_Unit_Price}}</td>
-                                        <td>{{Assay.Supplier4_Fabricating_Goods}}</td>
-                                        <td>{{Assay.Supplier4_Modification_of_free_offerd_item}}</td>
-                                      </tr>
-
-                                      <tr>
-                                        <th scope="row">5</th>
-                                        <td>{{Assay.Supplier5}}</td>
-                                        <td>{{Assay.Supplier5_Qty}}</td>
-                                        <td>{{Assay.Supplier5_Final_Unit_Price}}</td>
-                                        <td>{{Assay.Supplier5_Fabricating_Goods}}</td>
-                                        <td>{{Assay.Supplier5_Modification_of_free_offerd_item}}</td>
-                                      </tr>
-
-                                      <tr>
-                                        <th scope="row">6</th>
-                                        <td>{{Assay.Supplier6}}</td>
-                                        <td>{{Assay.Supplier6_Qty}}</td>
-                                        <td>{{Assay.Supplier6_Final_Unit_Price}}</td>
-                                        <td>{{Assay.Supplier6_Fabricating_Goods}}</td>
-                                        <td>{{Assay.Supplier6_Modification_of_free_offerd_item}}</td>
-                                      </tr>
-
-
-
-                                      </tbody>
-                                      </table>
-
-
-
-                          </div> <!-- card body -->
-
-                          <div class="card-footer">
-                            <button type="submit" class="btn btn-primary btn-sm">
-                              <i class="fa fa-dot-circle-o"></i> Submit
-                            </button>
-                            <button type="reset" class="btn btn-danger btn-sm">
-                              <i class="fa fa-ban"></i> Reset
-                            </button>
-                          </div> <!-- card footer-->
-                        </div> <!-- card -->
-
-
-
+                        </div> <!-- card body -->
+                      </div> <!-- card -->
               </div>
-
-
-
-
-
-
-               <div class="col-lg-6">
+              <div class="col-lg-4">
                 <div class="card">
                   <div class="card-header">
-                    <strong>Inquiry</strong> View
+                    <strong>Assay List </strong> View
                   </div>
-
-
                           <div class="card-body card-block">
-
                             <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
                                 <thead>
                                   <tr>
                                     <th>AssayNo</th>
                                     <th>Type</th>
-
                                   </tr>
                                 </thead>
                                 <tbody>
-
                                   {% for assay in assayList %}
                                     <tr>
                                       <td id="{{assay.SA_No}}">   {{ assay.SA_No }} </td>
@@ -219,35 +86,25 @@
                                   <tr>
                                     <th>AssayNo</th>
                                     <th>Type</th>
-
                                   </tr>
                             </tfoot>
                             </table>
                 </div> <!--card body -->
-
-
                 </div> <!-- card-->
-
               </div> <!-- card lg-6 -->
 
-
           </div> <!-- row -->
-            </div><!-- .animated -->
-        </div><!-- .content -->
-      </div>
+    <!-- </div><!-- .animated -->
+</div><!-- .content -->
+</div> <!-- /#right-panel -->
 
-    </div><!-- /#right-panel -->
 
-    <!-- Right Panel -->
 
 
     <script src="{% static 'assets/js/vendor/jquery-2.1.4.min.js' %}"></script>
     <script src="{% static 'assets/js/popper.min.js' %}"></script>
     <script src="{% static 'assets/js/plugins.js' %}"></script>
     <script src="{% static 'assets/js/main.js' %}"></script>
-
-
-
     <script src="{% static 'assets/js/lib/data-table/datatables.min.js' %}"></script>
     <script src="{% static 'assets/js/lib/data-table/dataTables.bootstrap.min.js' %}"></script>
     <script src="{% static 'assets/js/lib/data-table/dataTables.buttons.min.js' %}"></script>
@@ -264,21 +121,45 @@
 </html>
 
 <script>
-$(document).ready(function(){
-    console.log("java script called");
+  $(document).ready(function(){
+      console.log("java script called");
 
-// $("#bootstrap-data-table-export").click("td", function(){ //the event happening, table <td> clicked
-    $("#bootstrap-data-table-export").on('click', 'td', function(){ //the event happening, table <td> clicked
-        let assayNo=$(this).attr('id')
-        console.log(assayNo)
-        // let assayNo=$(this).attr('id');
+  // $("#bootstrap-data-table-export").click("td", function(){ //the event happening, table <td> clicked
+      $("#bootstrap-data-table-export").on('click', 'td', function(){ //the event happening, table <td> clicked
+          let assayNo=$(this).attr('id')
+          console.log(assayNo)
+          // let assayNo=$(this).attr('id');
+          $.ajax({
+              url : "assayQuery",
+              type : "get",
+              data: {
+                  'SA_No' : assayNo
+              },
+              async: false,
+              success : function(data) {
+                  console.log("successfully communicated with Server");
+                  // console.log(data);
+                  $("#result").html(
+                    ""
+                  );
+                  $("#result").html(
+                    data
+                  );
+              }
+          }) //end of $.ajax
+          console.log(assayNo);
+      }) // end of 'td' click
+      $('#check').click(function(){
+        console.log("clicked//")
+        var assayNo=$("#assayNo").val()
+        console.log(assayNo);
         $.ajax({
             url : "assayQuery",
             type : "get",
             data: {
                 'SA_No' : assayNo
             },
-            async: false,
+            // async: false,
             success : function(data) {
                 console.log("successfully communicated with Server");
                 // console.log(data);
@@ -290,32 +171,10 @@ $(document).ready(function(){
                 );
             }
         }) //end of $.ajax
-        console.log(assayNo);
-    }) // end of 'td' click
+      }); //end of #check click
 
 
-    $('#check').click(function(){
-      console.log("clicked//")
-      var assayNo=$("#assayNo").val()
-      console.log(assayNo);
-      $.ajax({
-          url : "assayQuery",
-          type : "get",
-          data: {
-              'SA_No' : assayNo
-          },
-          async: false,
-          success : function(data) {
-              console.log("successfully communicated with Server");
-              // console.log(data);
-              $("#result").html(
-                ""
-              );
-              $("#result").html(
-                data
-              );
-          }
-      }) //end of $.ajax
-    });
-});
+
+
+  });
 </script>
