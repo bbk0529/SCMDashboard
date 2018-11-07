@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'procurement',
     'loteam',
     'django_extensions',
+    'mathfilters',
 ]
 
 MIDDLEWARE = [

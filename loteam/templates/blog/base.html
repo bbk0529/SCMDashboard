@@ -5,11 +5,11 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
 <head>
-{% include "./subtemplate/head.html" %}
+{% include "../subtemplate/head.html" %}
 </head>
     <body>
-    {% include "./subtemplate/script.html" %}
-    {#% include "./subtemplate/left_panel.html" %#}
+    {% include "../subtemplate/script.html" %}
+    {#% include "../subtemplate/left_panel.html" %#}
     <div class="content mt-3">
     {% if user.is_authenticated %}
     Hi {{ user.username }}!

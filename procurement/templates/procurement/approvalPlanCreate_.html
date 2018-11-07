@@ -1,0 +1,192 @@
+<!-- TO BE DISREGARDED -->
+
+{%load static %}
+{% load mathfilters %}
+
+
+
+        <div class="card-body card-block">
+                        <div class="row form-group">
+                          <div class="col-3"><label for="text-input" class=" form-control-label"  >Category</label></div>
+                          <div class="col-9">
+                            <select class="form-control-sm">
+                              <option>설계변경</option>
+                              <option>공급사변경</option>
+                              <option>원부자재비용변경</option>
+                              <option>기타</option>
+                            </select>
+                          </div>
+                        </div>
+
+                        <div class="row form-group">
+                          <div class="col-3"><label for="text-input" class=" form-control-label"  >SA No.</label></div>
+                          <div class="col-9">
+                            <input type="text" id="text-input" name="SA_No" value="{{ Assay.SA_No}}"   placeholder="Text" class="form-control">
+                          </div>
+                        </div>
+                        <div class="row form-group">
+                          <div class="col-3"><label for="text-input" class=" form-control-label">Type</label></div>
+                          <div class="col-9"><input type="text" id="text-input" name="Type"
+                            {% ifnotequal Assay.Type 'nan' %}
+                              value="{{ Assay.Type}}"
+                            {% endifnotequal %}
+                            placeholder="Text" class="form-control query"></div>
+                        </div>
+                        <div class="row form-group">
+                          <div class="col col-md-3"><label for="text-input" class=" form-control-label">Delivery Time<br>(5Working Days)</label></div>
+                          <div class="col-12 col-md-9"><input type="text" id="text-input" name="Date"    value="{{ Assay.Date}}" placeholder="Text" class="form-control query"></div>
+                        </div>
+                        <div class="row form-group">
+                          <div class="col col-md-3"><label for="text-input" class=" form-control-label">Number of Suppliers</label></div>
+                          <div class="col-12 col-md-9"><input type="text" id="text-input" name="Number_of_suppliers"   value="{{Assay.Number_of_suppliers}}" placeholder="Text" class="form-control query"></div>
+                        </div>
+                        <div class="row form-group">
+                          <div class="col col-md-3"><label for="text-input" class=" form-control-label">Details1</label></div>
+                          <div class="col-12 col-md-9"><input type="text" id="text-input" name="Details_1"
+                              {% ifnotequal Assay.Details_1 'nan' %}
+                                value="{{ Assay.Details_1}}"
+                              {% endifnotequal %}
+                            placeholder="-" class="form-control query">
+                          </div>
+                        </div>
+                        <div class="row form-group">
+                          <div class="col col-md-3"><label for="text-input" class=" form-control-label">Details2</label></div>
+                          <div class="col-12 col-md-9"><input type="text" id="text-input" name="Details_2"
+                              {% ifnotequal Assay.Details_2 'nan' %}
+                                value="{{ Assay.Details_2}}"
+                              {% endifnotequal %}
+                            placeholder="-" class="form-control query">
+                          </div>
+                        </div>
+
+                        <div class="row form-group">
+                          <div class="col-3"><label for="text-input" class=" form-control-label"  >Description</label></div>
+                          <div class="col-9">
+                            <input type="textarea" id="text-input" name="SA_No" class="form-control">
+                          </div>
+                        </div>
+
+              <strong><h4>Summary</h4></strong>
+              <button class="btn btn-secondary btn-sm" id="copyFromDetail">
+                <i class="fa fa-lightbulb-o"></i> Copy from Details
+              </button>
+              <table class="table" id="summaryTable">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Supplier Name</th>
+                            <th scope="col">Qty</th>
+                            <th scope="col">Quot. Unit Price</th>
+                            <th scope="col">Quot. Value</th>
+                            <th scope="col">Final Unit Price</th>
+                            <th scope="col">Final Value</th>
+                        </tr>
+                      </thead>
+                      <tbody id="supplier">
+
+                      <tr>
+                        <th scope="row">1</th>
+                        <td contenteditable="">{{Assay.Supplier1}}</td>
+                        <td contenteditable="">{{Assay.Supplier1_Qty}}</td>
+                        <td contenteditable=""></td>
+                        <td contenteditable=""></td>
+                        <td contenteditable="">{{Assay.Supplier1_Final_Unit_Price}}</td>
+                        <td contenteditable=""></td>
+
+                      </tr>
+
+                      <tr>
+                        <th scope="row">2</th>
+                        <td contenteditable="">{{Assay.Supplier2}}</td>
+                        <td contenteditable="">{{Assay.Supplier2_Qty}}</td>
+                        <td contenteditable=""></td>
+                        <td contenteditable=""></td>
+                        <td contenteditable="">{{Assay.Supplier2_Final_Unit_Price}}</td>
+                        <td contenteditable=""></td>
+                      </tr>
+
+                      <tr>
+                        <th scope="row">3</th>
+                        <td contenteditable="">{{Assay.Supplier3}}</td>
+                        <td contenteditable="">{{Assay.Supplier3_Qty}}</td>
+                        <td contenteditable=""></td>
+                        <td contenteditable=""></td>
+                        <td contenteditable="">{{Assay.Supplier3_Final_Unit_Price}}</td>
+                        <td contenteditable=""></td>
+                      </tr>
+
+                      <tr>
+                        <th scope="row">4</th>
+                        <td contenteditable="">{{Assay.Supplier4}}</td>
+                        <td contenteditable="">{{Assay.Supplier4_Qty}}</td>
+                        <td contenteditable=""></td>
+                        <td contenteditable=""></td>
+                        <td contenteditable="">{{Assay.Supplier4_Final_Unit_Price}}</td>
+                        <td contenteditable=""></td>
+                      </tr>
+
+                      <tr>
+                        <th scope="row">5</th>
+                        <td contenteditable="">{{Assay.Supplier5}}</td>
+                        <td contenteditable="">{{Assay.Supplier5_Qty}}</td>
+                        <td contenteditable=""></td>
+                        <td contenteditable=""></td>
+                        <td contenteditable="">{{Assay.Supplier5_Final_Unit_Price}}</td>
+                        <td contenteditable=""></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">6</th>
+                        <td contenteditable="">{{Assay.Supplier6}}</td>
+                        <td contenteditable="">{{Assay.Supplier6_Qty}}</td>
+                        <td contenteditable=""></td>
+                        <td contenteditable=""></td>
+                        <td contenteditable="">{{Assay.Supplier6_Final_Unit_Price}}</td>
+                        <td contenteditable=""></td>
+                      </tr>
+
+                      </tbody>
+              </table>
+
+
+
+            <strong><h4>Details</h4></strong>
+              {%include 'procurement/approvalPlan_detail.html' %}
+
+    </div>
+  </div>
+</div>
+</div>
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Confirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                Are you sure to change and save this?
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="save">Save changes</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+
+        </body>
+        </html>
+
+
+
+        <script src="{% static 'assets/js/scm/approvalPlan.js' %}"></script>

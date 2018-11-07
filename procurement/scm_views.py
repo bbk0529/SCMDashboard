@@ -1,11 +1,35 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, render
 from .models import Assay
 import decimal
 
 # Create your views here.
 As=Assay.objects.all()[:10]
+
+
+
+def approvalPlan(request):
+    print("==========================main called")
+    #As=Assay.objects.filter(close=decimal.Decimal('NaN'))
+
+
+    try :
+        SA_No=request.GET['SA_No'].strip()
+        Ass=Assay.objects.get(SA_No=SA_No)
+        return render(
+            request, 'procurement/approvalPlan.html',{
+                'Assay' : Ass,
+                'assayList' : As
+        })
+
+
+    except Exception as e:
+        return render(
+            request, 'procurement/approvalPlan.html',{
+            'assayList' : As
+        })
+
 def main(request) :
     print("==========================main called")
     #As=Assay.objects.filter(close=decimal.Decimal('NaN'))
@@ -42,6 +66,28 @@ def assayQuery(request) :
             'Assay' : Ass,
             'assayList' : As
     })
+
+
+def approvalPlanQuery(request):
+    if request.method == 'GET':
+        SA_No=request.GET['SA_No'].strip()
+        print("READ ASSAY___",SA_No)
+        Ass=Assay.objects.get(SA_No=SA_No)
+
+    return render(
+        request,
+        'procurement/approvalPlanUpdate.html',{
+            'Assay' : Ass,
+            'assayList' : As
+        }
+    )
+
+def approvalPlanCreate(request):
+    return render(
+        request,
+        'procurement/approvalPlanUpdate.html',{
+        }
+    )
 
 
 def updateQuery(request):
