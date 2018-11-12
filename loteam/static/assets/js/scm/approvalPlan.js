@@ -1,78 +1,64 @@
 $(function(){
     $(".detail").css({"cursor":"pointer"})
 
-
     $('#supplierSingle'+ 1).click(function(){
-      console.log('single1 click')
         $('#supplierSingleReason1').prop("hidden",false)
-
     })
     $('#supplierMultiple'+1).click(function(){
-      console.log('multi1 click')
         $('#supplierSingleReason1').prop("hidden",true)
-
     })
 
     $('#supplierSingle2').click(function(){
-      console.log('single2 click')
         $('#supplierSingleReason2').prop("hidden",false)
-
     })
     $('#supplierMultiple2').click(function(){
-      console.log('multi1 click')
         $('#supplierSingleReason2').prop("hidden",true)
-
     })
     $('#supplierSingle3').click(function(){
-      console.log('single3 click')
         $('#supplierSingleReason3').prop("hidden",false)
-
     })
     $('#supplierMultiple3').click(function(){
-      console.log('multi1 click')
         $('#supplierSingleReason3').prop("hidden",true)
-
+    })
+    $('#supplierSingle4').click(function(){
+        $('#supplierSingleReason4').prop("hidden",false)
+    })
+    $('#supplierMultiple4').click(function(){
+        $('#supplierSingleReason4').prop("hidden",true)
+    })
+    $('#supplierSingle5').click(function(){
+        $('#supplierSingleReason5').prop("hidden",false)
+    })
+    $('#supplierMultiple5').click(function(){
+        $('#supplierSingleReason5').prop("hidden",true)
+    })
+    $('#supplierSingle6').click(function(){
+        $('#supplierSingleReason6').prop("hidden",false)
+    })
+    $('#supplierMultiple6').click(function(){
+        $('#supplierSingleReason6').prop("hidden",true)
     })
 
 
 
-
-
-
-
+// Hidden Detail Pop Up or Not
     $('#btnSupplierDetail1').click(function(){
-      console.log("java script called");
-      if($('#suppierDetail1').prop('hidden')==false){
-        $('#suppierDetail1').prop('hidden', true)
-
-      }
-      else{
-        $('#suppierDetail1').prop('hidden', false)
-      }
-
+      $('#suppierDetail1').prop('hidden', !$('#suppierDetail1').prop('hidden'))
     })
-
     $('#btnSupplierDetail2').click(function(){
-      console.log("java script called");
-      if($('#suppierDetail2').prop('hidden')==false){
-        $('#suppierDetail2').prop('hidden', true)
-
-      }
-      else{
-        $('#suppierDetail2').prop('hidden', false)
-      }
-
+      $('#suppierDetail2').prop('hidden', !$('#suppierDetail2').prop('hidden'))
     })
-
     $('#btnSupplierDetail3').click(function(){
-      console.log("java script called");
-      if($('#suppierDetail3').prop('hidden')==false){
-        $('#suppierDetail3').prop('hidden', true)
-      }
-      else{
-        $('#suppierDetail3').prop('hidden', false)
-      }
-
+      $('#suppierDetail3').prop('hidden', !$('#suppierDetail3').prop('hidden'))
+    })
+    $('#btnSupplierDetail4').click(function(){
+      $('#suppierDetail4').prop('hidden', !$('#suppierDetail4').prop('hidden'))
+    })
+    $('#btnSupplierDetail5').click(function(){
+      $('#suppierDetail5').prop('hidden', !$('#suppierDetail5').prop('hidden'))
+    })
+    $('#btnSupplierDetail6').click(function(){
+      $('#suppierDetail6').prop('hidden', !$('#suppierDetail6').prop('hidden'))
     })
 
 
@@ -86,9 +72,12 @@ $(function(){
       newtr.appendTo($('#summaryTable tbody'))
       newtr=$('#detailTable3 tbody tr:nth-child(1)').clone();
       newtr.appendTo($('#summaryTable tbody'))
-
-
-
+      newtr=$('#detailTable4 tbody tr:nth-child(1)').clone();
+      newtr.appendTo($('#summaryTable tbody'))
+      newtr=$('#detailTable5 tbody tr:nth-child(1)').clone();
+      newtr.appendTo($('#summaryTable tbody'))
+      newtr=$('#detailTable6 tbody tr:nth-child(1)').clone();
+      newtr.appendTo($('#summaryTable tbody'))
     })//end of copyFromDetail
 
 
@@ -107,48 +96,49 @@ $(function(){
           'Number_of_suppliers' : $("input[name='Number_of_suppliers']").val(),
           'Details_1' : $("input[name='Details_1']").val(),
           'Details_2' : $("input[name='Details_2']").val(),
-          'Supplier1'                                  :   $("input[name='Supplier1']").val(),
-          'Supplier1_Qty'                              :   $("input[name='Supplier1_Qty']").val(),
-          'Supplier1_Final_Unit_Price'                 :   $("input[name='Supplier1_Final_Unit_Price']").val(),
-          'Supplier1_Fabricating_Goods'                :   $("input[name='Supplier1_Fabricating_Goods']").val(),
-          'Supplier1_Modification_of_free_offerd_item' :   $("input[name='Supplier1_Modification_of_free_offerd_item']").val(),
+          'Supplier1'                                  :   $("#Supplier1").text(),
+          'Supplier1_Qty'                              :   $("#Supplier1_Qty").text(),
+          'Supplier1_Final_Unit_Price'                 :   $("#Supplier1_Final_Unit_Price").text(),
+          'Supplier1_Fabricating_Goods'                :   $("#Supplier1_Fabricating_Goods").text(),
+          'Supplier1_Modification_of_free_offerd_item' :   $("#Supplier1_Modification_of_free_offerd_item").text(),
 
-          'Supplier2'                                  :   $("input[name='Supplier2']").val(),
-          'Supplier2_Qty'                              :   $("input[name='Supplier2_Qty']").val(),
-          'Supplier2_Final_Unit_Price'                 :   $("input[name='Supplier2_Final_Unit_Price']").val(),
-          'Supplier2_Fabricating_Goods'                :   $("input[name='Supplier2_Fabricating_Goods']").val(),
-          'Supplier2_Modification_of_free_offerd_item' :   $("input[name='Supplier2_Modification_of_free_offerd_item']").val(),
+          'Supplier2'                                  :   $("#Supplier2").text(),
+          'Supplier2_Qty'                              :   $("#Supplier2_Qty").text(),
+          'Supplier2_Final_Unit_Price'                 :   $("#Supplier2_Final_Unit_Price").text(),
+          'Supplier2_Fabricating_Goods'                :   $("#Supplier2_Fabricating_Goods").text(),
+          'Supplier2_Modification_of_free_offerd_item' :   $("#Supplier2_Modification_of_free_offerd_item").text(),
 
-          'Supplier3'                                  :   $("input[name='Supplier3']").val(),
-          'Supplier3_Qty'                              :   $("input[name='Supplier3_Qty']").val(),
-          'Supplier3_Final_Unit_Price'                 :   $("input[name='Supplier3_Final_Unit_Price']").val(),
-          'Supplier3_Fabricating_Goods'                :   $("input[name='Supplier3_Fabricating_Goods']").val(),
-          'Supplier3_Modification_of_free_offerd_item' :   $("input[name='Supplier3_Modification_of_free_offerd_item']").val(),
+          'Supplier3'                                  :   $("#Supplier3").text(),
+          'Supplier3_Qty'                              :   $("#Supplier3_Qty").text(),
+          'Supplier3_Final_Unit_Price'                 :   $("#Supplier3_Final_Unit_Price").text(),
+          'Supplier3_Fabricating_Goods'                :   $("#Supplier3_Fabricating_Goods").text(),
+          'Supplier3_Modification_of_free_offerd_item' :   $("#Supplier3_Modification_of_free_offerd_item").text(),
 
-          'Supplier4'                                  :   $("input[name='Supplier4']").val(),
-          'Supplier4_Qty'                              :   $("input[name='Supplier4_Qty']").val(),
-          'Supplier4_Final_Unit_Price'                 :   $("input[name='Supplier4_Final_Unit_Price']").val(),
-          'Supplier4_Fabricating_Goods'                :   $("input[name='Supplier4_Fabricating_Goods']").val(),
-          'Supplier4_Modification_of_free_offerd_item' :   $("input[name='Supplier4_Modification_of_free_offerd_item']").val(),
+          'Supplier4'                                  :   $("#Supplier4").text(),
+          'Supplier4_Qty'                              :   $("#Supplier4_Qty").text(),
+          'Supplier4_Final_Unit_Price'                 :   $("#Supplier4_Final_Unit_Price").text(),
+          'Supplier4_Fabricating_Goods'                :   $("#Supplier4_Fabricating_Goods").text(),
+          'Supplier4_Modification_of_free_offerd_item' :   $("#Supplier4_Modification_of_free_offerd_item").text(),
 
-          'Supplier5'                                  :   $("input[name='Supplier5']").val(),
-          'Supplier5_Qty'                              :   $("input[name='Supplier5_Qty']").val(),
-          'Supplier5_Final_Unit_Price'                 :   $("input[name='Supplier5_Final_Unit_Price']").val(),
-          'Supplier5_Fabricating_Goods'                :   $("input[name='Supplier5_Fabricating_Goods']").val(),
-          'Supplier5_Modification_of_free_offerd_item' :   $("input[name='Supplier5_Modification_of_free_offerd_item']").val(),
+          'Supplier5'                                  :   $("#Supplier5").text(),
+          'Supplier5_Qty'                              :   $("#Supplier5_Qty").text(),
+          'Supplier5_Final_Unit_Price'                 :   $("#Supplier5_Final_Unit_Price").text(),
+          'Supplier5_Fabricating_Goods'                :   $("#Supplier5_Fabricating_Goods").text(),
+          'Supplier5_Modification_of_free_offerd_item' :   $("#Supplier5_Modification_of_free_offerd_item").text(),
 
-          'Supplier6'                                  :   $("input[name='Supplier6']").val(),
-          'Supplier6_Qty'                              :   $("input[name='Supplier6_Qty']").val(),
-          'Supplier6_Final_Unit_Price'                 :   $("input[name='Supplier6_Final_Unit_Price']").val(),
-          'Supplier6_Fabricating_Goods'                :   $("input[name='Supplier6_Fabricating_Goods']").val(),
-          'Supplier6_Modification_of_free_offerd_item' :   $("input[name='Supplier6_Modification_of_free_offerd_item']").val(),
+          'Supplier6'                                  :   $("#Supplier6").text(),
+          'Supplier6_Qty'                              :   $("#Supplier6_Qty").text(),
+          'Supplier6_Final_Unit_Price'                 :   $("#Supplier6_Final_Unit_Price").text(),
+          'Supplier6_Fabricating_Goods'                :   $("#Supplier6_Fabricating_Goods").text(),
+          'Supplier6_Modification_of_free_offerd_item' :   $("#Supplier6_Modification_of_free_offerd_item").text(),
+
 
 
         }
       })
-      console.log( $("input[name='Supplier6_Modification_of_free_offerd_item']").val());
-      $('.form-control.query').prop("disabled", true)
-      $('#submit').prop("hidden", true)
+
+      //$('.form-control.query').prop("disabled", true)
+      //$('#submit').prop("hidden", true)
       $('#header').html(''+
       '<div class="sufee-alert alert with-close alert-secondary alert-dismissible fade show">'+
           '<span class="badge badge-pill badge-primary">Success</span>'+

@@ -1,0 +1,26 @@
+{%load static %}
+
+
+                {% include 'procurement/approvalPlanDetailSupplier1.html' %}
+                {% include 'procurement/approvalPlanDetailSupplier2.html' %}
+                {% include 'procurement/approvalPlanDetailSupplier3.html' %}
+                {% include 'procurement/approvalPlanDetailSupplier4.html' %}
+                {% include 'procurement/approvalPlanDetailSupplier5.html' %}
+                {% include 'procurement/approvalPlanDetailSupplier6.html' %}
+                
+
+
+            <div class="card-footer">
+
+                <!-- <button type="reset" class="btn btn-secondary btn-sm" id="disableToggle">
+                  <i class="fa fa-lightbulb-o"></i> Query/Change
+                </button> -->
+                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal" id="submit">
+                        <i class="fa fa-dot-circle-o"></i>  Change/Save
+                </button>
+                <button type="reset" class="btn btn-danger btn-sm" id="reset" hidden="true">
+                  <i class="fa fa-ban"></i> Reset
+                </button>
+
+            </div> <!-- card footer-->
+        <script src="{% static 'assets/js/scm/approvalPlanDetail.js' %}"></script>

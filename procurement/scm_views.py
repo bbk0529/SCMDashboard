@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, render
 from .models import Assay
+from django.views.decorators.csrf import csrf_exempt
 import decimal
 
 # Create your views here.
@@ -89,7 +90,7 @@ def approvalPlanCreate(request):
         }
     )
 
-
+@csrf_exempt
 def updateQuery(request):
     if request.method == 'POST':
         assay=Assay(request.POST)
