@@ -7,7 +7,7 @@ from django.contrib import admin
 from . import views
 
 urlpatterns=[
-    path('',views.tab1, name='tab1'),
+    # path('',views.tab1, name='tab1'),
     #path('', TemplateView.as_view(template_name='./blog/index.html'), name='index'),
     path('tab3',views.tab3, name='tab3'),
     path('tab2',views.tab2, name='tab2'),

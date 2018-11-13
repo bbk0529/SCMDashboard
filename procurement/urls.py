@@ -4,8 +4,8 @@ from django.contrib import admin
 from . import scm_views
 
 urlpatterns=[
-    path('',scm_views.main, name='scm'),
-    path('approvalPlan', scm_views.approvalPlan, name='approvalPlan'),
+    path('list',scm_views.main, name='scm'),
+    path('', scm_views.approvalPlan, name='approvalPlan'),
     path('approvalPlanQuery', scm_views.approvalPlanQuery, name='approvalPlanQuery'),
     path('approvalPlanCreate', scm_views.approvalPlanCreate, name='approvalPlanCreate'),
     path('assayQuery',scm_views.assayQuery, name='assayQuery'),
