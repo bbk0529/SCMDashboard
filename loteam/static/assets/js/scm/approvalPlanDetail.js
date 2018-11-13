@@ -164,6 +164,9 @@ $(function(){
 
 
 
+
+
+
 function supplierDetailMath(supplierNo, detailNo){
     $('#supplier' + supplierNo + 'Nego' + detailNo).text(
         Math.round((
@@ -182,5 +185,52 @@ function supplierDetailMath(supplierNo, detailNo){
     (parseInt($('#supplier'+supplierNo+'FinalValue'+detailNo).text()) *  (parseInt($('#supplier'+ supplierNo +'Qty' + detailNo).text())))
   );
 }
+
+
+
+
+$('#copyFromDetail').click(function(){
+  console.log("copyfromdetail clicked");
+
+  var count=0
+  for(var i=1;i<=6;i++){
+      if ($('#supplier' + i +'Name').text()!=''){
+          copyFromDetail(i)
+          $('#summaryTable tr:nth-child('+ i +')').prop('hidden',false)
+          count+=1
+          console.log(i);
+      }
+     $('input[name="Number_of_suppliers"]').val(count);
+  }
+
+
+  function copyFromDetail(supplierNo){
+      $('#Supplier' + supplierNo).text($('#supplier'+ supplierNo+'Name').text())
+      $('#Supplier' + supplierNo + '_Qty').text($('#supplier' + supplierNo +'Qty1').text())
+      $('#supplier'+ supplierNo +'QuotValue').text($('#supplier'+ supplierNo +'QuotValue1').text())
+      $('#supplierQuotTotalValue' + supplierNo).text($('#supplier'+supplierNo+'QuotTotalValue1').text())
+      $('#Supplier'+supplierNo+'_Final_Unit_Price').text($('#supplier'+supplierNo+'FinalValue1').text())
+      $('#supplierFinalTotalValue'+supplierNo).text($('#supplier'+supplierNo+'FinalTotalValue1').text())
+      $('#supplier'+supplierNo+'Nego').text($('#supplier'+supplierNo+'Nego1').text())
+  }
+
+})//end of copyFromDetail
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }) //end of function
