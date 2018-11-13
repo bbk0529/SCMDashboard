@@ -38,10 +38,10 @@
 
                   <div class="pull-right">
                   <button class="btn btn-secondary btn-sm" id="Supplier1TableRowAdd">
-                    <i class="fa fa-lightbulb-o"></i> Add
+                    <i class="fa fa-plus"></i> Add
                   </button>
                   <button class="btn btn-secondary btn-sm" id="Supplier1TableRowDelete">
-                    <i class="fa fa-lightbulb-o"></i> Delete
+                    <i class="fa fa-minus"></i> Delete
                   </button>
                 </div>
                   <table class="table" id="detailTable1">
@@ -64,7 +64,7 @@
                               {% endif %}
                             >
                               <th scope="row">1</th>
-                              <td contenteditable=""                                                       >{{Assay.Supplier1}}</td>
+                              <td contenteditable=""                        id="supplier1Name" >{{Assay.Supplier1}}</td>
                               <td contenteditable="" class="supplier1_1"    id="supplier1Qty1"              >{{Assay.Supplier1_Qty}}</td>
                               <td contenteditable="" class="supplier1_1"    id="supplier1QuotValue1"        ></td>
                               <td bgcolor="DDDDDD"                          id="supplier1QuotTotalValue1"   ></td>

@@ -26,12 +26,12 @@
                 </div>
                 <div class="row form-group">
                   <div class="col-3"><label for="text-input" class=" form-control-label">List-1[Fabricating, Goods]</label></div>
-                  <div class="col-9"><input type="text" id="text-input" class="form-control" value="{{Assay.Supplier4_Fabricating_Goods}}"></div>
+                  <div class="col-9"><input type="text" id="Supplier4_Fabricating_Goods" class="form-control" value="{{Assay.Supplier4_Fabricating_Goods}}"></div>
                 </div>
                 <div class="row form-group">
                   <div class="col-3"><label for="text-input" class=" form-control-label">List-2 [Modification of free offered item]</label></div>
                   <div class="col-9">
-                    <input type="text" id="text-input" class="form-control" value="{{Assay.Supplier4_Modification_of_free_offerd_item}}">
+                    <input type="text" id="Supplier4_Modification_of_free_offerd_item" class="form-control" value="{{Assay.Supplier4_Modification_of_free_offerd_item}}">
                   </div>
                 </div>
 
@@ -39,10 +39,10 @@
 
                   <div class="pull-right">
                   <button class="btn btn-secondary btn-sm" id="Supplier4TableRowAdd">
-                    <i class="fa fa-lightbulb-o"></i> Add
+                    <i class="fa fa-plus"></i> Add
                   </button>
                   <button class="btn btn-secondary btn-sm" id="Supplier4TableRowDelete">
-                    <i class="fa fa-lightbulb-o"></i> Delete
+                    <i class="fa fa-minus"></i> Delete
                   </button>
                 </div>
                   <table class="table" id="detailTable4">
@@ -61,16 +61,16 @@
 
                             <tbody id="supplier4">
                             <tr id="supplier4Row1"
-                                {% if not Assay.supplier4 %}
+                                {% if not Assay.Supplier4 %}
                                 hidden
                                 {% endif %}
                             >
                             <th scope="row">1</th>
-                            <td contenteditable=""                                                        >{{Assay.supplier4}}</td>
-                            <td contenteditable="" class="supplier4_1"    id="supplier4Qty1"              >{{Assay.supplier4_Qty}}</td>
+                            <td contenteditable=""     id="supplier4Name"         >{{Assay.Supplier4}}</td>
+                            <td contenteditable="" class="supplier4_1"    id="supplier4Qty1"              >{{Assay.Supplier4_Qty}}</td>
                             <td contenteditable="" class="supplier4_1"    id="supplier4QuotValue1"        ></td>
                             <td bgcolor="DDDDDD"                          id="supplier4QuotTotalValue1"   ></td>
-                            <td contenteditable="" class="supplier4_1"    id="supplier4FinalValue1"       >{{Assay.supplier4_Final_Unit_Price}}</td>
+                            <td contenteditable="" class="supplier4_1"    id="supplier4FinalValue1"       >{{Assay.Supplier4_Final_Unit_Price}}</td>
                             <td bgcolor="DDDDDD"                          id="supplier4FinalTotalValue1"  ></td>
                             <td bgcolor="DDDDDD"                          id="supplier4Nego1"             ></td>
                           </tr>

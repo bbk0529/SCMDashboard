@@ -6,15 +6,29 @@ from django.views.decorators.csrf import csrf_exempt
 import decimal
 
 # Create your views here.
-As=Assay.objects.all()[:10]
+As=Assay.objects.order_by('SA_No')[:20]
 
+
+def headerRefresh(request):
+    print("headerrefresh")
+    try :
+        SA_No=request.GET['SA_No'].strip()
+        Ass=Assay.objects.get(SA_No=SA_No)
+        return render(
+            request, 'procurement/approvalPlanHeader.html',{
+                'Assay' : Ass,
+                'assayList' : As
+        })
+
+
+    except Exception as e:
+        return render(
+            request, 'procurement/approvalPlanHeader.html',{
+            'assayList' : As
+        })
 
 
 def approvalPlan(request):
-    print("==========================main called")
-    #As=Assay.objects.filter(close=decimal.Decimal('NaN'))
-
-
     try :
         SA_No=request.GET['SA_No'].strip()
         Ass=Assay.objects.get(SA_No=SA_No)
@@ -32,10 +46,6 @@ def approvalPlan(request):
         })
 
 def main(request) :
-    print("==========================main called")
-    #As=Assay.objects.filter(close=decimal.Decimal('NaN'))
-
-
     try :
         SA_No=request.GET['SA_No'].strip()
         Ass=Assay.objects.get(SA_No=SA_No)
@@ -95,9 +105,6 @@ def updateQuery(request):
     if request.method == 'POST':
         assay=Assay(request.POST)
         print("READ ASSAY",assay)
-
-
-
         SA_No=request.POST.get('SA_No')
         Type=request.POST.get('Type')
         Date=request.POST.get('Date')
@@ -189,7 +196,8 @@ def updateQuery(request):
         Ass=Assay.objects.get(SA_No=SA_No)
 
     return render(
-        request, 'procurement/view.html',{
+        # request, 'procurement/view.html',{
+         request, 'procurement/approvalPlan.html',{
             'Assay' : Ass,
             'assayList' : As
     })

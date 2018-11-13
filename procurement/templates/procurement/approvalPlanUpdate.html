@@ -1,8 +1,5 @@
 {%load static %}
 {% load mathfilters %}
-
-
-
         <div class="card-body card-block">
                         <div class="row form-group">
                           <div class="col-3"><label for="text-input" class=" form-control-label"  >SA No.</label></div>
@@ -24,7 +21,7 @@
                         </div>
                         <div class="row form-group">
                           <div class="col col-md-3"><label for="text-input" class=" form-control-label">Number of Suppliers</label></div>
-                          <div class="col-12 col-md-9"><input type="text" id="text-input" name="Number_of_suppliers"   value="{{Assay.Number_of_suppliers}}"  class="form-control query"></div>
+                          <div class="col-12 col-md-9"><input type="text" name="Number_of_suppliers"   value="{{Assay.Number_of_suppliers}}"  class="form-control query"></div>
                         </div>
                         <div class="row form-group">
                           <div class="col col-md-3"><label for="text-input" class=" form-control-label">Details1</label></div>
@@ -60,10 +57,10 @@
               <div class="col-9" >
                 <div class="pull-right">
                 <button class="btn btn-secondary btn-sm" id="SupplierTableRowAdd">
-                  <i class="fa fa-lightbulb-o"></i> Add
+                  <i class="fa fa-plus"></i> Add
                 </button>
                 <button class="btn btn-secondary btn-sm" id="SupplierTableRowDelete">
-                  <i class="fa fa-lightbulb-o"></i> Delete
+                  <i class="fa  fa-minus"></i> Delete
                 </button>
               </div>
             </div>
@@ -193,7 +190,7 @@
 </div>
 </div>
         <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby=!"exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
@@ -211,7 +208,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
         </body>
         </html>
 
