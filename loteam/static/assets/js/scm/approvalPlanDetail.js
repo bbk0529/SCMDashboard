@@ -217,6 +217,14 @@ $('#copyFromDetail').click(function(){
 })//end of copyFromDetail
 
 
+$('#SupplierTableRowAdd').click(function(){
+      $("#summaryTable tbody tr:hidden").first().prop('hidden',false)
+})
+
+$('#SupplierTableRowDelete').click(function(){
+  console.log('haha');
+        $("#summaryTable tbody tr:visible").last().prop('hidden',true)
+})
 
 
 

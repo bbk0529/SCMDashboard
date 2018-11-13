@@ -1,195 +1,28 @@
 {%load static %}
 {% load mathfilters %}
-        <div class="card-body card-block">
-                        <div class="row form-group">
-                          <div class="col-3"><label for="text-input" class=" form-control-label"  >SA No.</label></div>
-                          <div class="col-9">
-                            <input type="text" id="text-input" name="SA_No" value="{{ Assay.SA_No}}"  class="form-control">
-                          </div>
-                        </div>
-                        <div class="row form-group">
-                          <div class="col-3"><label for="text-input" class=" form-control-label">Type</label></div>
-                          <div class="col-9"><input type="text" id="text-input" name="Type"
-                            {% ifnotequal Assay.Type 'nan' %}
-                              value="{{ Assay.Type}}"
-                            {% endifnotequal %}
-                             class="form-control query"></div>
-                        </div>
-                        <div class="row form-group">
-                          <div class="col col-md-3"><label for="text-input" class=" form-control-label">Delivery Time<br>(5Working Days)</label></div>
-                          <div class="col-12 col-md-9"><input type="text" id="text-input" name="Date"    value="{{ Assay.Date}}" class="form-control query"></div>
-                        </div>
-                        <div class="row form-group">
-                          <div class="col col-md-3"><label for="text-input" class=" form-control-label">Number of Suppliers</label></div>
-                          <div class="col-12 col-md-9"><input type="text" name="Number_of_suppliers"   value="{{Assay.Number_of_suppliers}}"  class="form-control query"></div>
-                        </div>
-                        <div class="row form-group">
-                          <div class="col col-md-3"><label for="text-input" class=" form-control-label">Details1</label></div>
-                          <div class="col-12 col-md-9"><input type="text" id="text-input" name="Details_1"
-                              {% ifnotequal Assay.Details_1 'nan' %}
-                                value="{{ Assay.Details_1}}"
-                              {% endifnotequal %}
-                             class="form-control query">
-                          </div>
-                        </div>
-                        <div class="row form-group">
-                          <div class="col col-md-3"><label for="text-input" class=" form-control-label">Details2</label></div>
-                          <div class="col-12 col-md-9"><input type="text" id="text-input" name="Details_2"
-                              {% ifnotequal Assay.Details_2 'nan' %}
-                                value="{{ Assay.Details_2}}"
-                              {% endifnotequal %}
-                             class="form-control query">
-                          </div>
-                        </div>
-                        <div class="row form-group">
-                          <div class="col-3"><label for="text-input" class=" form-control-label"  >Description</label></div>
-                          <div class="col-9">
-                            <input type="textarea" id="text-input" name="SA_No" class="form-control">
-                          </div>
-                        </div>
 
-              <strong><h4>Summary</h4></strong>
-              <div class="col-3">
-                <button class="btn btn-secondary btn-sm" id="copyFromDetail">
-                  <i class="fa fa-lightbulb-o"></i> Copy from Details
-                </button>
-              </div>
-              <div class="col-9" >
-                <div class="pull-right">
-                <button class="btn btn-secondary btn-sm" id="SupplierTableRowAdd">
-                  <i class="fa fa-plus"></i> Add
-                </button>
-                <button class="btn btn-secondary btn-sm" id="SupplierTableRowDelete">
-                  <i class="fa  fa-minus"></i> Delete
-                </button>
-              </div>
+<div class="card-body card-block">
+        <div class="row">
+            <div class="col-6">
+                {% include 'procurement/approvalPlanDetail.html' %}
             </div>
+            <div class="col-6">
+                {% include 'procurement/approvalPlanTable.html' %}
+            </div>
+        </div>
 
-              <table class="table" id="summaryTable">
-                        <thead>
-                          <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Supplier Name</th>
-                            <th scope="col">Qty</th>
-                            <th scope="col">Quot. Unit Price</th>
-                            <th scope="col">Quot. Value</th>
-                            <th scope="col">Final Unit Price</th>
-                            <th scope="col">Final Value</th>
-                            <th scope="col">Nego(%)</th>
-                        </tr>
-                      </thead>
-                      <tbody id="supplier">
-                      <tr id="summaryTableSupplier1">
-                        <th scope="row">1</th>
-                        <td contenteditable="" id="Supplier1">{{Assay.Supplier1}}</td>
-                        <td contenteditable="" class="supplier1" id="Supplier1_Qty">{{Assay.Supplier1_Qty}}</td>
-                        <td contenteditable="" class="supplier1" id="supplier1QuotValue"></td>
-                        <td bgcolor="DDDDDD"   id="supplierQuotTotalValue1"></td>
-                        <td contenteditable="" class="supplier1" id="Supplier1_Final_Unit_Price">{{Assay.Supplier1_Final_Unit_Price}}</td>
-                        <td bgcolor="DDDDDD"   id="supplierFinalTotalValue1"></td>
-                        <td bgcolor="DDDDDD"   id="supplier1Nego"></td>
-                      </tr>
-
-                      <tr id="summaryTableSupplier2"
-                        {% if not Assay.Supplier2 %}
-                        hidden
-                        {% endif %}
-                      >
-                        <th scope="row">2</th>
-                        <td contenteditable="" id="Supplier2">{{Assay.Supplier2}}</td>
-                        <td contenteditable="" class="supplier2" id="Supplier2_Qty">{{Assay.Supplier2_Qty}}</td>
-                        <td contenteditable="" class="supplier2" id="supplier2QuotValue"></td>
-                        <td bgcolor="DDDDDD"   id="supplierQuotTotalValue2"></td>
-                        <td contenteditable="" class="supplier2" id="Supplier2_Final_Unit_Price">{{Assay.Supplier2_Final_Unit_Price}}</td>
-                        <td bgcolor="DDDDDD"   id="supplierFinalTotalValue2"></td>
-                        <td bgcolor="DDDDDD"   id="supplier2Nego"></td>
-                      </tr>
-
-
-                      <tr id="summaryTableSupplier3"
-                        {% if not Assay.Supplier3 %}
-                        hidden
-                        {% endif %}
-                      >
-                          <th scope="row">3</th>
-                          <td contenteditable="" id="Supplier3">{{Assay.Supplier3}}</td>
-                          <td contenteditable="" class="supplier3" id="Supplier3_Qty">{{Assay.Supplier3_Qty}}</td>
-                          <td contenteditable="" class="supplier3" id="supplier3QuotValue"></td>
-                          <td bgcolor="DDDDDD"   id="supplierQuotTotalValue3"></td>
-                          <td contenteditable="" class="supplier3" id="Supplier3_Final_Unit_Price">{{Assay.Supplier3_Final_Unit_Price}}</td>
-                          <td bgcolor="DDDDDD"   id="supplierFinalTotalValue3"></td>
-                          <td bgcolor="DDDDDD"   id="supplier3Nego"></td>
-
-                      </tr>
-
-                      <tr id="summaryTableSupplier4"
-                        {% if not Assay.Supplier4 %}
-                        hidden
-                        {% endif %}
-                      >
-                          <th scope="row">4</th>
-                          <td contenteditable="" id="Supplier4">{{Assay.Supplier4}}</td>
-                          <td contenteditable="" class="supplier4" id="Supplier4_Qty">{{Assay.Supplier4_Qty}}</td>
-                          <td contenteditable="" class="supplier4" id="supplier4QuotValue"></td>
-                          <td bgcolor="DDDDDD"   id="supplierQuotTotalValue4"></td>
-                          <td contenteditable="" class="supplier4" id="Supplier4_Final_Unit_Price">{{Assay.Supplier4_Final_Unit_Price}}</td>
-                          <td bgcolor="DDDDDD"   id="supplierFinalTotalValue4"></td>
-                          <td bgcolor="DDDDDD"   id="supplier4Nego"></td>
-                      </tr>
-
-                      <tr id="summaryTableSupplier5"
-                        {% if not Assay.Supplier5 %}
-                        hidden
-                        {% endif %}
-                      >
-                          <th scope="row">5</th>
-                          <td contenteditable="" id="Supplier5">{{Assay.Supplier5}}</td>
-                          <td contenteditable="" class="supplier5" id="Supplier5_Qty">{{Assay.Supplier5_Qty}}</td>
-                          <td contenteditable="" class="supplier5" id="supplier5QuotValue"></td>
-                          <td bgcolor="DDDDDD"   id="supplierQuotTotalValue5"></td>
-                          <td contenteditable="" class="supplier5" id="Supplier5_Final_Unit_Price">{{Assay.Supplier5_Final_Unit_Price}}</td>
-                          <td bgcolor="DDDDDD"   id="supplierFinalTotalValue5"></td>
-                          <td bgcolor="DDDDDD"   id="supplier5Nego"></td>
-                      </tr>
-
-                      <tr id="summaryTableSupplier6"
-                        {% if not Assay.Supplier6 %}
-                        hidden
-                        {% endif %}
-                      >
-                          <th scope="row">6</th>
-                          <td contenteditable="" id="Supplier6">{{Assay.Supplier6}}</td>
-                          <td contenteditable="" class="supplier6" id="Supplier6_Qty">{{Assay.Supplier6_Qty}}</td>
-                          <td contenteditable="" class="supplier6" id="supplier6QuotValue"></td>
-                          <td bgcolor="DDDDDD"   id="supplierQuotTotalValue6"></td>
-                          <td contenteditable="" class="supplier6" id="Supplier6_Final_Unit_Price">{{Assay.Supplier6_Final_Unit_Price}}</td>
-                          <td bgcolor="DDDDDD"   id="supplierFinalTotalValue6"></td>
-                          <td bgcolor="DDDDDD"   id="supplier6Nego"></td>
-                      </tr>
-
-                      </tbody>
-              </table>
-
-
-
-            <strong><h4>Details</h4></strong>
-            {% include 'procurement/approvalPlanDetailSupplier1.html' %}
-            {% include 'procurement/approvalPlanDetailSupplier2.html' %}
-            {% include 'procurement/approvalPlanDetailSupplier3.html' %}
-            {% include 'procurement/approvalPlanDetailSupplier4.html' %}
-            {% include 'procurement/approvalPlanDetailSupplier5.html' %}
-            {% include 'procurement/approvalPlanDetailSupplier6.html' %}
-
-
-
-    </div>
-  </div>
+        <strong><h4>Details</h4></strong>
+        <div class="row">
+            <div class="col-6">
+                {% include 'procurement/approvalPlanDetailSupplier1.html' %}
+                {% include 'procurement/approvalPlanDetailSupplier3.html' %}
+                {% include 'procurement/approvalPlanDetailSupplier5.html' %}
+            </div>
+            <div class="col-6">
+                {% include 'procurement/approvalPlanDetailSupplier2.html' %}
+                {% include 'procurement/approvalPlanDetailSupplier4.html' %}
+                {% include 'procurement/approvalPlanDetailSupplier6.html' %}
+            </div>
+        </div>
 </div>
-</div>
-</body>
-</html>
 <script src="{% static 'assets/js/scm/approvalPlanDetail.js' %}"></script>
-<!--
-        <script src="{% static 'assets/js/scm/approvalPlanDetail.js' %}"></script>
-        <script src="{% static 'assets/js/scm/approvalPlan.js' %}"></script>
-        <script src="{% static 'assets/js/scm/approvalPlanBody.js' %}"></script> -->

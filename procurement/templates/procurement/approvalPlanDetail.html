@@ -1,0 +1,42 @@
+                <div class="row form-group">
+                  <div class="col-2"><label for="text-input" class=" form-control-label"  >SA</label></div>
+                  <div class="col-4">
+                    <input type="text" id="text-input" name="SA_No" value="{{ Assay.SA_No}}"  class="form-control">
+                  </div>
+                  <div class="col-2"><label for="text-input" class=" form-control-label">Type</label></div>
+                  <div class="col-4"><input type="text" id="text-input" name="Type"
+                    {% ifnotequal Assay.Type 'nan' %}
+                      value="{{ Assay.Type}}"
+                    {% endifnotequal %}
+                     class="form-control query"></div>
+                </div>
+                <div class="row form-group">
+                  <div class="col-2"><label for="text-input" class=" form-control-label">Delivery Time<br></label></div>
+                  <div class="col-4"><input type="text" id="text-input" name="Date"    value="{{ Assay.Date}}" class="form-control query"></div>
+                  <div class="col-2"><label for="text-input" class=" form-control-label"># of Suppliers</label></div>
+                  <div class="col-4"><input type="text" name="Number_of_suppliers"   value="{{Assay.Number_of_suppliers}}"  class="form-control query"></div>
+                </div>
+                <div class="row form-group">
+                  <div class="col-2"><label for="text-input" class=" form-control-label">Details1</label></div>
+                  <div class="col-10"><input type="text" id="text-input" name="Details_1"
+                      {% ifnotequal Assay.Details_1 'nan' %}
+                        value="{{ Assay.Details_1}}"
+                      {% endifnotequal %}
+                     class="form-control query">
+                  </div>
+                </div>
+                <div class="row form-group">
+                  <div class="col-2"><label for="text-input" class=" form-control-label">Details2</label></div>
+                  <div class="col-10"><input type="text" id="text-input" name="Details_2"
+                      {% ifnotequal Assay.Details_2 'nan' %}
+                        value="{{ Assay.Details_2}}"
+                      {% endifnotequal %}
+                     class="form-control query">
+                  </div>
+                </div>
+                <div class="row form-group">
+                  <div class="col-2"><label for="text-input" class=" form-control-label"  >Description</label></div>
+                  <div class="col-10">
+                    <textarea rows="5" id="text-input" name="SA_No" class="form-control"></textarea>
+                  </div>
+                </div>

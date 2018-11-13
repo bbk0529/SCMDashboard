@@ -5,45 +5,43 @@
     {% include "../subtemplate/head.html" %}
 </head>
 <body>
-     <div id="header"></div>
+    <div id="header"></div>
     <div class="content mt-3">
     <!-- <div class="animated fadeIn"> -->
 <div><img src="{% static 'images/festologo.jpg' %}"></div>
 <span id="alert_message"></span>
 <div class="row" id!="result">
-<div class="col-12" >
-      <div class="card">
-        <div class="card-header" id="approvalPlanHeader">
-            {% include 'procurement/approvalPlanHeader.html' %}
+    <div class="col-12" >
+        <div class="card">
+            <div class="card-header" id="approvalPlanHeader">
+                {% include 'procurement/approvalPlanHeader.html' %}
+            </div>
+            <div id="approvalPlanQuery">
+                  {% include 'procurement/approvalPlanBody.html' %}
+            </div>
         </div>
-        <div id="approvalPlanQuery">
-              {% include 'procurement/approvalPlanBody.html' %}
-        </div>
-
-
-        </div>
- </div>
+     </div>
 </div>
 
 
-        
+
         <script src="{% static 'assets/js/scm/approvalPlan.js' %}"></script>
         <script src="{% static 'assets/js/scm/approvalPlanBody.js' %}"></script>
 
-            <script src="{% static 'assets/js/popper.min.js' %}"></script>
-            <script src="{% static 'assets/js/plugins.js' %}"></script>
-            <script src="{% static 'assets/js/main.js' %}"></script>
-            <script src="{% static 'assets/js/lib/data-table/datatables.min.js' %}"></script>
-            <script src="{% static 'assets/js/lib/data-table/dataTables.bootstrap.min.js' %}"></script>
-            <script src="{% static 'assets/js/lib/data-table/dataTables.buttons.min.js' %}"></script>
-            <script src="{% static 'assets/js/lib/data-table/buttons.bootstrap.min.js' %}"></script>
-            <script src="{% static 'assets/js/lib/data-table/jszip.min.js' %}"></script>
-            <script src="{% static 'assets/js/lib/data-table/pdfmake.min.js' %}"></script>
-            <script src="{% static 'assets/js/lib/data-table/vfs_fonts.js' %}"></script>
-            <script src="{% static 'assets/js/lib/data-table/buttons.html5.min.js' %}"></script>
-            <script src="{% static 'assets/js/lib/data-table/buttons.print.min.js' %}"></script>
-            <script src="{% static 'assets/js/lib/data-table/buttons.colVis.min.js' %}"></script>
-            <script src="{% static 'assets/js/lib/data-table/datatables-init.js' %}"></script>
+        <script src="{% static 'assets/js/popper.min.js' %}"></script>
+        <script src="{% static 'assets/js/plugins.js' %}"></script>
+        <script src="{% static 'assets/js/main.js' %}"></script>
+        <script src="{% static 'assets/js/lib/data-table/datatables.min.js' %}"></script>
+        <script src="{% static 'assets/js/lib/data-table/dataTables.bootstrap.min.js' %}"></script>
+        <script src="{% static 'assets/js/lib/data-table/dataTables.buttons.min.js' %}"></script>
+        <script src="{% static 'assets/js/lib/data-table/buttons.bootstrap.min.js' %}"></script>
+        <script src="{% static 'assets/js/lib/data-table/jszip.min.js' %}"></script>
+        <script src="{% static 'assets/js/lib/data-table/pdfmake.min.js' %}"></script>
+        <script src="{% static 'assets/js/lib/data-table/vfs_fonts.js' %}"></script>
+        <script src="{% static 'assets/js/lib/data-table/buttons.html5.min.js' %}"></script>
+        <script src="{% static 'assets/js/lib/data-table/buttons.print.min.js' %}"></script>
+        <script src="{% static 'assets/js/lib/data-table/buttons.colVis.min.js' %}"></script>
+        <script src="{% static 'assets/js/lib/data-table/datatables-init.js' %}"></script>
 
-        </body>
-        </html>
+</body>
+</html>
