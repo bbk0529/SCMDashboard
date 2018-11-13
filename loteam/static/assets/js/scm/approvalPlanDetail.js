@@ -1,4 +1,66 @@
 $(function(){
+    $(".detail").css({"cursor":"pointer"})
+
+    $('#supplierSingle'+ 1).click(function(){
+        $('#supplierSingleReason1').prop("hidden",false)
+    })
+    $('#supplierMultiple'+1).click(function(){
+        $('#supplierSingleReason1').prop("hidden",true)
+    })
+    $('#supplierSingle2').click(function(){
+        $('#supplierSingleReason2').prop("hidden",false)
+    })
+    $('#supplierMultiple2').click(function(){
+        $('#supplierSingleReason2').prop("hidden",true)
+    })
+    $('#supplierSingle3').click(function(){
+        $('#supplierSingleReason3').prop("hidden",false)
+    })
+    $('#supplierMultiple3').click(function(){
+        $('#supplierSingleReason3').prop("hidden",true)
+    })
+    $('#supplierSingle4').click(function(){
+        $('#supplierSingleReason4').prop("hidden",false)
+    })
+    $('#supplierMultiple4').click(function(){
+        $('#supplierSingleReason4').prop("hidden",true)
+    })
+    $('#supplierSingle5').click(function(){
+        $('#supplierSingleReason5').prop("hidden",false)
+    })
+    $('#supplierMultiple5').click(function(){
+        $('#supplierSingleReason5').prop("hidden",true)
+    })
+    $('#supplierSingle6').click(function(){
+        $('#supplierSingleReason6').prop("hidden",false)
+    })
+    $('#supplierMultiple6').click(function(){
+        $('#supplierSingleReason6').prop("hidden",true)
+    })
+
+
+
+// Hidden Detail Pop Up or Not
+    $('#btnSupplierDetail1').click(function(){
+      $('#suppierDetail1').prop('hidden', !$('#suppierDetail1').prop('hidden'))
+    })
+    $('#btnSupplierDetail2').click(function(){
+      $('#suppierDetail2').prop('hidden', !$('#suppierDetail2').prop('hidden'))
+    })
+    $('#btnSupplierDetail3').click(function(){
+      $('#suppierDetail3').prop('hidden', !$('#suppierDetail3').prop('hidden'))
+    })
+    $('#btnSupplierDetail4').click(function(){
+      $('#suppierDetail4').prop('hidden', !$('#suppierDetail4').prop('hidden'))
+    })
+    $('#btnSupplierDetail5').click(function(){
+      $('#suppierDetail5').prop('hidden', !$('#suppierDetail5').prop('hidden'))
+    })
+    $('#btnSupplierDetail6').click(function(){
+      $('#suppierDetail6').prop('hidden', !$('#suppierDetail6').prop('hidden'))
+    })
+
+
 
   $('#Supplier1TableRowAdd').click(function(){
         $("#detailTable1 tbody tr:hidden").first().prop('hidden',false)
@@ -88,8 +150,6 @@ $(function(){
   $('.supplier5_3').on('input', function () {
     supplierDetailMath(5,3);
   });
-
-
   $('.supplier6_1').on('input', function () {
     supplierDetailMath(6,1);
   });

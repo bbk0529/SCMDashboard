@@ -1,84 +1,4 @@
 $(function(){
-    $(".detail").css({"cursor":"pointer"})
-
-    $('#supplierSingle'+ 1).click(function(){
-        $('#supplierSingleReason1').prop("hidden",false)
-    })
-    $('#supplierMultiple'+1).click(function(){
-        $('#supplierSingleReason1').prop("hidden",true)
-    })
-    $('#supplierSingle2').click(function(){
-        $('#supplierSingleReason2').prop("hidden",false)
-    })
-    $('#supplierMultiple2').click(function(){
-        $('#supplierSingleReason2').prop("hidden",true)
-    })
-    $('#supplierSingle3').click(function(){
-        $('#supplierSingleReason3').prop("hidden",false)
-    })
-    $('#supplierMultiple3').click(function(){
-        $('#supplierSingleReason3').prop("hidden",true)
-    })
-    $('#supplierSingle4').click(function(){
-        $('#supplierSingleReason4').prop("hidden",false)
-    })
-    $('#supplierMultiple4').click(function(){
-        $('#supplierSingleReason4').prop("hidden",true)
-    })
-    $('#supplierSingle5').click(function(){
-        $('#supplierSingleReason5').prop("hidden",false)
-    })
-    $('#supplierMultiple5').click(function(){
-        $('#supplierSingleReason5').prop("hidden",true)
-    })
-    $('#supplierSingle6').click(function(){
-        $('#supplierSingleReason6').prop("hidden",false)
-    })
-    $('#supplierMultiple6').click(function(){
-        $('#supplierSingleReason6').prop("hidden",true)
-    })
-
-
-
-// Hidden Detail Pop Up or Not
-    $('#btnSupplierDetail1').click(function(){
-      $('#suppierDetail1').prop('hidden', !$('#suppierDetail1').prop('hidden'))
-    })
-    $('#btnSupplierDetail2').click(function(){
-      $('#suppierDetail2').prop('hidden', !$('#suppierDetail2').prop('hidden'))
-    })
-    $('#btnSupplierDetail3').click(function(){
-      $('#suppierDetail3').prop('hidden', !$('#suppierDetail3').prop('hidden'))
-    })
-    $('#btnSupplierDetail4').click(function(){
-      $('#suppierDetail4').prop('hidden', !$('#suppierDetail4').prop('hidden'))
-    })
-    $('#btnSupplierDetail5').click(function(){
-      $('#suppierDetail5').prop('hidden', !$('#suppierDetail5').prop('hidden'))
-    })
-    $('#btnSupplierDetail6').click(function(){
-      $('#suppierDetail6').prop('hidden', !$('#suppierDetail6').prop('hidden'))
-    })
-
-
-
-    // $('#copyFromDetail').click(function(){
-    //   console.log("copyfromdetail clicked");
-    //   $('#summaryTable tbody').html("")
-    //   newtr=$('#detailTable1 tbody tr:nth-child(1)').clone();
-    //   newtr.appendTo($('#summaryTable tbody'))
-    //   newtr=$('#detailTable2 tbody tr:nth-child(1)').clone();
-    //   newtr.appendTo($('#summaryTable tbody'))
-    //   newtr=$('#detailTable3 tbody tr:nth-child(1)').clone();
-    //   newtr.appendTo($('#summaryTable tbody'))
-    //   newtr=$('#detailTable4 tbody tr:nth-child(1)').clone();
-    //   newtr.appendTo($('#summaryTable tbody'))
-    //   newtr=$('#detailTable5 tbody tr:nth-child(1)').clone();
-    //   newtr.appendTo($('#summaryTable tbody'))
-    //   newtr=$('#detailTable6 tbody tr:nth-child(1)').clone();
-    //   newtr.appendTo($('#summaryTable tbody'))
-    // })//end of copyFromDetail
-
     $('#copyFromDetail').click(function(){
       console.log("copyfromdetail clicked");
 
@@ -105,22 +25,6 @@ $(function(){
       }
 
     })//end of copyFromDetail
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     $('#save').click(function(){
       console.log("save clicked");
@@ -231,55 +135,39 @@ $(function(){
         }
       })
     })
-
-    toggle=true
-    $('#disableToggle').click(function(){
-      console.log("clicked query/Change")
-
-      $('#header').html("");
-      if(toggle==true){
-        $('.form-control.query').prop("disabled", false)
-        $('td').prop("contenteditable", true)
-        $('#submit').prop("hidden", false)
-        toggle=false
-        console.log(toggle)
-      }
-      else {
-        $('.form-control.query').prop("disabled", true)
-        $('#submit').prop("hidden", true)
-        $('td').prop("contenteditable",false)
-        toggle=true
-        console.log(toggle)
-      }
-
-
-    })
-
-    $('#check').click(function(){
-      console.log("clicked//")
-      var assayNo=$("#assayNo").val()
-      if (assayNo!='') {
-          $('#radio_change').prop('checked', true)
-          $('#changeDocOptions').prop('hidden', false);
-          $('#newDocOptions').prop('hidden', true);
-          console.log(assayNo);
-          $.ajax({
-              url : "approvalPlanQuery",
-              type : "GET",
-              data: {
-                  'SA_No' : assayNo
-              },
-              success : function(data) {
-                  console.log("successfully communicated with Server");
-                  $("#approvalPlanQuery").html(
-                    data
-                  );
-              }
-          }) //end of $.ajax
-      }
-
+    function query(assayNo){
+        if (assayNo!='') {
+            $('#radio_change').prop('checked', true)
+            $('#changeDocOptions').prop('hidden', false);
+            $('#newDocOptions').prop('hidden', true);
+            console.log(assayNo);
+            $.ajax({
+                url : "approvalPlanQuery",
+                type : "GET",
+                data: {
+                    'SA_No' : assayNo
+                },
+                success : function(data) {
+                    console.log("successfully communicated with Server");
+                    $("#approvalPlanQuery").html(
+                      data
+                    );
+                }
+            }) //end of $.ajax
+        }
+    }
+    $("#assayNo").keypress(function(event) {
+        if (event.keyCode === 13) {
+            console.log('enter key in')
+            var assayNo=$("#assayNo").val()
+            query(assayNo)
+        }
     });
 
 
-
+    $('#query').click(function(){
+      console.log("clicked//")
+      var assayNo=$("#assayNo").val()
+      query(assayNo)
+    });
 } ) //end of function

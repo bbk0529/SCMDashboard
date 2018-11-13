@@ -76,18 +76,8 @@
                             <th scope="col">Final Unit Price</th>
                             <th scope="col">Final Value</th>
                             <th scope="col">Nego(%)</th>
-
                         </tr>
                       </thead>
-
-
-
-
-
-
-
-
-
                       <tbody id="supplier">
                       <tr id="summaryTableSupplier1">
                         <th scope="row">1</th>
@@ -183,36 +173,23 @@
 
 
             <strong><h4>Details</h4></strong>
-              {%include 'procurement/approvalPlanUpdateDetail.html' %}
+            {% include 'procurement/approvalPlanDetailSupplier1.html' %}
+            {% include 'procurement/approvalPlanDetailSupplier2.html' %}
+            {% include 'procurement/approvalPlanDetailSupplier3.html' %}
+            {% include 'procurement/approvalPlanDetailSupplier4.html' %}
+            {% include 'procurement/approvalPlanDetailSupplier5.html' %}
+            {% include 'procurement/approvalPlanDetailSupplier6.html' %}
+
+
 
     </div>
   </div>
 </div>
 </div>
-        <!-- Modal -->
-        <!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby=!"exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Confirm</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                Are you sure to change and save this?
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" id="save">Save changes</button>
-              </div>
-            </div>
-          </div>
-        </div> -->
-        </body>
-        </html>
-
-
-
+</body>
+</html>
+<script src="{% static 'assets/js/scm/approvalPlanDetail.js' %}"></script>
+<!--
+        <script src="{% static 'assets/js/scm/approvalPlanDetail.js' %}"></script>
         <script src="{% static 'assets/js/scm/approvalPlan.js' %}"></script>
-        <script src="{% static 'assets/js/scm/approvalPlanUpdate.js' %}"></script>
+        <script src="{% static 'assets/js/scm/approvalPlanBody.js' %}"></script> -->

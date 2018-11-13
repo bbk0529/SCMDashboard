@@ -87,7 +87,7 @@ def approvalPlanQuery(request):
 
     return render(
         request,
-        'procurement/approvalPlanUpdate.html',{
+        'procurement/approvalPlanBody.html',{
             'Assay' : Ass,
             'assayList' : As
         }
@@ -96,7 +96,7 @@ def approvalPlanQuery(request):
 def approvalPlanCreate(request):
     return render(
         request,
-        'procurement/approvalPlanUpdate.html',{
+        'procurement/approvalPlanBody.html',{
         }
     )
 
