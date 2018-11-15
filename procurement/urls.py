@@ -10,4 +10,5 @@ urlpatterns=[
     path('approvalPlanCreate', scm_views.approvalPlanCreate, name='approvalPlanCreate'),
     path('assayQuery',scm_views.assayQuery, name='assayQuery'),
     path('updateQuery',scm_views.updateQuery, name='updateQuery'),
+    path('changeLog',scm_views.changeLog, name='changeLog'),    
 ]

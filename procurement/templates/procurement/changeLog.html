@@ -1,0 +1,60 @@
+{% extends 'blog/base.html' %}
+
+{%load static %}
+{% block content %}
+<div id="header">  </div>
+<div class="card">
+    <div class="card-header">
+        <div class="col-4">
+            <strong>Inquiry</strong> View
+        </div>
+    </div>
+    <div class="card-body card-block">
+        <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">SA_No</th>
+                    <th scope="col">DateTime</th>
+                    <th scope="col">User</th>
+                    <th scope="col">Field</th>
+                    <th scope="col">Before</th>
+                    <th scope="col">After</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for change in changeLog %}
+                <tr>
+                    <td>{{change.SA_No}}</td>
+                    <td>{{change.DateTime}}</td>
+                    <td>{{change.User}}</td>
+                    <td>{{change.Field}}</td>
+                    <td>{{change.Before}}</td>
+                    <td>{{change.After}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <th scope="col">SA_No</th>
+                <th scope="col">DateTime</th>
+                <th scope="col">User</th>
+                <th scope="col">Field</th>
+                <th scope="col">Before</th>
+                <th scope="col">After</th>
+            </tfoot>
+
+      </table>
+    </div>
+</div>
+
+<script src="{% static 'assets/js/lib/data-table/datatables.min.js' %}"></script>
+<script src="{% static 'assets/js/lib/data-table/dataTables.bootstrap.min.js' %}"></script>
+<script src="{% static 'assets/js/lib/data-table/dataTables.buttons.min.js' %}"></script>
+<script src="{% static 'assets/js/lib/data-table/buttons.bootstrap.min.js' %}"></script>
+<script src="{% static 'assets/js/lib/data-table/jszip.min.js' %}"></script>
+<script src="{% static 'assets/js/lib/data-table/pdfmake.min.js' %}"></script>
+<script src="{% static 'assets/js/lib/data-table/vfs_fonts.js' %}"></script>
+<script src="{% static 'assets/js/lib/data-table/buttons.html5.min.js' %}"></script>
+<script src="{% static 'assets/js/lib/data-table/buttons.print.min.js' %}"></script>
+<script src="{% static 'assets/js/lib/data-table/buttons.colVis.min.js' %}"></script>
+<script src="{% static 'assets/js/lib/data-table/datatables-init.js' %}"></script>
+{% endblock %}

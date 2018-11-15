@@ -1,5 +1,6 @@
 from django.db import models
 
+
 # Create your models here.
 
 
@@ -53,3 +54,11 @@ class Assay(models.Model):
     Supplier6_Modification_of_free_offerd_item =models.CharField(max_length=50, blank=True,null=True)
     Supplier6_Qty=models.CharField(max_length=50, blank=True,null=True)
     Supplier6_Final_Unit_Price	=models.CharField(max_length=50, blank=True,null=True)
+
+class ChangeLog(models.Model):
+    SA_No=models.IntegerField(blank=True,null=True)
+    DateTime=models.DateTimeField(blank=True,null=True)
+    User=models.CharField(blank=True,null=True,max_length=30)
+    Field=models.CharField(blank=True,null=True,max_length=30)
+    Before=models.CharField(max_length=50, blank=True,null=True)
+    After=models.CharField(max_length=50, blank=True,null=True)

@@ -1,9 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, render, redirect
-from .models import Assay
+from .models import Assay, ChangeLog
 from django.views.decorators.csrf import csrf_exempt
-
+import datetime
 import decimal
 
 # Create your views here.
@@ -65,13 +65,22 @@ def approvalPlanCreate(request):
         }
     )
 
+
+
+def changeLog(request):
+
+    changeLog=ChangeLog.objects.all()
+    return render(
+        request, 'procurement/changeLog.html',{
+        'changeLog' : changeLog
+    })
+
+
 @csrf_exempt
 def updateQuery(request):
     if request.method == 'POST':
         username = request.user.username
-        print(username*100)
         assay=Assay(request.POST)
-        print("READ ASSAY",assay)
         SA_No=request.POST.get('SA_No')
         Type=request.POST.get('Type')
         Date=request.POST.get('Date')
@@ -79,6 +88,77 @@ def updateQuery(request):
         Number_of_suppliers=request.POST.get('Number_of_suppliers')
         Details_1=request.POST.get('Details_1')
         Details_2=request.POST.get('Details_2')
+
+        try :
+            Ass=Assay.objects.get(SA_No=SA_No)
+            if Ass.Type!=Type:
+                print("type log"*100)
+                ChangeLog.objects.create(
+                    SA_No=int(SA_No),
+                    DateTime=datetime.datetime.now(),
+                    User=username,
+                    Field="Type",
+                    Before=Ass.Type,
+                    After=Type,
+                )
+
+            if Ass.Date!=Date:
+                print("Date log")
+                ChangeLog.objects.create(
+                    SA_No=int(SA_No),
+                    DateTime=datetime.datetime.now(),
+                    User=username,
+                    Field="Date",
+                    Before=Ass.Date,
+                    After=Date,
+                )
+
+            if Ass.Description!=Description:
+                print("Description log")
+                ChangeLog.objects.create(
+                    SA_No=int(SA_No),
+                    DateTime=datetime.datetime.now(),
+                    User=username,
+                    Field="Description",
+                    Before=Ass.Description,
+                    After=Description,
+                )
+
+            if Ass.Number_of_suppliers!=Number_of_suppliers:
+                print("Number_of_supplierslog")
+                ChangeLog.objects.create(
+                    SA_No=int(SA_No),
+                    DateTime=datetime.datetime.now(),
+                    User=username,
+                    Field="Number_of_suppliers",
+                    Before=Ass.Number_of_suppliers,
+                    After=Number_of_suppliers,
+                )
+            if Ass.Details_1!=Details_1:
+                print("Number_of_supplierslog")
+                ChangeLog.objects.create(
+                    SA_No=int(SA_No),
+                    DateTime=datetime.datetime.now(),
+                    User=username,
+                    Field="Details_1",
+                    Before=Ass.Details_1,
+                    After=Details_1,
+
+                )
+            if Ass.Details_2!=Details_2:
+                print("Number_of_supplierslog")
+                ChangeLog.objects.create(
+                    SA_No=int(SA_No),
+                    DateTime=datetime.datetime.now(),
+                    User=username,
+                    Field="Details_2",
+                    Before=Ass.Details_2,
+                    After=Details_2,
+                )
+
+        except :
+            print("New creation")
+
         Supplier1=request.POST.get("Supplier1")
         Supplier1_Qty=request.POST.get("Supplier1_Qty")
         Supplier1_Final_Unit_Price=request.POST.get("Supplier1_Final_Unit_Price")
@@ -160,7 +240,8 @@ def updateQuery(request):
 
         except Exception as ex :
             print(ex)
-        Ass=Assay.objects.get(SA_No=SA_No)
+
+    Ass=Assay.objects.get(SA_No=SA_No)
     return render(
         # request, 'procurement/view.html',{
          request, 'procurement/approvalPlan.html',{
