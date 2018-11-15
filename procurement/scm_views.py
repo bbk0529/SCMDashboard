@@ -1,68 +1,33 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 from .models import Assay
 from django.views.decorators.csrf import csrf_exempt
+
 import decimal
 
 # Create your views here.
-As=Assay.objects.order_by('SA_No')[:20]
-
-
-def headerRefresh(request):
-    print("headerrefresh")
-    try :
-        SA_No=request.GET['SA_No'].strip()
-        Ass=Assay.objects.get(SA_No=SA_No)
-        return render(
-            request, 'procurement/approvalPlanHeader.html',{
-                'Assay' : Ass,
-                'assayList' : As
-        })
-
-
-    except Exception as e:
-        return render(
-            request, 'procurement/approvalPlanHeader.html',{
-            'assayList' : As
-        })
-
-
+# As=Assay.objects.order_by('SA_No')[:20]
+As=Assay.objects.order_by('SA_No')
+#######################################
+# MAIN default                        #
+#######################################
 def approvalPlan(request):
-    try :
-        SA_No=request.GET['SA_No'].strip()
-        Ass=Assay.objects.get(SA_No=SA_No)
-        return render(
-            request, 'procurement/approvalPlan.html',{
-                'Assay' : Ass,
-                'assayList' : As
-        })
 
-
-    except Exception as e:
+    if request.user.is_authenticated:
         return render(
             request, 'procurement/approvalPlan.html',{
             'assayList' : As
-        })
+            }
+        )
+    else:
+        return redirect('login')
 
-def main(request) :
-    try :
-        SA_No=request.GET['SA_No'].strip()
-        Ass=Assay.objects.get(SA_No=SA_No)
-        return render(
-            request, 'procurement/view.html',{
-                'Assay' : Ass,
-                'assayList' : As
-        })
-
-
-    except Exception as e:
-        return render(
-            request, 'procurement/view.html',{
-            'assayList' : As
-        })
-
-
+def listAssay(request) :
+    return render(
+        request, 'procurement/assayList.html',{
+        'assayList' : As
+    })
 
 
 def assayQuery(request) :
@@ -103,11 +68,14 @@ def approvalPlanCreate(request):
 @csrf_exempt
 def updateQuery(request):
     if request.method == 'POST':
+        username = request.user.username
+        print(username*100)
         assay=Assay(request.POST)
         print("READ ASSAY",assay)
         SA_No=request.POST.get('SA_No')
         Type=request.POST.get('Type')
         Date=request.POST.get('Date')
+        Description=request.POST.get('Description')
         Number_of_suppliers=request.POST.get('Number_of_suppliers')
         Details_1=request.POST.get('Details_1')
         Details_2=request.POST.get('Details_2')
@@ -151,6 +119,7 @@ def updateQuery(request):
                     'Number_of_suppliers':Number_of_suppliers,
                     'Details_1':Details_1,
                     'Details_2':Details_2,
+                    'Description':Description,
                     'Supplier1'                                  :   Supplier1,
                     'Supplier1_Qty'                              :   Supplier1_Qty,
                     'Supplier1_Final_Unit_Price'                 :   Supplier1_Final_Unit_Price,
@@ -191,19 +160,10 @@ def updateQuery(request):
 
         except Exception as ex :
             print(ex)
-
-
         Ass=Assay.objects.get(SA_No=SA_No)
-
     return render(
         # request, 'procurement/view.html',{
          request, 'procurement/approvalPlan.html',{
             'Assay' : Ass,
             'assayList' : As
     })
-    # return HttpResponse(request.POST) # methods must return HttpResponse
-
-
-
-def deleteQuery(request):
-    return

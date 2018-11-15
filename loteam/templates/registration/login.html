@@ -1,13 +1,19 @@
 <!-- templates/registration/login.html -->
-{% extends 'blog/base.html' %}
 
+{% extends 'blog/base.html' %}
+{% load static %}
 {% block title %}Login{% endblock %}
 
 {% block content %}
+<div><img src="{% static 'images/festologo.jpg' %}"></div>
     <h2>Login</h2>
     <form method="post">
       {% csrf_token %}
       {{ form.as_p }}
       <button type="submit">Login</button>
     </form>
+
+
+
+
 {% endblock %}

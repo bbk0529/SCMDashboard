@@ -37,6 +37,6 @@
                 <div class="row form-group">
                   <div class="col-2"><label for="text-input" class=" form-control-label"  >Description</label></div>
                   <div class="col-10">
-                    <textarea rows="5" id="text-input" name="SA_No" class="form-control"></textarea>
+                    <textarea rows="5" name="Description" class="form-control">{% ifnotequal Assay.Description 'None' %}{{Assay.Description}}{% endifnotequal %}</textarea>
                   </div>
                 </div>

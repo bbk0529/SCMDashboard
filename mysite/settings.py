@@ -129,8 +129,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 #https://simpleisbetterthancomplex.com/packages/2016/08/11/django-import-export.html
 IMPORT_EXPORT_USE_TRANSACTIONS = True
 
-LOGIN_REDIRECT_URL = 'tab1'
-LOGOUT_REDIRECT_URL = 'tab1'
+LOGIN_REDIRECT_URL = 'approvalPlan'
+LOGOUT_REDIRECT_URL = 'approvalPlan'
 
 DATE_FORMAT='y-m-d'
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '172.17.193.118']

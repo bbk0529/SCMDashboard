@@ -7,7 +7,13 @@
 <body>
     <div id="header"></div>
     <div class="content mt-3">
-    <!-- <div class="animated fadeIn"> -->
+    <div class="animated fadeIn">
+    {% if user.is_authenticated %}
+        <p>Hi {{ user.username }}
+            <i class="fa fa-user"></i><span class="badge"><a href="{% url 'logout' %}">logout</a></span>
+        </p>
+    {% endif %}
+
 <div><img src="{% static 'images/festologo.jpg' %}"></div>
 <span id="alert_message"></span>
 <div class="row" id!="result">
@@ -21,6 +27,7 @@
             </div>
         </div>
      </div>
+</div>
 </div>
 
 

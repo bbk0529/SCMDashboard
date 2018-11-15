@@ -13,6 +13,7 @@ $(function(){
               'Number_of_suppliers' : $("input[name='Number_of_suppliers']").val(),
               'Details_1' : $("input[name='Details_1']").val(),
               'Details_2' : $("input[name='Details_2']").val(),
+              'Description' : $.trim($("textarea[name='Description']").val()),
               'Supplier1'                                  :   $("#Supplier1").text(),
               'Supplier1_Qty'                              :   $("#Supplier1_Qty").text(),
               'Supplier1_Final_Unit_Price'                 :   $("#Supplier1_Final_Unit_Price").text(),
@@ -69,7 +70,6 @@ $(function(){
                     $(this).remove();
                   });
               }, 2000);
-              // $("#approvalPlanHeader").html(data)
           },
           error :function(){
               $('#header').html(''+
