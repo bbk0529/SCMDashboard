@@ -2,32 +2,58 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from .models import Assay, ChangeLog
-from django.views.decorators.csrf import csrf_exempt
+
 import datetime
 import decimal
+
+from .scm_views_updateQuery import *
+
+import xlwt
 
 # Create your views here.
 # As=Assay.objects.order_by('SA_No')[:20]
 As=Assay.objects.order_by('SA_No')
+
+
+############################################
+def setting(request):
+    ipAddress=get_client_ip(request)
+    if request.user.username=='buyer':
+        return render(
+            request, 'procurement/setting.html',{
+            'assayList' : As,
+            'ipAddress' : ipAddress
+            }
+        )
+    else:
+        return redirect('/list')
+
+
 #######################################
 # MAIN default                        #
 #######################################
 def approvalPlan(request):
-
-    if request.user.is_authenticated:
+    ipAddress=get_client_ip(request)
+    if request.user.username=='buyer':
         return render(
             request, 'procurement/approvalPlan.html',{
-            'assayList' : As
+            'assayList' : As,
+            'ipAddress' : ipAddress
             }
         )
     else:
-        return redirect('login')
-
+        return redirect('/list')
+####################################################
 def listAssay(request) :
-    return render(
-        request, 'procurement/assayList.html',{
-        'assayList' : As
-    })
+    ipAddress=get_client_ip(request)
+    if request.user.is_authenticated:
+        return render(
+            request, 'procurement/assayList.html',{
+            'assayList' : As,
+            'ipAddress' : ipAddress
+        })
+    else:
+        return redirect('login')
 
 
 def assayQuery(request) :
@@ -38,7 +64,7 @@ def assayQuery(request) :
         print(SA_No)
 
     return render(
-        request, 'procurement/view_tab1.html',{
+        request, 'procurement/assayListDetail.html',{
             'Assay' : Ass,
             'assayList' : As
     })
@@ -66,185 +92,249 @@ def approvalPlanCreate(request):
     )
 
 
-
+#########################################################
 def changeLog(request):
+    ipAddress=get_client_ip(request)
+    if request.user.username=='buyer':
+        changeLog=ChangeLog.objects.all()
+        return render(
+            request, 'procurement/changeLog.html',{
+            'changeLog' : changeLog,
+            'ipAddress' : ipAddress
+        })
+    else:
+        return redirect('/list')
 
-    changeLog=ChangeLog.objects.all()
-    return render(
-        request, 'procurement/changeLog.html',{
-        'changeLog' : changeLog
-    })
 
 
-@csrf_exempt
-def updateQuery(request):
+
+
+from django.contrib.auth.models import User
+
+def export_data_xls(request):
+    response = HttpResponse(content_type='application/ms-excel')
+    response['Content-Disposition'] = 'attachment; filename="data.xls"'
+
+    wb = xlwt.Workbook(encoding='utf-8')
+    ws = wb.add_sheet('data')
+
+    # Sheet header, first row
+    row_num = 0
+
+    font_style = xlwt.XFStyle()
+    font_style.font.bold = True
+
+    columns = [
+        'SA_No',
+        'Date',
+        'Number_of_suppliers',
+        'Type',
+        'Details_1',
+        'Details_2',
+        'Description',
+        'Category',
+        'Updated_date',
+        'Supplier1',
+        'Supplier1_Fabricating_Goods',
+        'Supplier1_Modification_of_free_offerd_item',
+        'Supplier1_Qty',
+        'Supplier1_Final_Unit_Price',
+        'Supplier2',
+        'Supplier2_Fabricating_Goods',
+        'Supplier2_Modification_of_free_offerd_item',
+        'Supplier2_Qty',
+        'Supplier2_Final_Unit_Price',
+        'Supplier3',
+        'Supplier3_Fabricating_Goods',
+        'Supplier3_Modification_of_free_offerd_item',
+        'Supplier3_Qty',
+        'Supplier3_Final_Unit_Price',
+        'Supplier4',
+        'Supplier4_Fabricating_Goods',
+        'Supplier4_Modification_of_free_offerd_item',
+        'Supplier4_Qty',
+        'Supplier4_Final_Unit_Price',
+        'Supplier5',
+        'Supplier5_Fabricating_Goods',
+        'Supplier5_Modification_of_free_offerd_item',
+        'Supplier5_Qty',
+        'Supplier5_Final_Unit_Price',
+        'Supplier6',
+        'Supplier6_Fabricating_Goods',
+        'Supplier6_Modification_of_free_offerd_item',
+        'Supplier6_Qty',
+        'Supplier6_Final_Unit_Price',
+        'Supplier7',
+        'Supplier7_Fabricating_Goods',
+        'Supplier7_Modification_of_free_offerd_item',
+        'Supplier7_Qty',
+        'Supplier7_Final_Unit_Price',
+        'Supplier8',
+        'Supplier8_Fabricating_Goods',
+        'Supplier8_Modification_of_free_offerd_item',
+        'Supplier8_Qty',
+        'Supplier8_Final_Unit_Price',
+    ]
+
+    for col_num in range(len(columns)):
+        ws.write(row_num, col_num, columns[col_num], font_style)
+
+    # Sheet body, remaining rows
+    font_style = xlwt.XFStyle()
+
+    rows = Assay.objects.all().values_list(
+        'SA_No',
+        'Date',
+        'Number_of_suppliers',
+        'Type',
+        'Details_1',
+        'Details_2',
+        'Description',
+        'Category',
+        'Updated_date',
+        'Supplier1',
+        'Supplier1_Fabricating_Goods',
+        'Supplier1_Modification_of_free_offerd_item',
+        'Supplier1_Qty',
+        'Supplier1_Final_Unit_Price',
+        'Supplier2',
+        'Supplier2_Fabricating_Goods',
+        'Supplier2_Modification_of_free_offerd_item',
+        'Supplier2_Qty',
+        'Supplier2_Final_Unit_Price',
+        'Supplier3',
+        'Supplier3_Fabricating_Goods',
+        'Supplier3_Modification_of_free_offerd_item',
+        'Supplier3_Qty',
+        'Supplier3_Final_Unit_Price',
+        'Supplier4',
+        'Supplier4_Fabricating_Goods',
+        'Supplier4_Modification_of_free_offerd_item',
+        'Supplier4_Qty',
+        'Supplier4_Final_Unit_Price',
+        'Supplier5',
+        'Supplier5_Fabricating_Goods',
+        'Supplier5_Modification_of_free_offerd_item',
+        'Supplier5_Qty',
+        'Supplier5_Final_Unit_Price',
+        'Supplier6',
+        'Supplier6_Fabricating_Goods',
+        'Supplier6_Modification_of_free_offerd_item',
+        'Supplier6_Qty',
+        'Supplier6_Final_Unit_Price',
+        'Supplier7',
+        'Supplier7_Fabricating_Goods',
+        'Supplier7_Modification_of_free_offerd_item',
+        'Supplier7_Qty',
+        'Supplier7_Final_Unit_Price',
+        'Supplier8',
+        'Supplier8_Fabricating_Goods',
+        'Supplier8_Modification_of_free_offerd_item',
+        'Supplier8_Qty',
+        'Supplier8_Final_Unit_Price',
+    )
+    for row in rows:
+        row_num += 1
+        for col_num in range(len(row)):
+            ws.write(row_num, col_num, row[col_num], font_style)
+
+    wb.save(response)
+    return response
+
+
+
+
+def export_log_xls(request):
+    response = HttpResponse(content_type='application/ms-excel')
+    response['Content-Disposition'] = 'attachment; filename="changeLog.xls"'
+
+    wb = xlwt.Workbook(encoding='utf-8')
+    ws = wb.add_sheet('changeLog')
+
+    # Sheet header, first row
+    row_num = 0
+
+    font_style = xlwt.XFStyle()
+    font_style.font.bold = True
+
+    columns = [
+            'SA_No',
+            'DateTime',
+            'User',
+            'Field',
+            'Before',
+            'After',
+    ]
+
+    for col_num in range(len(columns)):
+        ws.write(row_num, col_num, columns[col_num], font_style)
+
+    # Sheet body, remaining rows
+    font_style = xlwt.XFStyle()
+
+    rows = ChangeLog.objects.all().values_list(
+            'SA_No',
+            'DateTime',
+            'User',
+            'Field',
+            'Before',
+            'After',
+
+    )
+    for row in rows:
+        row_num += 1
+        for col_num in range(len(row)):
+            ws.write(row_num, col_num, row[col_num], font_style)
+
+    wb.save(response)
+    return response
+
+
+
+
+
+
+
+
+
+
+
+def get_client_ip(request):
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+from tablib import Dataset
+
+def simple_upload(request):
     if request.method == 'POST':
-        username = request.user.username
-        assay=Assay(request.POST)
-        SA_No=request.POST.get('SA_No')
-        Type=request.POST.get('Type')
-        Date=request.POST.get('Date')
-        Description=request.POST.get('Description')
-        Number_of_suppliers=request.POST.get('Number_of_suppliers')
-        Details_1=request.POST.get('Details_1')
-        Details_2=request.POST.get('Details_2')
+        person_resource = PersonResource()
+        dataset = Dataset()
+        new_persons = request.FILES['myfile']
 
-        try :
-            Ass=Assay.objects.get(SA_No=SA_No)
-            if Ass.Type!=Type:
-                print("type log"*100)
-                ChangeLog.objects.create(
-                    SA_No=int(SA_No),
-                    DateTime=datetime.datetime.now(),
-                    User=username,
-                    Field="Type",
-                    Before=Ass.Type,
-                    After=Type,
-                )
+        imported_data = dataset.load(new_persons.read())
+        result = person_resource.import_data(dataset, dry_run=True)  # Test the data import
 
-            if Ass.Date!=Date:
-                print("Date log")
-                ChangeLog.objects.create(
-                    SA_No=int(SA_No),
-                    DateTime=datetime.datetime.now(),
-                    User=username,
-                    Field="Date",
-                    Before=Ass.Date,
-                    After=Date,
-                )
+        if not result.has_errors():
+            person_resource.import_data(dataset, dry_run=False)  # Actually import now
 
-            if Ass.Description!=Description:
-                print("Description log")
-                ChangeLog.objects.create(
-                    SA_No=int(SA_No),
-                    DateTime=datetime.datetime.now(),
-                    User=username,
-                    Field="Description",
-                    Before=Ass.Description,
-                    After=Description,
-                )
-
-            if Ass.Number_of_suppliers!=Number_of_suppliers:
-                print("Number_of_supplierslog")
-                ChangeLog.objects.create(
-                    SA_No=int(SA_No),
-                    DateTime=datetime.datetime.now(),
-                    User=username,
-                    Field="Number_of_suppliers",
-                    Before=Ass.Number_of_suppliers,
-                    After=Number_of_suppliers,
-                )
-            if Ass.Details_1!=Details_1:
-                print("Number_of_supplierslog")
-                ChangeLog.objects.create(
-                    SA_No=int(SA_No),
-                    DateTime=datetime.datetime.now(),
-                    User=username,
-                    Field="Details_1",
-                    Before=Ass.Details_1,
-                    After=Details_1,
-
-                )
-            if Ass.Details_2!=Details_2:
-                print("Number_of_supplierslog")
-                ChangeLog.objects.create(
-                    SA_No=int(SA_No),
-                    DateTime=datetime.datetime.now(),
-                    User=username,
-                    Field="Details_2",
-                    Before=Ass.Details_2,
-                    After=Details_2,
-                )
-
-        except :
-            print("New creation")
-
-        Supplier1=request.POST.get("Supplier1")
-        Supplier1_Qty=request.POST.get("Supplier1_Qty")
-        Supplier1_Final_Unit_Price=request.POST.get("Supplier1_Final_Unit_Price")
-        Supplier1_Fabricating_Goods=request.POST.get("Supplier1_Fabricating_Goods")
-        Supplier1_Modification_of_free_offerd_item=request.POST.get('Supplier1_Modification_of_free_offerd_item')
-        Supplier2=request.POST.get('Supplier2')
-        Supplier2_Qty=request.POST.get('Supplier2_Qty')
-        Supplier2_Final_Unit_Price=request.POST.get('Supplier2_Final_Unit_Price')
-        Supplier2_Fabricating_Goods=request.POST.get('Supplier2_Fabricating_Goods')
-        Supplier2_Modification_of_free_offerd_item=request.POST.get('Supplier2_Modification_of_free_offerd_item')
-        Supplier3=request.POST.get('Supplier3')
-        Supplier3_Qty=request.POST.get('Supplier3_Qty')
-        Supplier3_Final_Unit_Price=request.POST.get('Supplier3_Final_Unit_Price')
-        Supplier3_Fabricating_Goods=request.POST.get('Supplier3_Fabricating_Goods')
-        Supplier3_Modification_of_free_offerd_item=request.POST.get('Supplier3_Modification_of_free_offerd_item')
-        Supplier4=request.POST.get('Supplier4')
-        Supplier4_Qty=request.POST.get('Supplier4_Qty')
-        Supplier4_Final_Unit_Price=request.POST.get('Supplier4_Final_Unit_Price')
-        Supplier4_Fabricating_Goods=request.POST.get('Supplier4_Fabricating_Goods')
-        Supplier4_Modification_of_free_offerd_item=request.POST.get('Supplier4_Modification_of_free_offerd_item')
-        Supplier5=request.POST.get('Supplier5')
-        Supplier5_Qty=request.POST.get('Supplier5_Qty')
-        Supplier5_Final_Unit_Price=request.POST.get('Supplier5_Final_Unit_Price')
-        Supplier5_Fabricating_Goods=request.POST.get('Supplier5_Fabricating_Goods')
-        Supplier5_Modification_of_free_offerd_item=request.POST.get('Supplier5_Modification_of_free_offerd_item')
-        Supplier6=request.POST.get('Supplier6')
-        Supplier6_Qty=request.POST.get('Supplier6_Qty')
-        Supplier6_Final_Unit_Price=request.POST.get('Supplier6_Final_Unit_Price')
-        Supplier6_Fabricating_Goods=request.POST.get('Supplier6_Fabricating_Goods')
-        Supplier6_Modification_of_free_offerd_item=request.POST.get('Supplier6_Modification_of_free_offerd_item')
-
-        try:
-            Assay.objects.update_or_create(
-                SA_No=SA_No,
-                defaults={
-                    'Type':Type,
-                    'Date':Date,
-                    'Number_of_suppliers':Number_of_suppliers,
-                    'Details_1':Details_1,
-                    'Details_2':Details_2,
-                    'Description':Description,
-                    'Supplier1'                                  :   Supplier1,
-                    'Supplier1_Qty'                              :   Supplier1_Qty,
-                    'Supplier1_Final_Unit_Price'                 :   Supplier1_Final_Unit_Price,
-                    'Supplier1_Fabricating_Goods'                :   Supplier1_Fabricating_Goods,
-                    'Supplier1_Modification_of_free_offerd_item' :   Supplier1_Modification_of_free_offerd_item,
-
-                    'Supplier2'                                  :   Supplier2,
-                    'Supplier2_Qty'                              :   Supplier2_Qty,
-                    'Supplier2_Final_Unit_Price'                 :   Supplier2_Final_Unit_Price,
-                    'Supplier2_Fabricating_Goods'                :   Supplier2_Fabricating_Goods,
-                    'Supplier2_Modification_of_free_offerd_item' :   Supplier2_Modification_of_free_offerd_item,
-
-                    'Supplier3'                                  :   Supplier3,
-                    'Supplier3_Qty'                              :   Supplier3_Qty,
-                    'Supplier3_Final_Unit_Price'                 :   Supplier3_Final_Unit_Price,
-                    'Supplier3_Fabricating_Goods'                :   Supplier3_Fabricating_Goods,
-                    'Supplier3_Modification_of_free_offerd_item' :   Supplier3_Modification_of_free_offerd_item,
-
-                    'Supplier4'                                  :   Supplier4,
-                    'Supplier4_Qty'                              :   Supplier4_Qty,
-                    'Supplier4_Final_Unit_Price'                 :   Supplier4_Final_Unit_Price,
-                    'Supplier4_Fabricating_Goods'                :   Supplier4_Fabricating_Goods,
-                    'Supplier4_Modification_of_free_offerd_item' :   Supplier4_Modification_of_free_offerd_item,
-
-                    'Supplier5'                                  :   Supplier5,
-                    'Supplier5_Qty'                              :   Supplier5_Qty,
-                    'Supplier5_Final_Unit_Price'                 :   Supplier5_Final_Unit_Price,
-                    'Supplier5_Fabricating_Goods'                :   Supplier5_Fabricating_Goods,
-                    'Supplier5_Modification_of_free_offerd_item' :   Supplier5_Modification_of_free_offerd_item,
-
-                    'Supplier6'                                  :   Supplier6,
-                    'Supplier6_Qty'                              :   Supplier6_Qty,
-                    'Supplier6_Final_Unit_Price'                 :   Supplier6_Final_Unit_Price,
-                    'Supplier6_Fabricating_Goods'                :   Supplier6_Fabricating_Goods,
-                    'Supplier6_Modification_of_free_offerd_item' :   Supplier6_Modification_of_free_offerd_item,
-                }
-            )
-
-        except Exception as ex :
-            print(ex)
-
-    Ass=Assay.objects.get(SA_No=SA_No)
-    return render(
-        # request, 'procurement/view.html',{
-         request, 'procurement/approvalPlan.html',{
-            'Assay' : Ass,
-            'assayList' : As
-    })
+    return render(request, 'core/simple_upload.html')

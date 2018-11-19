@@ -1,17 +1,22 @@
-            <div class="card  border border-secondary">
-              <div class="card-header detail" id="btnSupplierDetail3">
+<div class="card border border-secondary">
+      <div class="card-header detail" id="btnDetailSupplier3">
                 <div class="row">
                   <strong>Supplier3 Detail</strong>
                 </div>
-              </div>
-              <div class="card-body card-block"  id="suppierDetail3" hidden>
+      </div>
+      <div class="card-body card-block"  id="detailSupplier3"
+      {% if not Assay.Supplier3 %}
+        hidden
+      {% endif %}
+      >
                 <div class="row form-group">
                   <div class="col-3"><label for="text-input" class=" form-control-label"  >Quotation Info.2</label></div>
                   <div class="col-9">
-                    <input type="radio" name="supplierRadio3" id="supplierSingle3"> <label for="supplierSingle3">Single</label>
-                    <input type="radio" name="supplierRadio3" checked id="supplierMultiple3"> <label for="supplierMultiple3"> Multiple</label>
+                    <input type="radio" id="singleSupplier3"> <label for="singleSupplier3">Single</label>
+                    <input type="radio" checked id="multipleSupplier3"> <label for="multipleSupplier3"> Multiple</label>
 
-                    <select class="form-control-sm form-control" id="supplierSingleReason3" hidden>
+
+                    <select class="form-control-sm form-control" id="singleReasonSupplier3" hidden>
                         <option>기존과 유사한 경우 또는 동일 특성의 제품의 경우 </option>
                         <option>고객 긴급 요청으로 인한 선진행의 경우</option>
                         <option>국내 독점 공급사 또는 사양이 지정된 경우</option>
@@ -26,26 +31,27 @@
                 </div>
                 <div class="row form-group">
                   <div class="col-3"><label for="text-input" class=" form-control-label">List-1[Fabricating, Goods]</label></div>
-                  <div class="col-9"><input type="text" id="Supplier3_Fabricating_Goods" class="form-control" value="{{Assay.Supplier3_Fabricating_Goods}}"></div>
+                  <div class="col-9">
+                      <textarea type="text" id="Supplier3_Fabricating_Goods" class="form-control">{{Assay.Supplier3_Fabricating_Goods}}</textarea>
+
+                  </div>
                 </div>
                 <div class="row form-group">
                   <div class="col-3"><label for="text-input" class=" form-control-label">List-2 [Modification of free offered item]</label></div>
                   <div class="col-9">
-                    <input type="text" id="Supplier3_Modification_of_free_offerd_item" class="form-control" value="{{Assay.Supplier3_Modification_of_free_offerd_item}}">
+                    <textarea id="Supplier3_Modification_of_free_offerd_item" name="Details_2" class="form-control">{{Assay.Supplier3_Modification_of_free_offerd_item}}</textarea>
                   </div>
                 </div>
 
-
-
                   <div class="pull-right">
-                  <button class="btn btn-secondary btn-sm" id="Supplier3TableRowAdd">
+                  <button class="btn btn-secondary btn-sm" id="tableRowAddSupplier3">
                     <i class="fa fa-plus"></i> Add
                   </button>
-                  <button class="btn btn-secondary btn-sm" id="Supplier3TableRowDelete">
+                  <button class="btn btn-secondary btn-sm" id="tableRowDeleteSupplier3">
                     <i class="fa fa-minus"></i> Delete
                   </button>
                 </div>
-                  <table class="table" id="detailTable3">
+                  <table class="table" id="detailTableSupplier3">
                             <thead>
                               <tr>
                                 <th scope="col">#</th>
@@ -57,50 +63,47 @@
                                 <th scope="col">Final Value</th>
                                 <th scope="col">Nego(%)</th>
                             </tr>
-                            </thead>
-
-                            <tbody id="supplier3">
-                            <tr id="supplier3Row1"
-                                {% if not Assay.Supplier3 %}
-                                hidden
-                                {% endif %}
+                          </thead>
+                            <tbody id="Supplier3">
+                            <tr id="rowSupplier3_1"
+                              {% if not Assay.Supplier3 %}
+                              hidden
+                              {% endif %}
                             >
-                            <th scope="row">1</th>
-                            <td contenteditable=""    id="supplier3Name"   >{{Assay.Supplier3}}</td>
-                            <td contenteditable="" class="supplier3_1"    id="supplier3Qty1"              >{{Assay.Supplier3_Qty}}</td>
-                            <td contenteditable="" class="supplier3_1"    id="supplier3QuotValue1"        ></td>
-                            <td bgcolor="DDDDDD"                          id="supplier3QuotTotalValue1"   ></td>
-                            <td contenteditable="" class="supplier3_1"    id="supplier3FinalValue1"       >{{Assay.Supplier3_Final_Unit_Price}}</td>
-                            <td bgcolor="DDDDDD"                          id="supplier3FinalTotalValue1"  ></td>
-                            <td bgcolor="DDDDDD"                          id="supplier3Nego1"             ></td>
-                          </tr>
+                              <th scope="row">1</th>
+                              <td><input type="text" class="Supplier3_1" id="nameSupplier3" value="{{Assay.Supplier3}}" size="8"></td>
+                              <td><input type="text" class="Supplier3_1" id="qtySupplier3_1" size="4" value="{{Assay.Supplier3_Qty}}"></td>
+                              <td><input class="Supplier3_1" id="quotValueSupplier3_1" size="5"></td>
+                              <td bgcolor="EEEEEE"  id="quotTotalValueSupplier3_1"   ></td>
+                              <td><input class="Supplier3_1" id="finalValueSupplier3_1" value="{{Assay.Supplier3_Final_Unit_Price}}" size="7"></td>
+                              <td bgcolor="EEEEEE"  id="finalTotalValueSupplier3_1"  ></td>
+                              <td bgcolor="EEEEEE" id="negoSupplier3_1"             ></td>
+                            </tr>
 
-                          <tr hidden id="supplier3Row2">
-                            <th scope="row">2</th>
-                            <td contenteditable="" ></td>
-                            <td contenteditable="" class="supplier3_2" id="supplier3Qty2"></td>
-                            <td contenteditable="" class="supplier3_2" id="supplier3QuotValue2"></td>
-                            <td bgcolor="DDDDDD"  id="supplier3QuotTotalValue2"></td>
-                            <td contenteditable="" class="supplier3_2" id="supplier3FinalValue2"></td>
-                            <td bgcolor="DDDDDD"  id="supplier3FinalTotalValue2"></td>
-                            <td bgcolor="DDDDDD" id="supplier3Nego2"></td>
+                            <tr hidden id="rowSupplier3_3">
+                                <th scope="row">2</th>
+                                <td><input type="text" size="8"></td>
+                                <td><input type="text" class="Supplier3_2" id="qtySupplier3_2" size="4"></td>
+                                <td><input class="Supplier3_2" id="quotValueSupplier3_2" size="5"></td>
+                                <td bgcolor="EEEEEE"  id="quotTotalValueSupplier3_2"></td>
+                                <td><input class="Supplier3_2" id="finalValueSupplier3_2"  size="7"></td>
+                                <td bgcolor="EEEEEE"  id="finalTotalValueSupplier3_2"></td>
+                                <td bgcolor="EEEEEE" id="negoSupplier3_2"></td>
 
+                            </tr>
 
-                          </tr>
+                            <tr hidden id="rowSupplier3_3">
+                                <th scope="row">3</th>
+                                <td><input type="text" size="8"></td>
+                                <td><input type="text" class="Supplier3_3" id="qtySupplier3_3" size="4"></td>
+                                <td><input class="Supplier3_3" id="quotValueSupplier3_3" size="5"></td>
+                                <td bgcolor="EEEEEE"  id="quotTotalValueSupplier3_3"></td>
+                                <td><input class="Supplier3_3" id="finalValueSupplier3_3"  size="7"></td>
+                                <td bgcolor="EEEEEE"  id="finalTotalValueSupplier3_3"></td>
+                                <td bgcolor="EEEEEE" id="negoSupplier3_3"></td>
 
-                          <tr hidden id="supplier3Row3">
-                              <th scope="row">3</th>
-                              <td contenteditable="" ></td>
-                              <td contenteditable="" class="supplier3_3" id="supplier3Qty3"></td>
-                              <td contenteditable="" class="supplier3_3" id="supplier3QuotValue3"></td>
-                              <td bgcolor="DDDDDD"    id="supplier3QuotTotalValue3"></td>
-                              <td contenteditable="" class="supplier3_3" id="supplier3FinalValue3"></td>
-                              <td bgcolor="DDDDDD"    id="supplier3FinalTotalValue3"></td>
-                              <td bgcolor="DDDDDD"    id="supplier3Nego3"></td>
-                          </tr>
-
+                            </tr>
                           </tbody>
                   </table>
-                </div>
-
-              </div>
+        </div>
+</div>

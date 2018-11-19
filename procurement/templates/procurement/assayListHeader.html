@@ -1,0 +1,13 @@
+
+
+<div class="pull-right">
+    <strong>Inquiry</strong> View
+    <label for="text-input" class=" form-control-label"  >SA No.</label>
+    <input list="SA_No" name="SA_No" id="assayNo">
+    <datalist id="SA_No">
+        {% for assay in assayList %}
+            <option value=" {{ assay.SA_No }}">
+        {% endfor %}
+    </datalist>
+    <button id="check" > Query </button>
+</div>

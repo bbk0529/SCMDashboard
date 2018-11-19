@@ -5,6 +5,13 @@ from django.db import models
 
 
 
+class Person(models.Model):
+    name = models.CharField(max_length=30)
+    email = models.EmailField(blank=True)
+    birth_date = models.DateField()
+    location = models.CharField(max_length=100, blank=True)
+
+
 
 class Assay(models.Model):
     SA_No = models.IntegerField(primary_key=True)
@@ -55,9 +62,31 @@ class Assay(models.Model):
     Supplier6_Qty=models.CharField(max_length=50, blank=True,null=True)
     Supplier6_Final_Unit_Price	=models.CharField(max_length=50, blank=True,null=True)
 
+
+    Supplier7 =models.CharField(max_length=50, blank=True,null=True)
+    Supplier7_Fabricating_Goods =models.CharField(max_length=50, blank=True,null=True)
+    Supplier7_Modification_of_free_offerd_item =models.CharField(max_length=50, blank=True,null=True)
+    Supplier7_Qty=models.CharField(max_length=50, blank=True,null=True)
+    Supplier7_Final_Unit_Price	=models.CharField(max_length=50, blank=True,null=True)
+
+
+
+    Supplier8 =models.CharField(max_length=50, blank=True,null=True)
+    Supplier8_Fabricating_Goods =models.CharField(max_length=50, blank=True,null=True)
+    Supplier8_Modification_of_free_offerd_item =models.CharField(max_length=50, blank=True,null=True)
+    Supplier8_Qty=models.CharField(max_length=50, blank=True,null=True)
+    Supplier8_Final_Unit_Price	=models.CharField(max_length=50, blank=True,null=True)
+
+
+    def __unicode__(self):
+        return self.name
+
+
+
+
 class ChangeLog(models.Model):
     SA_No=models.IntegerField(blank=True,null=True)
-    DateTime=models.DateTimeField(blank=True,null=True)
+    DateTime=models.CharField(max_length=50, blank=True,null=True)
     User=models.CharField(blank=True,null=True,max_length=30)
     Field=models.CharField(blank=True,null=True,max_length=30)
     Before=models.CharField(max_length=50, blank=True,null=True)

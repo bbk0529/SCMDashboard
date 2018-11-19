@@ -1,51 +1,72 @@
-{% extends 'blog/base.html' %}
-
 {%load static %}
-{% block content %}
-<div id="header">  </div>
-<div class="card">
-    <div class="card-header">
-        <div class="col-4">
-            <strong>Inquiry</strong> View
+<head>
+    {% include "../subtemplate/head.html" %}
+    {% include "procurement/leftPanel.html" %}
+</head>
+<style>
+tfoot {
+     display: table-header-group;
+}
+</style>
+<body>
+    <div class="content mt-3">
+        <div class="animated fadeIn">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                                <strong>Change</strong> Log
+
+                        </div>
+                        <div class="card-body">
+                        <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>SA_No</th>
+                                        <th>DateTime</th>
+                                        <th>User</th>
+                                        <th>Field</th>
+                                        <th>Before</th>
+                                        <th>After</th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <th>SA_No</th>
+                                    <th>DateTime</th>
+                                    <th>User</th>
+                                    <th>Field</th>
+                                    <th>Before</th>
+                                    <th>After</th>
+                                </tfoot>
+                                <tbody>
+                                    {% for change in changeLog %}
+                                    <tr>
+                                        <td>{{change.SA_No}}</td>
+                                        <td>{{change.DateTime}}</td>
+                                        <td>{{change.User}}</td>
+                                        <td>{{change.Field}}</td>
+                                        <td>{{change.Before}}</td>
+                                        <td>{{change.After}}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+
+
+                          </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="card-body card-block">
-        <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
-            <thead>
-                <tr>
-                    <th scope="col">SA_No</th>
-                    <th scope="col">DateTime</th>
-                    <th scope="col">User</th>
-                    <th scope="col">Field</th>
-                    <th scope="col">Before</th>
-                    <th scope="col">After</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for change in changeLog %}
-                <tr>
-                    <td>{{change.SA_No}}</td>
-                    <td>{{change.DateTime}}</td>
-                    <td>{{change.User}}</td>
-                    <td>{{change.Field}}</td>
-                    <td>{{change.Before}}</td>
-                    <td>{{change.After}}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-            <tfoot>
-                <th scope="col">SA_No</th>
-                <th scope="col">DateTime</th>
-                <th scope="col">User</th>
-                <th scope="col">Field</th>
-                <th scope="col">Before</th>
-                <th scope="col">After</th>
-            </tfoot>
+</body>
+</html>
 
-      </table>
-    </div>
-</div>
+<script src="{% static 'assets/js/vendor/jquery-2.1.4.min.js' %}"></script>
 
+<script src="{% static 'assets/js/popper.min.js' %}"></script>
+<script src="{% static 'assets/js/plugins.js' %}"></script>
+<script src="{% static 'assets/js/main.js' %}"></script>
 <script src="{% static 'assets/js/lib/data-table/datatables.min.js' %}"></script>
 <script src="{% static 'assets/js/lib/data-table/dataTables.bootstrap.min.js' %}"></script>
 <script src="{% static 'assets/js/lib/data-table/dataTables.buttons.min.js' %}"></script>
@@ -57,4 +78,3 @@
 <script src="{% static 'assets/js/lib/data-table/buttons.print.min.js' %}"></script>
 <script src="{% static 'assets/js/lib/data-table/buttons.colVis.min.js' %}"></script>
 <script src="{% static 'assets/js/lib/data-table/datatables-init.js' %}"></script>
-{% endblock %}

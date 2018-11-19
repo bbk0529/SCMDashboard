@@ -1,78 +1,80 @@
 {%load static %}
 
-<script src="{% static 'assets/js/vendor/jquery-2.1.4.min.js' %}"></script>
+
 <head>
     {% include "../subtemplate/head.html" %}
+    {% include "procurement/leftPanel.html" %}
 </head>
+
 <body>
     <div id="header"></div>
     <div class="content mt-3">
-    <div class="animated fadeIn">
-    {% if user.is_authenticated %}
-        <p>Hi {{ user.username }}
-            <i class="fa fa-user"></i><span class="badge"><a href="{% url 'logout' %}">logout</a></span>
-        </p>
-    {% endif %}
+        <div class="animated fadeIn">
+    
+        <!-- <div><img src="{% static 'images/festologo.jpg' %}"></div> -->
+        <span id="alert_message"></span>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
 
-<div><img src="{% static 'images/festologo.jpg' %}"></div>
-<span id="alert_message"></span>
-<div class="row" id!="result">
-    <div class="col-12" >
-        <div class="card">
-            <div class="card-header" id="approvalPlanHeader">
-                {% include 'procurement/approvalPlanHeader.html' %}
-            </div>
-            <div id="approvalPlanQuery">
-                  {% include 'procurement/approvalPlanBody.html' %}
+
+                            <div class="card-header" id="approvalPlanHeader">
+                                {% include 'procurement/approvalPlanHeader.html' %}
+                            </div>
+
+                            <div class="card-body card-block" id="approvalPlanQuery">
+                              {% include 'procurement/approvalPlanBody.html' %}
+                          </div>
+
+
+                      </div>
             </div>
         </div>
-     </div>
-</div>
-</div>
+        </div>
+    </div>
 
 
-
-<div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Confirm</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        Are you sure to change and save this?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal" id="save">Save changes</button>
+    <div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Confirm</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Are you sure to change and save this?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" id="save">Save changes</button>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
-
-
-
-
 </body>
 
-<script src="{% static 'assets/js/scm/approvalPlan.js' %}"></script>
-<script src="{% static 'assets/js/scm/approvalPlanBody.js' %}"></script>
 
-<script src="{% static 'assets/js/popper.min.js' %}"></script>
-<script src="{% static 'assets/js/plugins.js' %}"></script>
-<script src="{% static 'assets/js/main.js' %}"></script>
-<script src="{% static 'assets/js/lib/data-table/datatables.min.js' %}"></script>
-<script src="{% static 'assets/js/lib/data-table/dataTables.bootstrap.min.js' %}"></script>
-<script src="{% static 'assets/js/lib/data-table/dataTables.buttons.min.js' %}"></script>
-<script src="{% static 'assets/js/lib/data-table/buttons.bootstrap.min.js' %}"></script>
-<script src="{% static 'assets/js/lib/data-table/jszip.min.js' %}"></script>
-<script src="{% static 'assets/js/lib/data-table/pdfmake.min.js' %}"></script>
-<script src="{% static 'assets/js/lib/data-table/vfs_fonts.js' %}"></script>
-<script src="{% static 'assets/js/lib/data-table/buttons.html5.min.js' %}"></script>
-<script src="{% static 'assets/js/lib/data-table/buttons.print.min.js' %}"></script>
-<script src="{% static 'assets/js/lib/data-table/buttons.colVis.min.js' %}"></script>
-<script src="{% static 'assets/js/lib/data-table/datatables-init.js' %}"></script>
 
+    <script src="{% static 'assets/js/scm/approvalPlan.js' %}"></script>
+    <script src="{% static 'assets/js/scm/approvalPlanBody.js' %}"></script>
+
+
+
+
+    <script src="{% static 'assets/js/popper.min.js' %}"></script>
+    <script src="{% static 'assets/js/plugins.js' %}"></script>
+    <script src="{% static 'assets/js/main.js' %}"></script>
+    <script src="{% static 'assets/js/lib/data-table/datatables.min.js' %}"></script>
+    <script src="{% static 'assets/js/lib/data-table/dataTables.bootstrap.min.js' %}"></script>
+    <script src="{% static 'assets/js/lib/data-table/dataTables.buttons.min.js' %}"></script>
+    <script src="{% static 'assets/js/lib/data-table/buttons.bootstrap.min.js' %}"></script>
+    <script src="{% static 'assets/js/lib/data-table/jszip.min.js' %}"></script>
+    <script src="{% static 'assets/js/lib/data-table/pdfmake.min.js' %}"></script>
+    <script src="{% static 'assets/js/lib/data-table/vfs_fonts.js' %}"></script>
+    <script src="{% static 'assets/js/lib/data-table/buttons.html5.min.js' %}"></script>
+    <script src="{% static 'assets/js/lib/data-table/buttons.print.min.js' %}"></script>
+    <script src="{% static 'assets/js/lib/data-table/buttons.colVis.min.js' %}"></script>
+    <script src="{% static 'assets/js/lib/data-table/datatables-init.js' %}"></script>
 </html>

@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'loteam',
     'django_extensions',
     'mathfilters',
+     'import_export',
 ]
 
 MIDDLEWARE = [
@@ -133,4 +134,5 @@ LOGIN_REDIRECT_URL = 'approvalPlan'
 LOGOUT_REDIRECT_URL = 'approvalPlan'
 
 DATE_FORMAT='y-m-d'
+DATETIME_FORMAT='Y-m-d H:m:s'
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '172.17.193.118']

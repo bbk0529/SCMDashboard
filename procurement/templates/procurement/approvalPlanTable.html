@@ -1,10 +1,10 @@
 <strong><h4>Summary</h4></strong>
-<div class="col-3">
+<!-- <div class="col-3">
   <button class="btn btn-secondary btn-sm" id="copyFromDetail">
     <i class="fa fa-lightbulb-o"></i> Copy from Details
   </button>
-</div>
-<div class="col-9" >
+</div> -->
+<!-- <div class="col-9" >
   <div class="pull-right">
   <button class="btn btn-secondary btn-sm" id="SupplierTableRowAdd">
     <i class="fa fa-plus"></i> Add
@@ -13,7 +13,7 @@
     <i class="fa fa-minus"></i> Delete
   </button>
 </div>
-</div>
+</div> -->
 
 <table class="table" id="summaryTable">
           <thead>
@@ -29,15 +29,19 @@
           </tr>
         </thead>
         <tbody id="supplier">
-        <tr id="summaryTableSupplier1">
+        <tr id="summaryTableSupplier1"
+            {% if not Assay.Supplier1 %}
+            hidden
+            {% endif %}
+        >
           <th scope="row">1</th>
-          <td contenteditable="" id="Supplier1">{{Assay.Supplier1}}</td>
-          <td contenteditable="" class="supplier1" id="Supplier1_Qty">{{Assay.Supplier1_Qty}}</td>
-          <td contenteditable="" class="supplier1" id="supplier1QuotValue"></td>
-          <td bgcolor="DDDDDD"   id="supplierQuotTotalValue1"></td>
-          <td contenteditable="" class="supplier1" id="Supplier1_Final_Unit_Price">{{Assay.Supplier1_Final_Unit_Price}}</td>
-          <td bgcolor="DDDDDD"   id="supplierFinalTotalValue1"></td>
-          <td bgcolor="DDDDDD"   id="supplier1Nego"></td>
+          <td class="supplier1" id="Supplier1">{{Assay.Supplier1}}</td>
+          <td class="supplier1" id="Supplier1_Qty">{{Assay.Supplier1_Qty}}</td>
+          <td class="supplier1" id="supplier1QuotValue"></td>
+          <td bgcolor="EEEEEE"   id="supplierQuotTotalValue1"></td>
+          <td class="supplier1" id="Supplier1_Final_Unit_Price">{{Assay.Supplier1_Final_Unit_Price}}</td>
+          <td bgcolor="EEEEEE"   id="supplierFinalTotalValue1"></td>
+          <td bgcolor="EEEEEE"   id="supplier1Nego"></td>
         </tr>
 
         <tr id="summaryTableSupplier2"
@@ -46,13 +50,13 @@
           {% endif %}
         >
           <th scope="row">2</th>
-          <td contenteditable="" id="Supplier2">{{Assay.Supplier2}}</td>
-          <td contenteditable="" class="supplier2" id="Supplier2_Qty">{{Assay.Supplier2_Qty}}</td>
-          <td contenteditable="" class="supplier2" id="supplier2QuotValue"></td>
-          <td bgcolor="DDDDDD"   id="supplierQuotTotalValue2"></td>
-          <td contenteditable="" class="supplier2" id="Supplier2_Final_Unit_Price">{{Assay.Supplier2_Final_Unit_Price}}</td>
-          <td bgcolor="DDDDDD"   id="supplierFinalTotalValue2"></td>
-          <td bgcolor="DDDDDD"   id="supplier2Nego"></td>
+          <td id="Supplier2">{{Assay.Supplier2}}</td>
+          <td class="supplier2" id="Supplier2_Qty">{{Assay.Supplier2_Qty}}</td>
+          <td class="supplier2" id="supplier2QuotValue"></td>
+          <td bgcolor="EEEEEE"   id="supplierQuotTotalValue2"></td>
+          <td class="supplier2" id="Supplier2_Final_Unit_Price">{{Assay.Supplier2_Final_Unit_Price}}</td>
+          <td bgcolor="EEEEEE"   id="supplierFinalTotalValue2"></td>
+          <td bgcolor="EEEEEE"   id="supplier2Nego"></td>
         </tr>
 
 
@@ -62,13 +66,13 @@
           {% endif %}
         >
             <th scope="row">3</th>
-            <td contenteditable="" id="Supplier3">{{Assay.Supplier3}}</td>
-            <td contenteditable="" class="supplier3" id="Supplier3_Qty">{{Assay.Supplier3_Qty}}</td>
-            <td contenteditable="" class="supplier3" id="supplier3QuotValue"></td>
-            <td bgcolor="DDDDDD"   id="supplierQuotTotalValue3"></td>
-            <td contenteditable="" class="supplier3" id="Supplier3_Final_Unit_Price">{{Assay.Supplier3_Final_Unit_Price}}</td>
-            <td bgcolor="DDDDDD"   id="supplierFinalTotalValue3"></td>
-            <td bgcolor="DDDDDD"   id="supplier3Nego"></td>
+            <td  id="Supplier3">{{Assay.Supplier3}}</td>
+            <td  class="supplier3" id="Supplier3_Qty">{{Assay.Supplier3_Qty}}</td>
+            <td  class="supplier3" id="supplier3QuotValue"></td>
+            <td bgcolor="EEEEEE"   id="supplierQuotTotalValue3"></td>
+            <td  class="supplier3" id="Supplier3_Final_Unit_Price">{{Assay.Supplier3_Final_Unit_Price}}</td>
+            <td bgcolor="EEEEEE"   id="supplierFinalTotalValue3"></td>
+            <td bgcolor="EEEEEE"   id="supplier3Nego"></td>
 
         </tr>
 
@@ -78,13 +82,13 @@
           {% endif %}
         >
             <th scope="row">4</th>
-            <td contenteditable="" id="Supplier4">{{Assay.Supplier4}}</td>
-            <td contenteditable="" class="supplier4" id="Supplier4_Qty">{{Assay.Supplier4_Qty}}</td>
-            <td contenteditable="" class="supplier4" id="supplier4QuotValue"></td>
-            <td bgcolor="DDDDDD"   id="supplierQuotTotalValue4"></td>
-            <td contenteditable="" class="supplier4" id="Supplier4_Final_Unit_Price">{{Assay.Supplier4_Final_Unit_Price}}</td>
-            <td bgcolor="DDDDDD"   id="supplierFinalTotalValue4"></td>
-            <td bgcolor="DDDDDD"   id="supplier4Nego"></td>
+            <td  id="Supplier4">{{Assay.Supplier4}}</td>
+            <td  class="supplier4" id="Supplier4_Qty">{{Assay.Supplier4_Qty}}</td>
+            <td  class="supplier4" id="supplier4QuotValue"></td>
+            <td bgcolor="EEEEEE"   id="supplierQuotTotalValue4"></td>
+            <td  class="supplier4" id="Supplier4_Final_Unit_Price">{{Assay.Supplier4_Final_Unit_Price}}</td>
+            <td bgcolor="EEEEEE"   id="supplierFinalTotalValue4"></td>
+            <td bgcolor="EEEEEE"   id="supplier4Nego"></td>
         </tr>
 
         <tr id="summaryTableSupplier5"
@@ -93,13 +97,13 @@
           {% endif %}
         >
             <th scope="row">5</th>
-            <td contenteditable="" id="Supplier5">{{Assay.Supplier5}}</td>
-            <td contenteditable="" class="supplier5" id="Supplier5_Qty">{{Assay.Supplier5_Qty}}</td>
-            <td contenteditable="" class="supplier5" id="supplier5QuotValue"></td>
-            <td bgcolor="DDDDDD"   id="supplierQuotTotalValue5"></td>
-            <td contenteditable="" class="supplier5" id="Supplier5_Final_Unit_Price">{{Assay.Supplier5_Final_Unit_Price}}</td>
-            <td bgcolor="DDDDDD"   id="supplierFinalTotalValue5"></td>
-            <td bgcolor="DDDDDD"   id="supplier5Nego"></td>
+            <td  id="Supplier5">{{Assay.Supplier5}}</td>
+            <td  class="supplier5" id="Supplier5_Qty">{{Assay.Supplier5_Qty}}</td>
+            <td  class="supplier5" id="supplier5QuotValue"></td>
+            <td bgcolor="EEEEEE"   id="supplierQuotTotalValue5"></td>
+            <td  class="supplier5" id="Supplier5_Final_Unit_Price">{{Assay.Supplier5_Final_Unit_Price}}</td>
+            <td bgcolor="EEEEEE"   id="supplierFinalTotalValue5"></td>
+            <td bgcolor="EEEEEE"   id="supplier5Nego"></td>
         </tr>
 
         <tr id="summaryTableSupplier6"
@@ -108,13 +112,43 @@
           {% endif %}
         >
             <th scope="row">6</th>
-            <td contenteditable="" id="Supplier6">{{Assay.Supplier6}}</td>
-            <td contenteditable="" class="supplier6" id="Supplier6_Qty">{{Assay.Supplier6_Qty}}</td>
-            <td contenteditable="" class="supplier6" id="supplier6QuotValue"></td>
-            <td bgcolor="DDDDDD"   id="supplierQuotTotalValue6"></td>
-            <td contenteditable="" class="supplier6" id="Supplier6_Final_Unit_Price">{{Assay.Supplier6_Final_Unit_Price}}</td>
-            <td bgcolor="DDDDDD"   id="supplierFinalTotalValue6"></td>
-            <td bgcolor="DDDDDD"   id="supplier6Nego"></td>
+            <td  id="Supplier6">{{Assay.Supplier6}}</td>
+            <td  class="supplier6" id="Supplier6_Qty">{{Assay.Supplier6_Qty}}</td>
+            <td  class="supplier6" id="supplier6QuotValue"></td>
+            <td bgcolor="EEEEEE"   id="supplierQuotTotalValue6"></td>
+            <td  class="supplier6" id="Supplier6_Final_Unit_Price">{{Assay.Supplier6_Final_Unit_Price}}</td>
+            <td bgcolor="EEEEEE"   id="supplierFinalTotalValue6"></td>
+            <td bgcolor="EEEEEE"   id="supplier6Nego"></td>
+        </tr>
+
+        <tr id="summaryTableSupplier7"
+          {% if not Assay.Supplier7 %}
+          hidden
+          {% endif %}
+        >
+            <th scope="row">7</th>
+            <td  id="Supplier7">{{Assay.Supplier7}}</td>
+            <td  class="supplier7" id="Supplier7_Qty">{{Assay.Supplier7_Qty}}</td>
+            <td  class="supplier7" id="supplier7QuotValue"></td>
+            <td bgcolor="EEEEEE"   id="supplierQuotTotalValue7"></td>
+            <td  class="supplier7" id="Supplier7_Final_Unit_Price">{{Assay.Supplier7_Final_Unit_Price}}</td>
+            <td bgcolor="EEEEEE"   id="supplierFinalTotalValue7"></td>
+            <td bgcolor="EEEEEE"   id="supplier7Nego"></td>
+        </tr>
+
+        <tr id="summaryTableSupplier8"
+          {% if not Assay.Supplier8 %}
+          hidden
+          {% endif %}
+        >
+            <th scope="row">8</th>
+            <td  id="Supplier8">{{Assay.Supplier8}}</td>
+            <td  class="supplier8" id="Supplier8_Qty">{{Assay.Supplier8_Qty}}</td>
+            <td  class="supplier8" id="supplier8QuotValue"></td>
+            <td bgcolor="EEEEEE"   id="supplierQuotTotalValue8"></td>
+            <td  class="supplier8" id="Supplier8_Final_Unit_Price">{{Assay.Supplier8_Final_Unit_Price}}</td>
+            <td bgcolor="EEEEEE"   id="supplierFinalTotalValue8"></td>
+            <td bgcolor="EEEEEE"   id="supplier8Nego"></td>
         </tr>
 
         </tbody>
