@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'loteam',
     'django_extensions',
     'mathfilters',
-     'import_export',
+     # 'import_export',
 ]
 
 MIDDLEWARE = [
@@ -67,6 +67,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -136,3 +137,6 @@ LOGOUT_REDIRECT_URL = '/'
 DATE_FORMAT='y-m-d'
 DATETIME_FORMAT='Y-m-d H:m:s'
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '172.17.193.118']
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

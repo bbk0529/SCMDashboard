@@ -4,13 +4,12 @@ from django.db import models
 # Create your models here.
 
 
+from django.db import models
 
-class Person(models.Model):
-    name = models.CharField(max_length=30)
-    email = models.EmailField(blank=True)
-    birth_date = models.DateField()
-    location = models.CharField(max_length=100, blank=True)
-
+class Document(models.Model):
+    description = models.CharField(max_length=255, blank=True)
+    document = models.FileField(upload_to='documents/')
+    uploaded_at = models.DateTimeField(auto_now_add=True)
 
 
 class Assay(models.Model):

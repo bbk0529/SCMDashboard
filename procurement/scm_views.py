@@ -2,31 +2,34 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from .models import Assay, ChangeLog
-
 import datetime
 import decimal
-
 from .scm_views_updateQuery import *
-
 import xlwt
+from django.shortcuts import render, redirect
+from django.conf import settings
+from django.core.files.storage import FileSystemStorage
+
+from .models import Document
+from .forms import DocumentForm
 
 # Create your views here.
 # As=Assay.objects.order_by('SA_No')[:20]
 As=Assay.objects.all()
 
-
-############################################
-def setting(request):
-    ipAddress=get_client_ip(request)
-    if request.user.username=='buyer':
-        return render(
-            request, 'procurement/setting.html',{
-            'assayList' : As,
-            'ipAddress' : ipAddress
-            }
-        )
-    else:
-        return redirect('/')
+#
+# ############################################
+# def setting(request):
+#     ipAddress=get_client_ip(request)
+#     if request.user.username=='buyer':
+#         return render(
+#             request, 'procurement/setting.html',{
+#             'assayList' : As,
+#             'ipAddress' : ipAddress
+#             }
+#         )
+#     else:
+#         return redirect('/')
 
 
 #######################################
@@ -54,8 +57,6 @@ def listAssay(request) :
         })
     else:
         return redirect('login')
-
-
 def assayQuery(request) :
     if request.method=='GET':
         print("request.method = GET ///assay Query")
@@ -68,8 +69,6 @@ def assayQuery(request) :
             'Assay' : Ass,
             'assayList' : As
     })
-
-
 def approvalPlanQuery(request):
     if request.method == 'GET':
         SA_No=request.GET['SA_No'].strip()
@@ -83,15 +82,12 @@ def approvalPlanQuery(request):
             'assayList' : As
         }
     )
-
 def approvalPlanCreate(request):
     return render(
         request,
         'procurement/approvalPlanBody.html',{
         }
     )
-
-
 #########################################################
 def changeLog(request):
     ipAddress=get_client_ip(request)
@@ -104,13 +100,6 @@ def changeLog(request):
         })
     else:
         return redirect('/')
-
-
-
-
-
-from django.contrib.auth.models import User
-
 def export_data_xls(request):
     response = HttpResponse(content_type='application/ms-excel')
     response['Content-Disposition'] = 'attachment; filename="data.xls"'
@@ -240,10 +229,6 @@ def export_data_xls(request):
 
     wb.save(response)
     return response
-
-
-
-
 def export_log_xls(request):
     response = HttpResponse(content_type='application/ms-excel')
     response['Content-Disposition'] = 'attachment; filename="changeLog.xls"'
@@ -288,17 +273,6 @@ def export_log_xls(request):
 
     wb.save(response)
     return response
-
-
-
-
-
-
-
-
-
-
-
 def get_client_ip(request):
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
     if x_forwarded_for:
@@ -310,31 +284,101 @@ def get_client_ip(request):
 
 
 
+import pandas as pd
+def setting(request):
+    print('simple load')
+    if request.method == 'POST' and request.FILES['myfile']:
+        print('post received')
+        myfile = request.FILES['myfile']
+        fs = FileSystemStorage()
+        filename = fs.save(myfile.name, myfile)
+
+        uploaded_file_url = fs.url(filename)
+        return render(request, 'procurement/setting.html', {
+            'uploaded_file_url': uploaded_file_url
+        })
+    return render(request, 'procurement/setting.html')
+
+def import_data_xls(request):
+    print("kkkkkkkkkkkkkkkkkkk")
+    uploaded_file_url=request.GET['uploaded_file_url'].strip()
+    print(uploaded_file_url)
 
 
+    df=pd.read_excel('/dev/django' + uploaded_file_url)
+    print(df)
+    df=df.fillna('')
+    Assay.objects.all().delete()
+    df.columns=[
+        'SA_No',
+        'Date',
+        'Number_of_suppliers',
+        'Type',
+        'Supplier1_Fabricating_Goods',
+        'Supplier1_Modification_of_free_offerd_item',
+        'Supplier1_Qty','Supplier1_Final_Unit_Price',
+        'Supplier1',
+        'Supplier2_Fabricating_Goods','Supplier2_Modification_of_free_offerd_item','Supplier2_Qty','Supplier2_Final_Unit_Price','Supplier2',
+        'Supplier3_Fabricating_Goods','Supplier3_Modification_of_free_offerd_item','Supplier3_Qty','Supplier3_Final_Unit_Price','Supplier3',
+        'Supplier4_Fabricating_Goods','Supplier4_Modification_of_free_offerd_item','Supplier4_Qty','Supplier4_Final_Unit_Price','Supplier4',
+        'Supplier5_Fabricating_Goods','Supplier5_Modification_of_free_offerd_item','Supplier5_Qty','Supplier5_Final_Unit_Price','Supplier5',
+        'Supplier6_Fabricating_Goods','Supplier6_Modification_of_free_offerd_item','Supplier6_Qty','Supplier6_Final_Unit_Price','Supplier6',
+        'Details_1',
+        'Details_2',
+        'Description',
+        'Category',
+        'Updated_date',
+    ]
+    for i,v in df.iterrows() :
+        print(i)
+        Assay.objects.update_or_create(
+                    SA_No=v['SA_No']                        ,
+                    defaults={
+                        'SA_No':v['SA_No'],
+                        'Date':v['Date'],
+                        'Number_of_suppliers':v['Number_of_suppliers'],
+                        'Type':v['Type'],
+                        'Details_1':v['Details_1'],
+                        'Details_2':v['Details_2'],
+                        'Description':v['Description'],
+                        'Category':v['Category'],
+                        'Updated_date':v['Updated_date'],
 
+                        'Supplier1':v['Supplier1'],
+                        'Supplier1_Fabricating_Goods':v['Supplier1_Fabricating_Goods'],
+                        'Supplier1_Modification_of_free_offerd_item':v['Supplier1_Modification_of_free_offerd_item'],
+                        'Supplier1_Qty':v['Supplier1_Qty'],
+                        'Supplier1_Final_Unit_Price': v['Supplier1_Final_Unit_Price'],
 
+                        'Supplier2':v['Supplier2'],
+                        'Supplier2_Fabricating_Goods':v['Supplier2_Fabricating_Goods'],
+                        'Supplier2_Modification_of_free_offerd_item':v['Supplier2_Modification_of_free_offerd_item'],
+                        'Supplier2_Qty':v['Supplier2_Qty'],
+                        'Supplier2_Final_Unit_Price': v['Supplier2_Final_Unit_Price'],
 
+                        'Supplier3':v['Supplier3'],
+                        'Supplier3_Fabricating_Goods':v['Supplier3_Fabricating_Goods'],
+                        'Supplier3_Modification_of_free_offerd_item':v['Supplier3_Modification_of_free_offerd_item'],
+                        'Supplier3_Qty':v['Supplier3_Qty'],
+                        'Supplier3_Final_Unit_Price': v['Supplier3_Final_Unit_Price'],
 
+                        'Supplier4':v['Supplier4'],
+                        'Supplier4_Fabricating_Goods':v['Supplier4_Fabricating_Goods'],
+                        'Supplier4_Modification_of_free_offerd_item':v['Supplier4_Modification_of_free_offerd_item'],
+                        'Supplier4_Qty':v['Supplier4_Qty'],
+                        'Supplier4_Final_Unit_Price': v['Supplier4_Final_Unit_Price'],
 
+                        'Supplier5':v['Supplier5'],
+                        'Supplier5_Fabricating_Goods':v['Supplier5_Fabricating_Goods'],
+                        'Supplier5_Modification_of_free_offerd_item':v['Supplier5_Modification_of_free_offerd_item'],
+                        'Supplier5_Qty':v['Supplier5_Qty'],
+                        'Supplier5_Final_Unit_Price': v['Supplier5_Final_Unit_Price'],
 
-
-
-
-
-
-from tablib import Dataset
-
-def simple_upload(request):
-    if request.method == 'POST':
-        person_resource = PersonResource()
-        dataset = Dataset()
-        new_persons = request.FILES['myfile']
-
-        imported_data = dataset.load(new_persons.read())
-        result = person_resource.import_data(dataset, dry_run=True)  # Test the data import
-
-        if not result.has_errors():
-            person_resource.import_data(dataset, dry_run=False)  # Actually import now
-
-    return render(request, 'core/simple_upload.html')
+                        'Supplier6':v['Supplier6'],
+                        'Supplier6_Fabricating_Goods':v['Supplier6_Fabricating_Goods'],
+                        'Supplier6_Modification_of_free_offerd_item':v['Supplier6_Modification_of_free_offerd_item'],
+                        'Supplier6_Qty':v['Supplier6_Qty'],
+                        'Supplier6_Final_Unit_Price': v['Supplier6_Final_Unit_Price'],
+                    }
+        )
+    return HttpResponse('')
