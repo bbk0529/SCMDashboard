@@ -12,7 +12,7 @@ import xlwt
 
 # Create your views here.
 # As=Assay.objects.order_by('SA_No')[:20]
-As=Assay.objects.order_by('SA_No')
+As=Assay.objects.all()
 
 
 ############################################
@@ -26,7 +26,7 @@ def setting(request):
             }
         )
     else:
-        return redirect('/list')
+        return redirect('/')
 
 
 #######################################
@@ -42,7 +42,7 @@ def approvalPlan(request):
             }
         )
     else:
-        return redirect('/list')
+        return redirect('/')
 ####################################################
 def listAssay(request) :
     ipAddress=get_client_ip(request)
@@ -103,7 +103,7 @@ def changeLog(request):
             'ipAddress' : ipAddress
         })
     else:
-        return redirect('/list')
+        return redirect('/')
 
 
 

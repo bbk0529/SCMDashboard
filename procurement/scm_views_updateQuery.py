@@ -16,6 +16,7 @@ def updateQuery(request):
         SA_No=request.POST.get('SA_No')
         Type=request.POST.get('Type')
         Date=request.POST.get('Date')
+        Category=request.POST.get('Category')
         Description=request.POST.get('Description')
         Number_of_suppliers=request.POST.get('Number_of_suppliers')
         Details_1=request.POST.get('Details_1')
@@ -63,7 +64,22 @@ def updateQuery(request):
         Supplier8_Modification_of_free_offerd_item=request.POST.get('Supplier8_Modification_of_free_offerd_item')
         print(request.POST)
         try :
+
+
             Ass=Assay.objects.get(SA_No=SA_No)
+
+
+            if Ass.changeDocOptions!=changeDocOptions:
+                print("category log")
+                ChangeLog.objects.create(
+                    SA_No=int(SA_No),
+                    DateTime=datetime.datetime.now(),
+                    User=username,
+                    Field="Category",
+                    Before=Ass.Category,
+                    After=Category,
+                )
+
             if Ass.Type!=Type:
                 print("type log"*100)
                 ChangeLog.objects.create(
@@ -574,6 +590,14 @@ def updateQuery(request):
 
         except Exception as e:
             print(e, "New creation")
+            ChangeLog.objects.create(
+                SA_No=int(SA_No),
+                DateTime=datetime.datetime.now(),
+                User=username,
+                Field="신규생성_New Creation",
+                Before='',
+                After='',
+            )
 
 
         try:
@@ -583,6 +607,7 @@ def updateQuery(request):
                 defaults={
                     'Type':Type,
                     'Date':Date,
+                    'Category':Category,
                     'Number_of_suppliers':Number_of_suppliers,
                     'Details_1':Details_1,
                     'Details_2':Details_2,

@@ -5,8 +5,8 @@ from . import scm_views
 # import scm_views
 
 urlpatterns=[
-    path('list',scm_views.listAssay, name='listAssay'),
-    path('', scm_views.approvalPlan, name='approvalPlan'),
+    path('',scm_views.listAssay, name='listAssay'),
+    path('approvalPlan', scm_views.approvalPlan, name='approvalPlan'),
     path('changeLog',scm_views.changeLog, name='changeLog'),
     path('setting',scm_views.setting, name='setting'),
     path('approvalPlanQuery', scm_views.approvalPlanQuery, name='approvalPlanQuery'),

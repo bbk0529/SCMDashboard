@@ -130,8 +130,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 #https://simpleisbetterthancomplex.com/packages/2016/08/11/django-import-export.html
 IMPORT_EXPORT_USE_TRANSACTIONS = True
 
-LOGIN_REDIRECT_URL = 'approvalPlan'
-LOGOUT_REDIRECT_URL = 'approvalPlan'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
 
 DATE_FORMAT='y-m-d'
 DATETIME_FORMAT='Y-m-d H:m:s'

@@ -7,6 +7,7 @@ $(function(){
           type:"POST",
           data:{
               'csrfmiddlewaretoken': '{{csrf_token}}',
+              'Category': $('#changeDocOptions').val(),
               'SA_No' : $("input[name='SA_No']").val(),
               'Type' : $("input[name='Type']").val(),
               'Date' : $("input[name='Date']").val(),
@@ -98,6 +99,7 @@ $(function(){
       console.log('clicked radio_create')
       $('#newDocOptions').prop('hidden',false)
       $('#changeDocOptions').prop('hidden',true)
+
       $.ajax({
         url : "approvalPlanCreate",
         type : "GET",
@@ -126,6 +128,7 @@ $(function(){
                     $("#approvalPlanQuery").html(
                       data
                     );
+                    console.log(data)
                 }
             }) //end of $.ajax
         }

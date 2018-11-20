@@ -16,12 +16,13 @@ class Person(models.Model):
 class Assay(models.Model):
     SA_No = models.IntegerField(primary_key=True)
     Date=models.CharField(max_length=30, blank=True,null=True)
+    #changeDocOptions=models.CharField(max_length=30, default="신규등록")
     Number_of_suppliers=models.CharField(max_length=30,blank=True,null=True)
     Type	=models.CharField(max_length=50, blank=True,null=True)
     Details_1	=models.CharField(max_length=50, blank=True,null=True)
     Details_2	=models.CharField(max_length=50, blank=True,null=True)
     Description	=models.CharField(max_length=50, blank=True,null=True)
-    Category	=models.CharField(max_length=50, blank=True,null=True)
+    Category	=models.CharField(max_length=50, default="신규등록")
     Updated_date=models.CharField(max_length=50, blank=True,null=True)
 
 

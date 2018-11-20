@@ -1,7 +1,6 @@
 {%load static %}
 <head>
     {% include "../subtemplate/head.html" %}
-    {% include "procurement/leftPanel.html" %}
 </head>
 <style>
 tfoot {
@@ -10,201 +9,65 @@ tfoot {
 </style>
 <body>
     <div class="content mt-3">
+        <div class="row">
+        <div class="col-md-12">
         <div class="animated fadeIn">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header">
-                                <strong>Setting</strong> Master File
-
-                        </div>
-
-                    <div class="card-body">
-                            <p><a href="{% url 'export_data_xls' %}">Export all DATA</a></p>
-                            <p><a href="{% url 'export_log_xls' %}">Export all ChangeLog</a></p>
-                        </div>
-                        <!-- <div class="card-body">
-                            <p>Import Excel Data</p>
-                                                    <form method="post" enctype="multipart/form-data">
-                                                       {% csrf_token %}
-                                                       <input type="file" name="myfile">
-                                                       <button type="submit">Upload</button>
-                                                     </form>
-
-                                                    </div>
-                    </div> -->
 
 
+            <div class="col-md-2">
+                <img src="{% static 'images/festologo.jpg' %}">
+            </div>
+            <div class="col-md-10">
+            <div class="pull-right">
+                {% if user.is_authenticated %}
+                        Hi! {{ user.username }}
+                        <i class="fa fa-user"></i><span class="badge"><a href="{% url 'logout' %}">logout</a></span>
+                        {{ipAddress}}
 
+                {%else%}
+                    <i class="fa fa-user"></i><span class="badge"><a href="{% url 'login' %}">login</a></span>
+                {% endif %}
+            </div>
+            </div>
+        <span id="alert_message"></span>
+        <div class="card">
+            <div class="card-body">
 
-                            <!-- <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>SA_No</th>
-                                        <th>Date</th>
-                                        <th>Number_of_suppliers</th>
-                                        <th>Type</th>
-                                        <th>Details_1</th>
-                                        <th>Details_2</th>
-                                        <th>Description</th>
-                                        <th>Category</th>
-                                        <th>Updated_date </th>
-                                        <th>Supplier1</th>
-                                        <th>Supplier1_Fabricating_Goods</th>
-                                        <th>Supplier1_Modification_of_free_offerd_item</th>
-                                        <th>Supplier1_Qty</th>
-                                        <th>Supplier1_Final_Unit_Price</th>
-                                        <th>Supplier2</th>
-                                        <th>Supplier2_Fabricating_Goods</th>
-                                        <th>Supplier2_Modification_of_free_offerd_item</th>
-                                        <th>Supplier2_Qty</th>
-                                        <th>Supplier2_Final_Unit_Price </th>
-                                        <th>Supplier3</th>
-                                        <th>Supplier3_Fabricating_Goods</th>
-                                        <th>Supplier3_Modification_of_free_offerd_item</th>
-                                        <th>Supplier3_Qty</th>
-                                        <th>Supplier3_Final_Unit_Price  </th>
-                                        <th>Supplier4</th>
-                                        <th>Supplier4_Fabricating_Goods</th>
-                                        <th>Supplier4_Modification_of_free_offerd_item</th>
-                                        <th>Supplier4_Qty</th>
-                                        <th>Supplier4_Final_Unit_Price  </th>
-                                        <th>Supplier5</th>
-                                        <th>Supplier5_Fabricating_Goods</th>
-                                        <th>Supplier5_Modification_of_free_offerd_item</th>
-                                        <th>Supplier5_Qty</th>
-                                        <th>Supplier5_Final_Unit_Price </th>
-                                        <th>Supplier6</th>
-                                        <th>Supplier6_Fabricating_Goods</th>
-                                        <th>Supplier6_Modification_of_free_offerd_item</th>
-                                        <th>Supplier6_Qty</th>
-                                        <th>Supplier6_Final_Unit_Price</th>
-                                        <th>Supplier7</th>
-                                        <th>Supplier7_Fabricating_Goods</th>
-                                        <th>Supplier7_Modification_of_free_offerd_item</th>
-                                        <th>Supplier7_Qty</th>
-                                        <th>Supplier7_Final_Unit_Price</th>
-                                        <th>Supplier8</th>
-                                        <th>Supplier8_Fabricating_Goods</th>
-                                        <th>Supplier8_Modification_of_free_offerd_item</th>
-                                        <th>Supplier8_Qty</th>
-                                        <th>Supplier8_Final_Unit_Price</th>
-                                    </tr>
-                                </thead>
-                                <tfoot>
-                                    <th>SA_No</th>
-                                    <th>Date</th>
-                                    <th>Number_of_suppliers</th>
-                                    <th>Type</th>
-                                    <th>Details_1</th>
-                                    <th>Details_2</th>
-                                    <th>Description</th>
-                                    <th>Category</th>
-                                    <th>Updated_date </th>
-                                    <th>Supplier1</th>
-                                    <th>Supplier1_Fabricating_Goods</th>
-                                    <th>Supplier1_Modification_of_free_offerd_item</th>
-                                    <th>Supplier1_Qty</th>
-                                    <th>Supplier1_Final_Unit_Price</th>
-                                    <th>Supplier2</th>
-                                    <th>Supplier2_Fabricating_Goods</th>
-                                    <th>Supplier2_Modification_of_free_offerd_item</th>
-                                    <th>Supplier2_Qty</th>
-                                    <th>Supplier2_Final_Unit_Price </th>
-                                    <th>Supplier3</th>
-                                    <th>Supplier3_Fabricating_Goods</th>
-                                    <th>Supplier3_Modification_of_free_offerd_item</th>
-                                    <th>Supplier3_Qty</th>
-                                    <th>Supplier3_Final_Unit_Price  </th>
-                                    <th>Supplier4</th>
-                                    <th>Supplier4_Fabricating_Goods</th>
-                                    <th>Supplier4_Modification_of_free_offerd_item</th>
-                                    <th>Supplier4_Qty</th>
-                                    <th>Supplier4_Final_Unit_Price  </th>
-                                    <th>Supplier5</th>
-                                    <th>Supplier5_Fabricating_Goods</th>
-                                    <th>Supplier5_Modification_of_free_offerd_item</th>
-                                    <th>Supplier5_Qty</th>
-                                    <th>Supplier5_Final_Unit_Price </th>
-                                    <th>Supplier6</th>
-                                    <th>Supplier6_Fabricating_Goods</th>
-                                    <th>Supplier6_Modification_of_free_offerd_item</th>
-                                    <th>Supplier6_Qty</th>
-                                    <th>Supplier6_Final_Unit_Price</th>
-                                    <th>Supplier7</th>
-                                    <th>Supplier7_Fabricating_Goods</th>
-                                    <th>Supplier7_Modification_of_free_offerd_item</th>
-                                    <th>Supplier7_Qty</th>
-                                    <th>Supplier7_Final_Unit_Price</th>
-                                    <th>Supplier8</th>
-                                    <th>Supplier8_Fabricating_Goods</th>
-                                    <th>Supplier8_Modification_of_free_offerd_item</th>
-                                    <th>Supplier8_Qty</th>
-                                    <th>Supplier8_Final_Unit_Price</th>
-                                </tfoot>
-                                <tbody>
-                                    {#% for assay in assayList %#}
-                                    <tr>
-                                        <td>{{assay.SA_No}}</td>
-                                        <td>{{assay.Date}}</td>
-                                        <td>{{assay.Number_of_suppliers}}</td>
-                                        <td>{{assay.Type}}</td>
-                                        <td>{{assay.Details_1}}</td>
-                                        <td>{{assay.Details_2}}</td>
-                                        <td>{{assay.Description}}</td>
-                                        <td>{{assay.Category}}</td>
-                                        <td>{{assay.Updated_date }}</td>
-                                        <td>{{assay.Supplier1}}</td>
-                                        <td>{{assay.Supplier1_Fabricating_Goods}}</td>
-                                        <td>{{assay.Supplier1_Modification_of_free_offerd_item}}</td>
-                                        <td>{{assay.Supplier1_Qty}}</td>
-                                        <td>{{assay.Supplier1_Final_Unit_Price}}</td>
-                                        <td>{{assay.Supplier2}}</td>
-                                        <td>{{assay.Supplier2_Fabricating_Goods}}</td>
-                                        <td>{{assay.Supplier2_Modification_of_free_offerd_item}}</td>
-                                        <td>{{assay.Supplier2_Qty}}</td>
-                                        <td>{{assay.Supplier2_Final_Unit_Price }}</td>
-                                        <td>{{assay.Supplier3}}</td>
-                                        <td>{{assay.Supplier3_Fabricating_Goods}}</td>
-                                        <td>{{assay.Supplier3_Modification_of_free_offerd_item}}</td>
-                                        <td>{{assay.Supplier3_Qty}}</td>
-                                        <td>{{assay.Supplier3_Final_Unit_Price  }}</td>
-                                        <td>{{assay.Supplier4}}</td>
-                                        <td>{{assay.Supplier4_Fabricating_Goods}}</td>
-                                        <td>{{assay.Supplier4_Modification_of_free_offerd_item}}</td>
-                                        <td>{{assay.Supplier4_Qty}}</td>
-                                        <td>{{assay.Supplier4_Final_Unit_Price  }}</td>
-                                        <td>{{assay.Supplier5}}</td>
-                                        <td>{{assay.Supplier5_Fabricating_Goods}}</td>
-                                        <td>{{assay.Supplier5_Modification_of_free_offerd_item}}</td>
-                                        <td>{{assay.Supplier5_Qty}}</td>
-                                        <td>{{assay.Supplier5_Final_Unit_Price }}</td>
-                                        <td>{{assay.Supplier6}}</td>
-                                        <td>{{assay.Supplier6_Fabricating_Goods}}</td>
-                                        <td>{{assay.Supplier6_Modification_of_free_offerd_item}}</td>
-                                        <td>{{assay.Supplier6_Qty}}</td>
-                                        <td>{{assay.Supplier6_Final_Unit_Price}}</td>
-                                        <td>{{assay.Supplier7}}</td>
-                                        <td>{{assay.Supplier7_Fabricating_Goods}}</td>
-                                        <td>{{assay.Supplier7_Modification_of_free_offerd_item}}</td>
-                                        <td>{{assay.Supplier7_Qty}}</td>
-                                        <td>{{assay.Supplier7_Final_Unit_Price}}</td>
-                                        <td>{{assay.Supplier8}}</td>
-                                        <td>{{assay.Supplier8_Fabricating_Goods}}</td>
-                                        <td>{{assay.Supplier8_Modification_of_free_offerd_item}}</td>
-                                        <td>{{assay.Supplier8_Qty}}</td>
-                                        <td>{{assay.Supplier8_Final_Unit_Price}}</td>
-                                    </tr>
-                                    {#% endfor %#}
-                                </tbody>
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link" id="list"  href="/">List</a>
+                        </li>
 
+                        <li class="nav-item">
+                            <a class="nav-link" id="approval"  href="/approvalPlan" >Approval</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="changeLog" href="/changeLog">ChangeLog</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" id="setting" href="/setting">Setting</a>
+                        </li>
 
-                          </table> -->
-                        </div>
+                    </ul>
+
+                <div class="tab-content pl-3 p-1" id="myTabContent">
+                    <div class="tab-pane fade show active">
+                        <h3>Setting</h3>
+                        <p>Extract all data </p>
                     </div>
                 </div>
+
+
+                <a href="{% url 'export_data_xls' %}"><button type="button" class="btn btn-outline-secondary"><i class="fa fa-lightbulb-o"></i>&nbsp;Export DATA </button></a>
+                <a href="{% url 'export_log_xls' %}"><button type="button" class="btn btn-outline-secondary"><i class="fa fa-lightbulb-o"></i>&nbsp;Export ChangeLog</button></a>
+
+
+
             </div>
         </div>
+    </div>
+    </div>
+    </div>
     </div>
 </body>
 </html>

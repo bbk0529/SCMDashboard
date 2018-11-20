@@ -6,20 +6,55 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
 <head>
     {% include "../subtemplate/head.html" %}
-    {% include "procurement/leftPanel.html" %}
 </head>
 <body>
 
     <div class="content mt-3">
         <div class="animated fadeIn">
-                <!-- <span><img src="{% static 'images/festologo.jpg' %}"></span> -->
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="card-header">
-                                {% include 'procurement/assayListHeader.html' %}
+            <div class="col-md-2">
+                <img src="{% static 'images/festologo.jpg' %}">
+            </div>
+            <div class="col-md-10">
+            <div class="pull-right">
+                {% if user.is_authenticated %}
+                        Hi! {{ user.username }}
+                        <i class="fa fa-user"></i><span class="badge"><a href="{% url 'logout' %}">logout</a></span>
+                        {{ipAddress}}
+
+                {%else%}
+                    <i class="fa fa-user"></i><span class="badge"><a href="{% url 'login' %}">login</a></span>
+                {% endif %}
+            </div>
+            </div>
+                <div class="card">
+                            <div class="card-body">
+                                <div class="pull-right">
+                                        {% include 'procurement/assayListHeader.html' %}
+                                </div>
+                                    <ul class="nav nav-tabs active" id="myTab" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" id="home-tab" href="/" >List   </a>
+                                        </li>
+                                        {% ifequal request.user.username 'buyer' %}
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="profile-tab"  href="/approvalPlan">Approval</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="changeLog" href="/changeLog">ChangeLog</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="setting" href="/setting">Setting</a>
+                                        </li>
+                                        {% endifequal %}
+                                    </ul>
+
+                                <div class="tab-content pl-3 p-1" id="myTabContent">
+                                    <div class="tab-pane fade  show active">
+                                        <h3>List</h3>
+                                        <p>Authorized to Buyer, Viewer1, and Viewer2 (Limited Authority) </p>
+                                    </div>
                             </div>
-                            <div class="card-body card-block" id="result">
+                            <div class="col-md-12" id="result">
                                 {% include 'procurement/assayListDetail.html' %}
                             </div>
                         </div>
@@ -42,10 +77,10 @@
 <script src="{% static 'assets/js/vendor/jquery-2.1.4.min.js' %}"></script>
 <script src="{% static 'assets/js/scm/assayList.js' %}"></script>
 
-<script src="{% static 'assets/js/popper.min.js' %}"></script>
+<!-- <script src="{% static 'assets/js/popper.min.js' %}"></script>
 <script src="{% static 'assets/js/plugins.js' %}"></script>
-<script src="{% static 'assets/js/main.js' %}"></script>
-<script src="{% static 'assets/js/lib/data-table/datatables.min.js' %}"></script>
+<script src="{% static 'assets/js/main.js' %}"></script> -->
+<!-- <script src="{% static 'assets/js/lib/data-table/datatables.min.js' %}"></script>
 <script src="{% static 'assets/js/lib/data-table/dataTables.bootstrap.min.js' %}"></script>
 <script src="{% static 'assets/js/lib/data-table/dataTables.buttons.min.js' %}"></script>
 <script src="{% static 'assets/js/lib/data-table/buttons.bootstrap.min.js' %}"></script>
@@ -55,4 +90,4 @@
 <script src="{% static 'assets/js/lib/data-table/buttons.html5.min.js' %}"></script>
 <script src="{% static 'assets/js/lib/data-table/buttons.print.min.js' %}"></script>
 <script src="{% static 'assets/js/lib/data-table/buttons.colVis.min.js' %}"></script>
-<script src="{% static 'assets/js/lib/data-table/datatables-init.js' %}"></script>
+<script src="{% static 'assets/js/lib/data-table/datatables-init.js' %}"></script> -->
