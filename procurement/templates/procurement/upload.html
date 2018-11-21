@@ -1,3 +1,4 @@
+{% load static %}
 <style>
 .lds-ring {
   display: inline-block;
@@ -52,25 +53,11 @@
   <p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
 {% endif %}
 <div class="lds-ring" hidden><div></div><div></div><div></div><div></div></div>
+<div id="header"></div>
+
+<script src="{% static 'assets/js/scm/upload.js' %}"></script>
 
 
-<script>
-$('#import').click(function(){
-    $('.lds-ring').prop('hidden', false)
-    console.log("{{uploaded_file_url}}")
-    $.ajax({
-        url : "import_data_xls",
-        type : "GET",
-        data: {
-            'uploaded_file_url' : "{{uploaded_file_url}}"
-        },
-
-        success : function(data) {
-            console.log("successfully communicated with Server");
-            $('.lds-ring').prop('hidden', true)
-        }
-    }) //end of $.ajax
-})
-
-
-</script>
+<script src="{% static 'assets/js/popper.min.js' %}"></script>
+<script src="{% static 'assets/js/plugins.js' %}"></script>
+<script src="{% static 'assets/js/main.js' %}"></script>
