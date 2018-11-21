@@ -1,29 +1,8 @@
+
 $(function(){
 
 //Mouse Cursor on Supplier Detail
     $(".detail").css({"cursor":"pointer"})
-
-
-
-//Detail table rows added deleted
-$('.tableRowAddSupplier').click(function(){
-    var num=$(this).prop('id').slice(-1,)
-    console.log(num);
-    $("#detailTableSupplier" + num +" tbody tr:hidden").first().prop('hidden',false)
-    $("#summaryTableSupplier" + num).prop('hidden',false)
-    $("#Number_of_suppliers").val(
-           $('#summaryTable tbody tr:visible').length
-    )
- })
-
- $('.tableRowDeleteSupplier').click(function(){
-     var num=$(this).prop('id').slice(-1,)
-     console.log(num);
-     $("#detailTableSupplier"+num +" tbody tr:visible").last().prop('hidden',true)
-     if ($("#detailTableSupplier"+num+" tbody tr:visible").length==0){
-         $("#summaryTableSupplier"+num).prop('hidden',true)
-     }
- })
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -40,9 +19,17 @@ $('.tableRowAddSupplier').click(function(){
     $('#btnDetailSupplier1').click(function(){
       $('#detailSupplier1').prop('hidden', !$('#detailSupplier1').prop('hidden'))
     })
-
-
-
+//Detail Row Add/Delete
+    $('#tableRowAddSupplier1').click(function(){
+        $("#detailTableSupplier1 tbody tr:hidden").first().prop('hidden',false)
+        $("#summaryTableSupplier1").prop('hidden',false)
+  })
+    $('#tableRowDeleteSupplier1').click(function(){
+        $("#detailTableSupplier1 tbody tr:visible").last().prop('hidden',true)
+        if ($("#detailTableSupplier1 tbody tr:visible").length==0){
+            $("#summaryTableSupplier1").prop('hidden',true)
+        }
+  })
 //Detail Math, automatically calculation
     $('.Supplier1_1').on('input', function () {
       console.log('Supplier1_1 input')
@@ -71,7 +58,17 @@ $('.tableRowAddSupplier').click(function(){
     $('#btnDetailSupplier2').click(function(){
       $('#detailSupplier2').prop('hidden', !$('#detailSupplier2').prop('hidden'))
     })
-
+//Detail Row Add/Delete
+    $('#tableRowAddSupplier2').click(function(){
+        $("#detailTableSupplier2 tbody tr:hidden").first().prop('hidden',false)
+        $("#summaryTableSupplier2").prop('hidden',false)
+  })
+    $('#tableRowDeleteSupplier2').click(function(){
+        $("#detailTableSupplier2 tbody tr:visible").last().prop('hidden',true)
+        if ($("#detailTableSupplier2 tbody tr:visible").length==0){
+            $("#summaryTableSupplier2").prop('hidden',true)
+        }
+    })
 //Detail Math, automatically calculation
     $('.Supplier2_1').on('input', function () {
       console.log('Supplier2_1 input')
@@ -100,7 +97,17 @@ $('.tableRowAddSupplier').click(function(){
     $('#btnDetailSupplier3').click(function(){
       $('#detailSupplier3').prop('hidden', !$('#detailSupplier3').prop('hidden'))
     })
-
+//Detail Row Add/Delete
+    $('#tableRowAddSupplier3').click(function(){
+        $("#detailTableSupplier3 tbody tr:hidden").first().prop('hidden',false)
+        $("#summaryTableSupplier3").prop('hidden',false)
+  })
+    $('#tableRowDeleteSupplier3').click(function(){
+        $("#detailTableSupplier3 tbody tr:visible").last().prop('hidden',true)
+        if ($("#detailTableSupplier3 tbody tr:visible").length==0){
+            $("#summaryTableSupplier3").prop('hidden',true)
+        }
+    })
 //Detail Math, automatically calculation
     $('.Supplier3_1').on('input', function () {
       console.log('Supplier3_1 input')
@@ -129,7 +136,17 @@ $('.tableRowAddSupplier').click(function(){
     $('#btnDetailSupplier4').click(function(){
       $('#detailSupplier4').prop('hidden', !$('#detailSupplier4').prop('hidden'))
     })
-
+//Detail Row Add/Delete
+    $('#tableRowAddSupplier4').click(function(){
+        $("#detailTableSupplier4 tbody tr:hidden").first().prop('hidden',false)
+        $("#summaryTableSupplier4").prop('hidden',false)
+  })
+    $('#tableRowDeleteSupplier4').click(function(){
+        $("#detailTableSupplier4 tbody tr:visible").last().prop('hidden',true)
+        if ($("#detailTableSupplier4 tbody tr:visible").length==0){
+            $("#summaryTableSupplier4").prop('hidden',true)
+        }
+    })
 //Detail Math, automatically calculation
     $('.Supplier4_1').on('input', function () {
       console.log('Supplier4_1 input')
@@ -158,7 +175,17 @@ $('.tableRowAddSupplier').click(function(){
     $('#btnDetailSupplier5').click(function(){
       $('#detailSupplier5').prop('hidden', !$('#detailSupplier5').prop('hidden'))
     })
-
+//Detail Row Add/Delete
+    $('#tableRowAddSupplier5').click(function(){
+        $("#detailTableSupplier5 tbody tr:hidden").first().prop('hidden',false)
+        $("#summaryTableSupplier5").prop('hidden',false)
+  })
+    $('#tableRowDeleteSupplier5').click(function(){
+        $("#detailTableSupplier5 tbody tr:visible").last().prop('hidden',true)
+        if ($("#detailTableSupplier5 tbody tr:visible").length==0){
+            $("#summaryTableSupplier5").prop('hidden',true)
+        }
+    })
 //Detail Math, automatically calculation
     $('.Supplier5_1').on('input', function () {
       console.log('Supplier5_1 input')
@@ -186,7 +213,17 @@ $('.tableRowAddSupplier').click(function(){
     $('#btnDetailSupplier6').click(function(){
       $('#detailSupplier6').prop('hidden', !$('#detailSupplier6').prop('hidden'))
     })
-
+//Detail Row Add/Delete
+    $('#tableRowAddSupplier6').click(function(){
+        $("#detailTableSupplier6 tbody tr:hidden").first().prop('hidden',false)
+        $("#summaryTableSupplier6").prop('hidden',false)
+  })
+    $('#tableRowDeleteSupplier6').click(function(){
+        $("#detailTableSupplier6 tbody tr:visible").last().prop('hidden',true)
+        if ($("#detailTableSupplier6 tbody tr:visible").length==0){
+            $("#summaryTableSupplier6").prop('hidden',true)
+        }
+    })
 //Detail Math, automatically calculation
     $('.Supplier6_1').on('input', function () {
       console.log('Supplier6_1 input')
@@ -214,7 +251,17 @@ $('.tableRowAddSupplier').click(function(){
     $('#btnDetailSupplier7').click(function(){
       $('#detailSupplier7').prop('hidden', !$('#detailSupplier7').prop('hidden'))
     })
-
+//Detail Row Add/Delete
+    $('#tableRowAddSupplier7').click(function(){
+        $("#detailTableSupplier7 tbody tr:hidden").first().prop('hidden',false)
+        $("#summaryTableSupplier7").prop('hidden',false)
+  })
+    $('#tableRowDeleteSupplier7').click(function(){
+        $("#detailTableSupplier7 tbody tr:visible").last().prop('hidden',true)
+        if ($("#detailTableSupplier7 tbody tr:visible").length==0){
+            $("#summaryTableSupplier7").prop('hidden',true)
+        }
+    })
 //Detail Math, automatically calculation
     $('.Supplier7_1').on('input', function () {
       console.log('Supplier7_1 input')
@@ -242,7 +289,17 @@ $('.tableRowAddSupplier').click(function(){
     $('#btnDetailSupplier8').click(function(){
       $('#detailSupplier8').prop('hidden', !$('#detailSupplier8').prop('hidden'))
     })
-
+//Detail Row Add/Delete
+    $('#tableRowAddSupplier8').click(function(){
+        $("#detailTableSupplier8 tbody tr:hidden").first().prop('hidden',false)
+        $("#summaryTableSupplier8").prop('hidden',false)
+  })
+    $('#tableRowDeleteSupplier8').click(function(){
+        $("#detailTableSupplier8 tbody tr:visible").last().prop('hidden',true)
+        if ($("#detailTableSupplier8 tbody tr:visible").length==0){
+            $("#summaryTableSupplier8").prop('hidden',true)
+        }
+    })
 //Detail Math, automatically calculation
     $('.Supplier8_1').on('input', function () {
       console.log('Supplier8_1 input')
@@ -295,7 +352,6 @@ function copyFromDetail(supplierNo, detailNo){
     $('#Supplier'+ supplierNo +'_Final_Unit_Price').text($('#finalValueSupplier'+ supplierNo +'_' + detailNo).val())
     $('#supplierFinalTotalValue'+ supplierNo).text($('#finalTotalValueSupplier'+ supplierNo +'_' + detailNo).text())
     $('#supplier'+ supplierNo +'Nego').text($('#negoSupplier'+ supplierNo +'_' + detailNo).text())
-
 }
 
 $('textarea').each(function () {
