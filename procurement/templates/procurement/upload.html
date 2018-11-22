@@ -1,22 +1,27 @@
 {% load static %}
 <style>
+
+#import{
+    cursor:pointer;
+}
+
 .lds-ring {
   display: inline-block;
   position: relative;
-  width: 64px;
-  height: 64px;
+  width: 20px;
+  height: 20px;
 }
 .lds-ring div {
   box-sizing: border-box;
   display: block;
   position: absolute;
-  width: 51px;
-  height: 51px;
-  margin: 6px;
-  border: 6px solid #ddd;
+  width: 15px;
+  height: 15px;
+  margin: 2px;
+  border: 2px solid #ddf;
   border-radius: 50%;
   animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-  border-color: #ddd transparent transparent transparent;
+  border-color: #ddf transparent transparent transparent;
 }
 .lds-ring div:nth-child(1) {
   animation-delay: -0.45s;
@@ -38,21 +43,27 @@
 </style>
 
 
-<form method="post" enctype="multipart/form-data" novalidate>
-  {% csrf_token %}
-  <input type="file" name="myfile">
-  <button type="submit" class="btn btn-outline-secondary"><i class="fa fa-lightbulb-o"></i>Upload</button>
+
+    <form method="post" enctype="multipart/form-data" novalidate>
+      {% csrf_token %}
+      <input type="file" name="myfile">
+      <button type="submit" class="btn btn-outline-secondary">Upload</button>
+    </form>
+
+      {% if uploaded_file_url %}
+      File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a>
+      <span id="import"><i class="fa fa-upload"></i>Execute Import</span>
+      <div class="lds-ring" hidden><div></div><div></div><div></div><div></div></div></p>
+                <span class="bg-flat-color-1 text-light">All data will be erased. Please download data first before import new data.</span>
+      {% endif %}
 
 
 <!-- <a href="{% url 'import_data_xls' %}"> -->
 
 <!-- </a> -->
-</form>
-{% if uploaded_file_url %}
-<button class="btn btn-outline-secondary" id="import"><i class="fa fa-search"></i>Import</button>
-  <p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
-{% endif %}
-<div class="lds-ring" hidden><div></div><div></div><div></div><div></div></div>
+
+
+
 <div id="header"></div>
 
 <!-- <script src="{% static 'assets/js/scm/upload.js' %}"></script> -->

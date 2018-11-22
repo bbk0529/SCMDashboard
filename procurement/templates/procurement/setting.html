@@ -55,19 +55,22 @@
                 <div class="tab-content pl-3 p-1" id="myTabContent">
                     <div class="tab-pane fade show active">
                         <h3>Setting</h3>
-                        <p>Extract all data </p>
+                        <p>Extract all data / Import Data</p>
                     </div>
+
+                    <h4><i class="fa fa-cloud-download"></i>Data Export</h4>
+                    <a href="{% url 'export_data_xls' %}"><button type="button" class="btn btn-outline-secondary">&nbsp;Export DATA </button></a>
+                    <a href="{% url 'export_log_xls' %}"><button type="button" class="btn btn-outline-secondary">&nbsp;Export ChangeLog</button></a>
+
+                    <br>
+                    <br><br><br><br>
+
+                    <h4><i class="fa fa-cloud-upload"></i>Data Import</h4>
+                    {%include "procurement/upload.html" %}
+
+
                 </div>
 
-
-                <a href="{% url 'export_data_xls' %}"><button type="button" class="btn btn-outline-secondary"><i class="fa fa-lightbulb-o"></i>&nbsp;Export DATA </button></a>
-                <a href="{% url 'export_log_xls' %}"><button type="button" class="btn btn-outline-secondary"><i class="fa fa-lightbulb-o"></i>&nbsp;Export ChangeLog</button></a>
-
-                <br>
-                <br><br><br><br>
-
-
-                {%include "procurement/upload.html" %}
 
             </div>
         </div>
